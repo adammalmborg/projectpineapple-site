@@ -65,11 +65,8 @@ fallback.
 
 Still to configure in the Cal.com dashboard before launch:
 
-1. **Duration.** The event is 15 minutes; all copy says thirty. Change the
-   event to 30 minutes. If that changes the event slug, update `CAL_LINK` and
-   `CAL_NAMESPACE` in `src/content/site.ts`.
-2. **Redirect on booking** to `https://projectpineapple.com/thanks`.
-3. **Brand color.** The embed passes `cal-brand: #22402f` via `cssVarsPerTheme`;
+1. **Redirect on booking** to `https://projectpineapple.com/thanks`.
+2. **Brand color.** The embed passes `cal-brand: #22402f` via `cssVarsPerTheme`;
    set the same in the Cal.com appearance settings so the hosted booking page
    matches.
 

@@ -9,15 +9,12 @@ export const CITY = 'Salt Lake City, Utah';
 export const EMAIL = 'adam@projectpineapple.com';
 
 /**
- * Cal.com booking event.
- *
- * The handoff flags a duration mismatch: the Cal event is 15 minutes and every
- * piece of client-approved copy says thirty. The agreed default is to change the
- * Cal event to 30 minutes. If that produces a new event slug (for example
- * "30min"), update CAL_LINK and CAL_NAMESPACE here and nothing else.
+ * Cal.com booking event. A 30-minute event, matching the copy everywhere on
+ * the site. If the event slug ever changes, update these two values and
+ * nothing else.
  */
-export const CAL_LINK = 'adammalmborg/15min';
-export const CAL_NAMESPACE = '15min';
+export const CAL_LINK = 'adammalmborg/30min';
+export const CAL_NAMESPACE = '30min';
 
 /** Every CTA on the site reads the same. Deliberate; do not vary per page. */
 export const CTA_LABEL = "Let's jump on a call";
