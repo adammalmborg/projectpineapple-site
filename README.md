@@ -72,10 +72,24 @@ Still to configure in the Cal.com dashboard before launch:
 
 ## Deploying
 
-Static output. Zero-config on Vercel, Netlify, or Cloudflare Pages: build
-command `npm run build`, output directory `dist`. The production origin is set
-in `astro.config.mjs` (`site`), which drives canonical URLs, Open Graph tags,
-and the sitemap.
+Hosted on Cloudflare Workers as a static-assets Worker (`wrangler.jsonc`).
+No server code runs; Cloudflare serves `dist/` from the edge.
+
+One-time setup in the Cloudflare dashboard:
+
+1. Workers & Pages, Create, **Import a repository**, pick
+   `adammalmborg/projectpineapple-site`.
+2. Worker name `projectpineapple-site` (must match `wrangler.jsonc`).
+3. Build command `npm run build`. Deploy command can stay at the default
+   `npx wrangler deploy`. Production branch `main`.
+4. After the first deploy, add the custom domain under the Worker's
+   Settings, Domains & Routes.
+
+Every push to `main` then builds and deploys. Pushes to other branches get
+a preview URL.
+
+The production origin is set in `astro.config.mjs` (`site`), which drives
+canonical URLs, Open Graph tags, and the sitemap.
 
 ## Pre-launch review
 

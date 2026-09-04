@@ -1,0 +1,39 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Base title="Page not found | Project Pineapple" description="That page doesn't exist." noindex>
+  <Header variant="minimal" sectionLinks={false} cta={true} />
+
+  <section class="nf">
+    <h1>That page doesn't exist.</h1>
+    <p>It may have moved, or the link was typed wrong.</p>
+    <a href="/" class="textlink">Back to the home page</a>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .nf {
+    padding: var(--pad-hero) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  h1 {
+    margin: 0 0 22px;
+    font: 400 clamp(26px, 3.73vw, 44px) / 1.18 var(--serif);
+    letter-spacing: -0.01em;
+    max-width: 24ch;
+  }
+  p {
+    margin: 0 0 30px;
+    max-width: 44ch;
+    font: 400 18px/1.65 var(--sans);
+    color: var(--text-72);
+  }
+  .textlink {
+    font: 500 14.5px/1 var(--sans);
+  }
+</style>

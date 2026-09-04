@@ -1,0 +1,15 @@
+{
+  // Cloudflare Workers static-assets deployment. No Worker script: the built
+  // site in dist/ is served directly from Cloudflare's edge.
+  //
+  // Connect the repo in the Cloudflare dashboard (Workers & Pages > Create >
+  // Import a repository). The Worker name there must match `name` below.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "projectpineapple-site",
+  "compatibility_date": "2026-09-01",
+  "assets": {
+    "directory": "./dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
