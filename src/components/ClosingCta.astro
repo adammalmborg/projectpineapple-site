@@ -14,7 +14,7 @@ const { heading, variant = 'home' } = Astro.props;
 ---
 
 <section class:list={['closing', `closing--${variant}`]}>
-  <h3>{heading}</h3>
+  <h2>{heading}</h2>
   <p><slot /></p>
   <CtaLink />
 </section>
@@ -30,12 +30,12 @@ const { heading, variant = 'home' } = Astro.props;
   .closing--industry {
     padding: var(--pad-major) var(--gutter);
   }
-  h3 {
+  h2 {
     margin: 0 auto 14px;
     font: 400 clamp(20px, 2.88vw, 34px) / 1.26 var(--serif);
     max-width: 28ch;
   }
-  .closing--industry h3 {
+  .closing--industry h2 {
     font-size: clamp(20px, 2.8vw, 33px);
   }
   p {

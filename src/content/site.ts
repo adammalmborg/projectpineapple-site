@@ -24,5 +24,13 @@ export const CTA_MICROCOPY_HOME =
   'Thirty minutes. You keep everything I find, whether or not we work together.';
 export const CTA_MICROCOPY_INDUSTRY = 'Thirty minutes. You keep everything I find.';
 
+/**
+ * Google Tag Manager container id (GTM-XXXXXXX). Leave empty to emit no tag
+ * manager at all. When set, the container loads on every page and a
+ * `booking_complete` event is pushed to the dataLayer when Cal.com reports a
+ * successful booking.
+ */
+export const GTM_ID = '';
+
 /** Cal.com embed config, shared by the modal triggers and the inline embed. */
 export const CAL_CONFIG = { layout: 'month_view' } as const;
