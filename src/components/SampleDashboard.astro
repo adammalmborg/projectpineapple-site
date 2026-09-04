@@ -1,0 +1,392 @@
+---
+/**
+ * Sample monthly report card, Home proof section.
+ *
+ * Deliberately recessive: blurred and muted at rest, clear on hover, with a
+ * label plate reading "Sample dashboard / Client details redacted". On touch
+ * devices there is no hover, so it stays blurred; acceptable for a redacted
+ * sample per the handoff.
+ *
+ * All figures are invented and internally consistent. Per-source revenue sums
+ * to the total and return multiples match spend and revenue. They must stay
+ * labelled as a sample until real redacted numbers replace them (v2).
+ */
+
+const summary = [
+  { label: 'You spent', value: '$8,550' },
+  { label: 'Revenue attributed', value: '$56,200' },
+  { label: 'Return on spend', value: '6.6×', accent: true },
+  { label: 'Customers', value: '40' },
+];
+
+const bars = [
+  { label: 'Brand search', pct: 100, value: '$17.26' },
+  { label: 'Non-brand search', pct: 33, value: '$5.77' },
+  { label: 'Local services', pct: 22, value: '$3.84' },
+  { label: 'Directory listing', pct: 7, value: '$1.13', accent: true },
+];
+
+const rows = [
+  { source: 'Google Ads, brand', spend: '$1,240', customers: '14', revenue: '$21,400', ret: '17.3×' },
+  { source: 'Google Ads, non-brand', spend: '$4,610', customers: '19', revenue: '$26,600', ret: '5.8×' },
+  { source: 'Google Ads, local services', spend: '$1,900', customers: '6', revenue: '$7,300', ret: '3.8×' },
+  { source: 'Directory listing', spend: '$800', customers: '1', revenue: '$900', ret: '1.1×', muted: true },
+];
+---
+
+<figure class="sample">
+  <div class="frame">
+    <div class="plate" aria-hidden="true">
+      <div class="plate__panel">
+        <div class="plate__title">Sample dashboard</div>
+        <div class="plate__sub">Client details redacted</div>
+      </div>
+    </div>
+
+    <div class="card-wrap">
+      <div class="card">
+        <div class="head">
+          <div class="head__title">
+            <span>Monthly report,</span>
+            <span class="redact" aria-label="client name redacted"></span>
+          </div>
+          <div class="head__meta">Sample · details redacted</div>
+        </div>
+
+        <div class="summary">
+          {
+            summary.map((s) => (
+              <div class:list={['summary__cell', { accent: s.accent }]}>
+                <div class="label">{s.label}</div>
+                <div class="value">{s.value}</div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="bars-section">
+          <div class="label bars-label">Return on spend, by source</div>
+          <div class="bars">
+            {
+              bars.map((b) => (
+                <div class="bar-row">
+                  <span class="bar-name">{b.label}</span>
+                  <div class="bar-track">
+                    <div class:list={['bar-fill', { accent: b.accent }]} style={`width:${b.pct}%`} />
+                  </div>
+                  <span class="bar-value">{b.value}</span>
+                </div>
+              ))
+            }
+          </div>
+          <div class="bars-note">
+            The directory listing is close to breaking even. That's the conversation for next month.
+          </div>
+        </div>
+
+        <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Source</th>
+              <th scope="col">Spend</th>
+              <th scope="col">Customers</th>
+              <th scope="col">Revenue</th>
+              <th scope="col">Return</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map((r) => (
+                <tr class:list={{ muted: r.muted }}>
+                  <td>{r.source}</td>
+                  <td>{r.spend}</td>
+                  <td>{r.customers}</td>
+                  <td>{r.revenue}</td>
+                  <td>{r.ret}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+          <tfoot>
+            <tr>
+              <td>Total attributed</td>
+              <td>$8,550</td>
+              <td>40</td>
+              <td>$56,200</td>
+              <td>6.6×</td>
+            </tr>
+          </tfoot>
+        </table>
+        </div>
+
+        <div class="unattributed">
+          <span class="diamond-sm" aria-hidden="true"></span>
+          <div>
+            <div class="unattributed__title">Not attributed yet: 9 customers, roughly $12,000</div>
+            <div class="unattributed__body">
+              Six calls where the source couldn't be identified, three still in consultation. None of it is
+              counted above, and none of it is counted as revenue until it is.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <figcaption>
+    A sample of the monthly report, with client details redacted. What you spent, what it returned, and what
+    I can't attribute yet.
+  </figcaption>
+</figure>
+
+<style>
+  .sample {
+    margin: clamp(28px, 3.4vw, 40px) 0 0;
+    max-width: 540px;
+  }
+  .frame {
+    position: relative;
+  }
+
+  .plate {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .plate__panel {
+    background: var(--cream);
+    border: 1px solid rgba(34, 64, 47, 0.3);
+    padding: 10px 20px;
+    text-align: center;
+  }
+  .plate__title {
+    font: 400 16px/1.25 var(--serif);
+    margin-bottom: 4px;
+  }
+  .plate__sub {
+    font: 400 10px/1 var(--mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .card-wrap {
+    filter: blur(1.6px);
+    opacity: 0.62;
+    transition:
+      filter 0.35s ease,
+      opacity 0.35s ease;
+  }
+  .frame:hover .card-wrap {
+    filter: blur(0);
+    opacity: 1;
+  }
+  .frame:hover .plate {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .card {
+    background: #fdfaf4;
+    border: 1px solid rgba(34, 64, 47, 0.22);
+    container-type: inline-size;
+  }
+
+  .head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+    border-bottom: 1px solid rgba(34, 64, 47, 0.22);
+  }
+  .head__title {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font: 400 13.5px/1.3 var(--serif);
+  }
+  .redact {
+    display: inline-block;
+    width: 88px;
+    height: 10px;
+    background: rgba(34, 64, 47, 0.3);
+  }
+  .head__meta {
+    font: 400 10.5px/1 var(--mono);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(34, 64, 47, 0.5);
+  }
+
+  .label {
+    font: 400 10px/1 var(--sans);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+    background: #f4ede1;
+    border-bottom: 1px solid rgba(34, 64, 47, 0.16);
+  }
+  .summary__cell {
+    padding: 14px 18px;
+    border-right: 1px solid var(--hairline-inner);
+  }
+  .summary__cell:last-child {
+    border-right: 0;
+  }
+  .summary__cell .label {
+    margin-bottom: 10px;
+  }
+  .value {
+    font: 400 20px/1 var(--serif);
+    color: var(--pine);
+  }
+  .summary__cell.accent .label,
+  .summary__cell.accent .value {
+    color: var(--clay);
+  }
+
+  .bars-section {
+    padding: 16px 18px;
+    border-bottom: 1px solid rgba(34, 64, 47, 0.22);
+  }
+  .bars-label {
+    margin-bottom: 14px;
+  }
+  .bars {
+    display: grid;
+    gap: 10px;
+  }
+  .bar-row {
+    display: grid;
+    grid-template-columns: 104px 1fr 42px;
+    gap: 10px;
+    align-items: center;
+  }
+  .bar-name {
+    font: 400 12px/1.35 var(--sans);
+    color: var(--text-70);
+  }
+  .bar-track {
+    height: 11px;
+    background: var(--sand);
+  }
+  .bar-fill {
+    height: 100%;
+    background: var(--pine);
+  }
+  .bar-fill.accent {
+    background: var(--clay);
+  }
+  .bar-value {
+    font: 400 12px/1 var(--mono);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .bars-note {
+    margin-top: 13px;
+    font: 400 11.5px/1.5 var(--sans);
+    color: var(--text-60);
+  }
+
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table {
+    width: 100%;
+    min-width: 420px;
+    border-collapse: collapse;
+    font: 400 12.5px/1.35 var(--sans);
+  }
+  th,
+  td {
+    text-align: right;
+    padding: 9px 8px;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  th:first-child,
+  td:first-child {
+    text-align: left;
+    padding-left: 18px;
+    white-space: normal;
+  }
+  th:last-child,
+  td:last-child {
+    padding-right: 18px;
+    padding-left: 10px;
+  }
+  thead th {
+    font: 400 10px/1 var(--sans);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #f4ede1;
+    border-bottom: 1px solid rgba(34, 64, 47, 0.16);
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+  tbody td {
+    border-bottom: 1px solid rgba(34, 64, 47, 0.1);
+  }
+  tbody tr.muted td {
+    color: var(--text-60);
+  }
+  tfoot td {
+    font-weight: 500;
+    background: #f4ede1;
+    border-bottom: 1px solid rgba(34, 64, 47, 0.22);
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .unattributed {
+    padding: 14px 18px;
+    display: grid;
+    grid-template-columns: 14px 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  .diamond-sm {
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: var(--clay);
+    transform: rotate(45deg);
+    margin-top: 5px;
+  }
+  .unattributed__title {
+    font: 500 13.5px/1.45 var(--sans);
+    margin-bottom: 4px;
+  }
+  .unattributed__body {
+    font: 400 13px/1.6 var(--sans);
+    color: var(--text-65);
+  }
+
+  figcaption {
+    margin: 11px 0 0;
+    max-width: 44ch;
+    font: 400 12.5px/1.6 var(--sans);
+    color: var(--text-60);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-wrap,
+    .plate {
+      transition: none;
+    }
+  }
+</style>

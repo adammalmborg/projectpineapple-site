@@ -1,0 +1,50 @@
+---
+/**
+ * Centered closing CTA: Caslon h3, one muted paragraph, the button.
+ */
+import CtaLink from './CtaLink.astro';
+
+interface Props {
+  heading: string;
+  /** Home uses the 34px h3 and 88px padding; industry uses 33px and 80px. */
+  variant?: 'home' | 'industry';
+}
+
+const { heading, variant = 'home' } = Astro.props;
+---
+
+<section class:list={['closing', `closing--${variant}`]}>
+  <h3>{heading}</h3>
+  <p><slot /></p>
+  <CtaLink />
+</section>
+
+<style>
+  .closing {
+    text-align: center;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .closing--home {
+    padding: var(--gutter);
+  }
+  .closing--industry {
+    padding: var(--pad-major) var(--gutter);
+  }
+  h3 {
+    margin: 0 auto 14px;
+    font: 400 clamp(20px, 2.88vw, 34px) / 1.26 var(--serif);
+    max-width: 28ch;
+  }
+  .closing--industry h3 {
+    font-size: clamp(20px, 2.8vw, 33px);
+  }
+  p {
+    margin: 0 auto 30px;
+    max-width: 48ch;
+    font: 400 16px/1.7 var(--sans);
+    color: var(--text-70);
+  }
+  .closing--industry p {
+    max-width: 50ch;
+  }
+</style>

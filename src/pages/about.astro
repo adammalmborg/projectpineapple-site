@@ -1,0 +1,151 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Portrait from '../components/Portrait.astro';
+import CtaLink from '../components/CtaLink.astro';
+---
+
+<Base
+  title="Adam Malmborg | Project Pineapple"
+  description="Running paid advertising since 2014, running businesses just as long. Why the practice exists and how it's run."
+>
+  <Header variant="minimal" sectionLinks={false} cta={true} />
+
+  <section class="bio">
+    <div>
+      <h1>Adam Malmborg</h1>
+      <div class="eyebrow bio__eyebrow">The short version</div>
+      <div class="bio__text">
+        <p class="body body--long">
+          I've been running paid advertising since 2014, and running businesses just as long, and for most of that
+          time I was doing both at once.
+        </p>
+        <p class="body body--long">
+          I started in lead generation before it was called that, buying media for other people's businesses and
+          learning what it costs to acquire a customer who actually pays. Then I started my own businesses and
+          spent years on the other side of the table, deciding whether the marketing spend was worth it while also
+          being responsible for payroll, pricing, hiring, and whether there was enough in the account at the end of
+          the month.
+        </p>
+        <p class="body body--long">
+          I've co-founded and operated businesses in custom retail, professional services, and the trades. Some
+          worked well. Some taught me expensive lessons. All of them had marketing budgets I was personally
+          accountable for.
+        </p>
+      </div>
+    </div>
+    <div class="bio__portrait">
+      <Portrait crop="square" loading="eager" />
+    </div>
+  </section>
+
+  <section class="section section--pine why">
+    <div class="eyebrow why__eyebrow">Why the practice exists</div>
+    <div class="why__text">
+      <p class="body">
+        At some point I noticed that every business I ran had the same problem with its marketing vendors. They
+        reported on things the platform could see, and the platform couldn't see the sale. The reports looked
+        fine. The revenue did whatever it was going to do. Nobody connected the two, because connecting them is
+        genuinely hard work and nobody was being paid to do it.
+      </p>
+      <p class="pull">
+        So that's the work. Figure out what a customer is worth, connect the sale back to where it came from, and
+        rebuild the spending around what actually produced revenue. It isn't glamorous and it isn't fast. It is
+        the thing that determines whether any of the rest of it worked.
+      </p>
+    </div>
+  </section>
+
+  <section class="run">
+    <div class="eyebrow run__eyebrow">How I run this</div>
+    <div class="run__grid">
+      <p class="run__p">
+        I keep the client list short on purpose. Fewer clients means I'm in your account, not delegating it. You
+        get me on the call, me in the reporting, and me making the recommendation. I don't run a team and I'm not
+        building one.
+      </p>
+      <p class="run__p">
+        I charge a flat monthly fee rather than a percentage of spend, so my recommendation about your budget
+        isn't shaped by how it affects my invoice.
+      </p>
+      <p class="run__p">
+        I'm based in Salt Lake City. Most of my clients aren't. It doesn't matter much for the work, though if
+        you're local I'm happy to come by.
+      </p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <CtaLink />
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .bio {
+    padding: var(--pad-major) var(--gutter) var(--pad-split);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: clamp(28px, 4.7vw, 56px);
+    align-items: start;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .bio h1 {
+    margin: 0 0 34px;
+    font: 400 clamp(26px, 3.73vw, 44px) / 1.18 var(--serif);
+    letter-spacing: -0.01em;
+  }
+  .bio__eyebrow {
+    margin-bottom: 22px;
+  }
+  .bio__text {
+    display: grid;
+    gap: 22px;
+    max-width: 60ch;
+  }
+  .bio__portrait {
+    width: 100%;
+    max-width: 260px;
+  }
+
+  .why {
+    padding-top: var(--pad-secondary);
+    padding-bottom: var(--pad-secondary);
+  }
+  .why__eyebrow {
+    margin-bottom: 24px;
+  }
+  .why__text {
+    display: grid;
+    gap: 24px;
+    max-width: 62ch;
+  }
+  .why .body {
+    line-height: 1.75;
+  }
+
+  .run {
+    padding: var(--pad-secondary) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .run__eyebrow {
+    margin-bottom: 24px;
+  }
+  .run__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 165px), 1fr));
+    gap: var(--gutter-inner);
+  }
+  .run__p {
+    font: 400 15.5px/1.72 var(--sans);
+    color: var(--text-82);
+  }
+
+  .cta {
+    padding: var(--pad-split) var(--gutter);
+    text-align: center;
+    border-bottom: 1px solid var(--hairline);
+  }
+</style>

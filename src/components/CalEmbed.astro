@@ -1,0 +1,54 @@
+---
+/**
+ * Cal.com inline embed for /assessment.
+ *
+ * The loader in Base.astro is async, so the mount runs from a client script
+ * with a short retry loop until Cal.ns[namespace] and the container both
+ * exist. useSlotsViewOnSmallScreen gives narrow screens the list view rather
+ * than a squeezed month grid.
+ */
+import { CAL_LINK, CAL_NAMESPACE } from '../content/site';
+---
+
+<div
+  id="cal-inline"
+  class="cal"
+  data-cal-inline-link={CAL_LINK}
+  data-cal-inline-namespace={CAL_NAMESPACE}
+>
+</div>
+
+<script>
+  const el = document.getElementById('cal-inline');
+
+  function mount(tries: number) {
+    const w = window as unknown as {
+      Cal?: { ns?: Record<string, (action: string, opts: unknown) => void> };
+    };
+    if (!el) return;
+    const ns = el.dataset.calInlineNamespace ?? '';
+    const link = el.dataset.calInlineLink ?? '';
+    const api = w.Cal?.ns?.[ns];
+    if (!api) {
+      if (tries < 40) setTimeout(() => mount(tries + 1), 150);
+      return;
+    }
+    if (el.dataset.calMounted) return;
+    el.dataset.calMounted = '1';
+    api('inline', {
+      elementOrSelector: '#cal-inline',
+      config: { layout: 'month_view', useSlotsViewOnSmallScreen: 'true' },
+      calLink: link,
+    });
+  }
+
+  mount(0);
+</script>
+
+<style>
+  .cal {
+    width: 100%;
+    min-height: 620px;
+    overflow: auto;
+  }
+</style>

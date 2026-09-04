@@ -1,0 +1,83 @@
+---
+/**
+ * Three equal columns on sand, hairline top and bottom, vertical dividers.
+ * Outer padding matches the page gutter so the first and last cells are
+ * asymmetric at full width. When the cells wrap, a container query evens the
+ * padding out and drops the trailing divider.
+ */
+interface Props {
+  items: { label: string; value: string }[];
+  /** Home uses a 22px value; industry pages use 21px. */
+  size?: 'lg' | 'md';
+}
+
+const { items, size = 'lg' } = Astro.props;
+---
+
+<div class="strip-wrap">
+  <dl class:list={['strip', { 'strip--md': size === 'md' }]}>
+    {
+      items.map(({ label, value }) => (
+        <div class="cell">
+          <dt>{label}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>
+
+<style>
+  .strip-wrap {
+    container-type: inline-size;
+    background: var(--sand);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 165px), 1fr));
+    margin: 0;
+  }
+  .cell {
+    padding: 22px 24px;
+    border-right: 1px solid var(--hairline-inner);
+  }
+  .cell:first-child {
+    padding-left: var(--gutter);
+  }
+  .cell:last-child {
+    padding-right: var(--gutter);
+    border-right: 0;
+  }
+  dt {
+    font: 400 10.5px/1 var(--sans);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  dd {
+    margin: 0;
+    font: 400 clamp(13px, 1.86vw, 22px) / 1 var(--serif);
+    white-space: nowrap;
+  }
+  .strip--md dd {
+    font-size: clamp(13px, 1.78vw, 21px);
+  }
+
+  @container (width < 560px) {
+    .strip {
+      grid-template-columns: 1fr;
+    }
+    .cell,
+    .cell:first-child,
+    .cell:last-child {
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
+      border-right: 0;
+    }
+    .cell + .cell {
+      border-top: 1px solid var(--hairline-inner);
+    }
+  }
+</style>

@@ -1,0 +1,39 @@
+---
+/**
+ * The site's one call to action, in every place it appears.
+ *
+ * Renders an anchor that Cal.com binds by delegation (data-cal-link) to open
+ * the booking modal. The href points at /assessment as the no-JS fallback,
+ * which is also where the inline embed lives.
+ *
+ * `variant`:
+ *   button    solid pine button (default)
+ *   button-lg the slightly larger home hero button
+ *   text      hairline-underlined text link (header nav CTA)
+ */
+import { CAL_CONFIG, CAL_LINK, CAL_NAMESPACE, CTA_LABEL } from '../content/site';
+
+interface Props {
+  variant?: 'button' | 'button-lg' | 'text';
+  class?: string;
+}
+
+const { variant = 'button', class: className = '' } = Astro.props;
+
+const cls =
+  variant === 'text'
+    ? `textlink ${className}`
+    : variant === 'button-lg'
+      ? `btn btn--lg ${className}`
+      : `btn ${className}`;
+---
+
+<a
+  href="/assessment"
+  class={cls.trim()}
+  data-cal-link={CAL_LINK}
+  data-cal-namespace={CAL_NAMESPACE}
+  data-cal-config={JSON.stringify(CAL_CONFIG)}
+>
+  {CTA_LABEL}
+</a>

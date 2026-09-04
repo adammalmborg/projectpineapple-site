@@ -1,0 +1,80 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CtaLink from '../components/CtaLink.astro';
+import { CITY, EMAIL, LEGAL_NAME } from '../content/site';
+---
+
+<Base
+  title="Contact | Project Pineapple"
+  description="Email Adam Malmborg at Project Pineapple, or book the free thirty-minute marketing assessment. Salt Lake City, clients nationwide."
+>
+  <Header variant="minimal" sectionLinks={false} cta={true} />
+
+  <section class="contact">
+    <div>
+      <h1>Contact</h1>
+      <address class="details">
+        <span>{LEGAL_NAME}</span>
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        <span>{CITY}</span>
+      </address>
+    </div>
+    <div class="panel">
+      <p class="panel__lead">The fastest way to start is the assessment.</p>
+      <CtaLink class="panel__btn" />
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .contact {
+    padding: var(--pad-major) var(--gutter) var(--pad-secondary);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+    gap: clamp(28px, 4.7vw, 56px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  h1 {
+    margin: 0 0 32px;
+    font: 400 clamp(25px, 3.56vw, 42px) / 1.2 var(--serif);
+    letter-spacing: -0.01em;
+  }
+  .details {
+    display: grid;
+    gap: 14px;
+    font: 400 16px/1.6 var(--sans);
+    font-style: normal;
+    color: var(--text-82);
+  }
+  .details a {
+    color: var(--pine);
+    text-decoration: none;
+    border-bottom: 1px solid var(--middot);
+    padding-bottom: 2px;
+    justify-self: start;
+  }
+  .details a:hover {
+    color: var(--clay);
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 22px;
+    background: var(--sand);
+    padding: var(--gutter-inner);
+  }
+  .panel__lead {
+    max-width: 26ch;
+    font: 400 clamp(14px, 2.03vw, 24px) / 1.42 var(--serif);
+  }
+  .panel :global(.panel__btn) {
+    padding: 15px 30px;
+  }
+</style>

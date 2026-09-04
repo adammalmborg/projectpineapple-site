@@ -1,0 +1,138 @@
+---
+/**
+ * Post-booking confirmation. noindex. No CTA: the visitor already converted.
+ * Cal.com's event redirect must point here.
+ */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MethodList from '../components/MethodList.astro';
+import OperatorBlock from '../components/OperatorBlock.astro';
+import { EMAIL } from '../content/site';
+
+const helps = [
+  `Read-only access to your Google Ads account. Send it to ${EMAIL} and I'll spend time in there before we talk, so the call isn't me looking at it for the first time.`,
+  "Roughly what a new customer is worth to you. A rough number is fine. If you don't know, that's fine too, and it's usually the first thing worth figuring out.",
+];
+---
+
+<Base
+  title="Thanks, the call is booked | Project Pineapple"
+  description="Confirmation page for booked assessments."
+  noindex
+>
+  <Header variant="wordmark" />
+
+  <section class="hero">
+    <div class="hero__inner">
+    <div class="hero__status">
+      <span class="diamond" aria-hidden="true"></span>
+      <span class="eyebrow">You're on the calendar</span>
+    </div>
+    <h1>Thanks. The call is booked.</h1>
+    <p class="hero__sub">
+      You'll get a calendar invite with the meeting link. If you don't see it in a few minutes, check spam, or just
+      email me and I'll sort it out.
+    </p>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="split__grid">
+      <div class="split__col quad">
+        <div class="eyebrow">Two things that will help</div>
+        <MethodList items={helps} compact />
+      </div>
+      <div class="split__col quad quad--cream2">
+        <div class="eyebrow">What happens on the call</div>
+        <p class="body quad__p">
+          Thirty minutes. I walk you through what's being counted as a conversion, which sales the platform can't
+          see, and the two or three changes with the largest expected effect. No pitch, no deck.
+        </p>
+        <p class="pull">You keep all of it, whether or not we work together.</p>
+      </div>
+    </div>
+  </section>
+
+  <OperatorBlock heading="Need to move it, or have a question first?" background="sand">
+    Reschedule from the calendar invite, or email me at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>. You'll be talking
+    to me, not an account team.
+  </OperatorBlock>
+
+  <section class="wait">
+    <span class="wait__label">While you wait:</span>
+    <a href="/#how-i-work" class="textlink wait__link">How I work</a>
+    <a href="/about" class="textlink wait__link">About me</a>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .hero {
+    padding: var(--pad-hero) var(--gutter) var(--pad-major);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .hero__inner {
+    max-width: 900px;
+  }
+  .hero__status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    margin: 0 0 26px;
+    font: 400 clamp(28px, 3.9vw, 46px) / 1.16 var(--serif);
+    letter-spacing: -0.012em;
+    max-width: 22ch;
+  }
+  .hero__sub {
+    max-width: 52ch;
+    font: 400 18px/1.68 var(--sans);
+    color: var(--text-75);
+  }
+
+  .quad .eyebrow {
+    margin-bottom: 24px;
+  }
+  .quad--cream2 {
+    background: var(--cream-2);
+  }
+  .quad__p {
+    margin-bottom: 22px;
+  }
+  .quad .pull {
+    line-height: 1.6;
+  }
+  /* Thanks uses 18px item padding in the compact list */
+  .quad :global(.method--compact li) {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .quad :global(.method--compact li:first-child) {
+    padding-top: 0;
+  }
+  .quad :global(.method--compact li:last-child) {
+    padding-bottom: 0;
+  }
+  .quad :global(.method--compact p) {
+    line-height: 1.68;
+  }
+
+  .wait {
+    padding: var(--pad-split-sm) var(--gutter);
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    flex-wrap: wrap;
+  }
+  .wait__label {
+    font: 400 14.5px/1.6 var(--sans);
+    color: rgba(34, 64, 47, 0.62);
+  }
+  .wait__link {
+    font: 500 14.5px/1 var(--sans);
+  }
+</style>
