@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://projectpineapple.com',
   output: 'static',
   trailingSlash: 'never',
-  build: { format: 'file' },
+  build: { format: 'directory' },
   integrations: [
     sitemap({
       // /thanks is a post-booking confirmation and is set to noindex.

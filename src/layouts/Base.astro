@@ -12,7 +12,7 @@ import '@fontsource/instrument-sans/latin-400.css';
 import '@fontsource/instrument-sans/latin-500.css';
 import '../styles/global.css';
 
-import { CAL_NAMESPACE, SITE_NAME } from '../content/site';
+import { CAL_NAMESPACE, GTM_ID, SITE_NAME } from '../content/site';
 
 interface Props {
   title: string;
@@ -48,6 +48,28 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="theme-color" content="#faf5ee" />
 
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- dataLayer exists on every page so events can be pushed whether or
+         not a tag manager is configured. -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+    </script>
+    {
+      GTM_ID && (
+        <script is:inline define:vars={{ GTM_ID }}>
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', GTM_ID);
+        </script>
+      )
+    }
 
     <!-- Cal.com embed loader. Binds every [data-cal-link] on the page by
          delegation and exposes Cal.ns[namespace] for the inline embed. -->
@@ -96,9 +118,33 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           dark: { 'cal-brand': '#22402f' },
         },
       });
+      // Conversion event. Fires for both the modal and the inline embed.
+      Cal.ns[ns]('on', {
+        action: 'bookingSuccessful',
+        callback: function (e) {
+          var d = (e && e.detail && e.detail.data) || {};
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'booking_complete',
+            booking_event_type: (d.eventType && d.eventType.slug) || ns,
+          });
+        },
+      });
     </script>
   </head>
   <body>
+    {
+      GTM_ID && (
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style="display:none;visibility:hidden"
+          />
+        </noscript>
+      )
+    }
     <main class="page">
       <slot />
     </main>

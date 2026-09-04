@@ -70,6 +70,14 @@ Still to configure in the Cal.com dashboard before launch:
    set the same in the Cal.com appearance settings so the hosted booking page
    matches.
 
+## Analytics
+
+`GTM_ID` in `src/content/site.ts` is empty by default, so no tag manager
+loads. Set it to the container id and the GTM snippet is emitted on every
+page. Independently of GTM, a successful Cal.com booking (modal or inline)
+pushes `{ event: 'booking_complete' }` to `window.dataLayer`, which is the
+trigger to use for the conversion tag.
+
 ## Deploying
 
 Hosted on Cloudflare Workers as a static-assets Worker (`wrangler.jsonc`).

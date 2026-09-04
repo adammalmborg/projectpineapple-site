@@ -3,13 +3,13 @@
  * Sample monthly report card, Home proof section.
  *
  * Deliberately recessive: blurred and muted at rest, clear on hover, with a
- * label plate reading "Sample dashboard / Client details redacted". On touch
- * devices there is no hover, so it stays blurred; acceptable for a redacted
- * sample per the handoff.
+ * label plate reading "Sample dashboard / Illustrative example, not client
+ * data". On touch devices there is no hover, so it stays blurred.
  *
  * All figures are invented and internally consistent. Per-source revenue sums
- * to the total and return multiples match spend and revenue. They must stay
- * labelled as a sample until real redacted numbers replace them (v2).
+ * to the total and return multiples match spend and revenue. Every label on
+ * the card says so; do not relabel as client data unless real figures from a
+ * real account replace these.
  */
 
 const summary = [
@@ -20,10 +20,10 @@ const summary = [
 ];
 
 const bars = [
-  { label: 'Brand search', pct: 100, value: '$17.26' },
-  { label: 'Non-brand search', pct: 33, value: '$5.77' },
-  { label: 'Local services', pct: 22, value: '$3.84' },
-  { label: 'Directory listing', pct: 7, value: '$1.13', accent: true },
+  { label: 'Brand search', pct: 100, value: '17.3×' },
+  { label: 'Non-brand search', pct: 33, value: '5.8×' },
+  { label: 'Local services', pct: 22, value: '3.8×' },
+  { label: 'Directory listing', pct: 6, value: '1.1×', accent: true },
 ];
 
 const rows = [
@@ -39,18 +39,15 @@ const rows = [
     <div class="plate" aria-hidden="true">
       <div class="plate__panel">
         <div class="plate__title">Sample dashboard</div>
-        <div class="plate__sub">Client details redacted</div>
+        <div class="plate__sub">Illustrative example, not client data</div>
       </div>
     </div>
 
     <div class="card-wrap">
       <div class="card">
         <div class="head">
-          <div class="head__title">
-            <span>Monthly report,</span>
-            <span class="redact" aria-label="client name redacted"></span>
-          </div>
-          <div class="head__meta">Sample · details redacted</div>
+          <div class="head__title">Monthly report</div>
+          <div class="head__meta">Illustrative example · not client data</div>
         </div>
 
         <div class="summary">
@@ -135,8 +132,8 @@ const rows = [
   </div>
 
   <figcaption>
-    A sample of the monthly report, with client details redacted. What you spent, what it returned, and what
-    I can't attribute yet.
+    An illustrative example of the monthly report, not client data. What you spent, what it returned, and
+    what I can't attribute yet.
   </figcaption>
 </figure>
 
@@ -211,12 +208,6 @@ const rows = [
     align-items: baseline;
     gap: 10px;
     font: 400 13.5px/1.3 var(--serif);
-  }
-  .redact {
-    display: inline-block;
-    width: 88px;
-    height: 10px;
-    background: rgba(34, 64, 47, 0.3);
   }
   .head__meta {
     font: 400 10.5px/1 var(--mono);
