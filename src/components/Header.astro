@@ -1,0 +1,198 @@
+---
+/**
+ * Site header. Three variants per the handoff:
+ *
+ *   full      Home: How I work, Who it's for, About, CTA
+ *   minimal   Assessment (section links, no CTA since the embed is on the page),
+ *             About, Contact, Terms (CTA only)
+ *   wordmark  Dental, Legal, Thanks: no nav at all, to protect the single
+ *             conversion path on landing pages
+ *
+ * Mobile navigation: below 640px the inline nav is replaced by a native
+ * <details> disclosure. No JavaScript, no animation, keyboard accessible.
+ * This is the only media query on the site.
+ */
+import Logo from './Logo.astro';
+import CtaLink from './CtaLink.astro';
+
+type Variant = 'full' | 'minimal' | 'wordmark';
+
+interface Props {
+  variant?: Variant;
+  /** For 'minimal': show section links (How I work, Who it's for, About). */
+  sectionLinks?: boolean;
+  /** For 'minimal': show the CTA text link. */
+  cta?: boolean;
+  /** Home renders the wordmark as plain text (already on the page). */
+  wordmarkAsLink?: boolean;
+}
+
+const {
+  variant = 'full',
+  sectionLinks = variant === 'full',
+  cta = variant === 'full',
+  wordmarkAsLink = true,
+} = Astro.props;
+
+const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
+---
+
+<header class:list={['header', { 'header--compact': variant === 'wordmark' }]}>
+  <div class="lockup">
+    <Logo />
+    {
+      wordmarkAsLink ? (
+        <a href="/" class="wordmark">Project Pineapple</a>
+      ) : (
+        <span class="wordmark">Project Pineapple</span>
+      )
+    }
+  </div>
+
+  {
+    hasNav && (
+      <>
+        <nav class="nav nav--inline" aria-label="Primary">
+          {sectionLinks && (
+            <>
+              <a href="/#how-i-work">How I work</a>
+              <a href="/#who-its-for">Who it's for</a>
+              <a href="/about">About</a>
+            </>
+          )}
+          {cta && <CtaLink variant="text" />}
+        </nav>
+
+        <details class="nav nav--mobile">
+          <summary>
+            Menu
+          </summary>
+          <nav aria-label="Primary">
+            {sectionLinks && (
+              <>
+                <a href="/#how-i-work">How I work</a>
+                <a href="/#who-its-for">Who it's for</a>
+                <a href="/about">About</a>
+              </>
+            )}
+            {cta && <CtaLink variant="text" />}
+          </nav>
+        </details>
+      </>
+    )
+  }
+</header>
+
+<style>
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    padding: 24px var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .header--compact {
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+
+  .lockup {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: none;
+  }
+  .wordmark {
+    font: 400 15px/1 var(--serif);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--pine);
+    text-decoration: none;
+  }
+  a.wordmark:hover {
+    color: var(--pine);
+  }
+
+  .nav--inline {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font: 400 13px/1 var(--sans);
+    color: var(--text-65);
+  }
+  .nav--inline a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .nav--inline a:hover {
+    color: var(--pine);
+  }
+  .nav--inline :global(a.textlink) {
+    color: var(--pine);
+  }
+  .nav--inline :global(a.textlink:hover) {
+    color: var(--clay);
+  }
+
+  /* Mobile disclosure, hidden on wider screens */
+  .nav--mobile {
+    display: none;
+    font: 400 13px/1 var(--sans);
+  }
+  .nav--mobile summary {
+    list-style: none;
+    cursor: pointer;
+    color: var(--text-65);
+    padding: 6px 0;
+    user-select: none;
+  }
+  .nav--mobile summary::-webkit-details-marker {
+    display: none;
+  }
+  .nav--mobile summary::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 8px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+  }
+  .nav--mobile[open] summary::after {
+    transform: translateY(1px) rotate(-135deg);
+  }
+  .nav--mobile[open] {
+    flex-basis: 100%;
+  }
+  .nav--mobile nav {
+    display: grid;
+    gap: 0;
+    margin-top: 14px;
+    border-top: 1px solid var(--hairline-inner);
+  }
+  .nav--mobile nav a {
+    display: block;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--hairline-inner);
+    color: var(--pine);
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .nav--mobile nav :global(a.textlink) {
+    border-bottom: 1px solid var(--hairline-inner);
+    padding-bottom: 15px;
+  }
+
+  @media (max-width: 640px) {
+    .nav--inline {
+      display: none;
+    }
+    .nav--mobile {
+      display: block;
+    }
+  }
+</style>

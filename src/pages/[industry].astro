@@ -1,0 +1,152 @@
+---
+/**
+ * Industry landing page template. Driven entirely by src/content/industries.ts.
+ * Paid-search landing page first: wordmark-only header, no nav, one CTA top
+ * and bottom, no testimonial.
+ */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CtaLink from '../components/CtaLink.astro';
+import MethodList from '../components/MethodList.astro';
+import StatStrip from '../components/StatStrip.astro';
+import OperatorBlock from '../components/OperatorBlock.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import { industries } from '../content/industries';
+import { CTA_MICROCOPY_INDUSTRY } from '../content/site';
+
+export function getStaticPaths() {
+  return Object.values(industries).map((industry) => ({
+    params: { industry: industry.slug },
+    props: { industry },
+  }));
+}
+
+const { industry } = Astro.props;
+---
+
+<Base title={industry.title} description={industry.description}>
+  <Header variant="wordmark" />
+
+  <section class="hero">
+    <div class="eyebrow hero__eyebrow">{industry.eyebrow}</div>
+    <h1>{industry.headline}</h1>
+    <p class="hero__sub">{industry.subhead}</p>
+    <div class="hero__cta">
+      <CtaLink class="hero__btn" />
+      <span class="hero__micro">{CTA_MICROCOPY_INDUSTRY}</span>
+    </div>
+  </section>
+
+  <section class="section section--pine breaks">
+    <h2>{industry.breaksHeading}</h2>
+    <ul class="breaks__list">
+      {
+        industry.breaks.map((b) => (
+          <li>
+            <div class="breaks__heading">{b.heading}</div>
+            <div class="breaks__body">{b.body}</div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <section class="section method">
+    <div class="eyebrow method__eyebrow">{industry.methodHeading}</div>
+    <MethodList items={industry.method} industry />
+  </section>
+
+  <StatStrip items={industry.stats} size="md" />
+
+  <OperatorBlock heading="Adam Malmborg, Project Pineapple">
+    Running paid advertising since 2014. Running businesses just as long. You work with me, not an account team.
+  </OperatorBlock>
+
+  <ClosingCta heading={industry.closingHeading} variant="industry">
+    {industry.closingBody}
+  </ClosingCta>
+
+  <Footer />
+</Base>
+
+<style>
+  .hero {
+    padding: var(--pad-industry) var(--gutter) clamp(38px, 5.8vw, 68px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .hero__eyebrow {
+    margin-bottom: 26px;
+  }
+  .hero h1 {
+    margin: 0 0 26px;
+    font: 400 clamp(28px, 3.9vw, 46px) / 1.16 var(--serif);
+    letter-spacing: -0.012em;
+    max-width: 26ch;
+  }
+  .hero__sub {
+    margin: 0 0 36px;
+    max-width: 56ch;
+    font: 400 17px/1.7 var(--sans);
+    color: var(--text-75);
+  }
+  .hero__cta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero :global(.hero__btn) {
+    padding: 16px 30px;
+  }
+  .hero__micro {
+    font: 400 13px/1.6 var(--sans);
+    color: var(--text-60);
+    max-width: 26ch;
+  }
+
+  .breaks {
+    padding-top: var(--pad-industry);
+    padding-bottom: var(--pad-industry);
+  }
+  .breaks h2 {
+    margin: 0 0 40px;
+    font: 400 clamp(19px, 2.63vw, 31px) / 1.26 var(--serif);
+    max-width: 26ch;
+  }
+  .breaks__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    max-width: 66ch;
+  }
+  .breaks__list li {
+    padding: 22px 0;
+    border-top: 1px solid var(--hairline-on-pine);
+  }
+  .breaks__list li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .breaks__list li:last-child {
+    padding-bottom: 0;
+  }
+  .breaks__heading {
+    font: 500 17px/1.4 var(--sans);
+    margin-bottom: 7px;
+  }
+  .breaks__body {
+    font: 400 15px/1.7 var(--sans);
+    color: var(--on-pine-3);
+  }
+
+  .method {
+    padding-top: var(--pad-industry);
+    padding-bottom: var(--pad-industry);
+  }
+  .method__eyebrow {
+    margin-bottom: 30px;
+  }
+</style>

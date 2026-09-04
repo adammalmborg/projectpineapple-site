@@ -1,0 +1,281 @@
+/*
+  Project Pineapple, global styles.
+
+  Design tokens from the handoff. No pure black, no pure white, no shadows,
+  no border radius except circular portrait crops. Separation is done with
+  hairline borders and background shifts only.
+
+  Responsive behavior is intrinsic (auto-fit grids, clamp() spacing and type)
+  rather than breakpoint-driven. The single media query in the site is the
+  mobile navigation in Header.astro.
+*/
+
+:root {
+  --pine: #22402f;
+  --clay: #c1613c;
+  --clay-light: #e0a184;
+  --cream: #faf5ee;
+  --cream-2: #f6efe4;
+  --sand: #f0e7da;
+
+  /* Derived from pine at stated alpha */
+  --hairline: rgba(34, 64, 47, 0.18);
+  --hairline-inner: rgba(34, 64, 47, 0.14);
+  --hairline-strong: rgba(34, 64, 47, 0.35);
+  --text-82: rgba(34, 64, 47, 0.82);
+  --text-75: rgba(34, 64, 47, 0.75);
+  --text-72: rgba(34, 64, 47, 0.72);
+  --text-70: rgba(34, 64, 47, 0.7);
+  --text-65: rgba(34, 64, 47, 0.65);
+  --text-60: rgba(34, 64, 47, 0.6);
+  --muted: rgba(34, 64, 47, 0.55);
+  --middot: rgba(34, 64, 47, 0.3);
+
+  /* On pine */
+  --on-pine: rgba(250, 245, 238, 0.82);
+  --on-pine-2: rgba(250, 245, 238, 0.68);
+  --on-pine-3: rgba(250, 245, 238, 0.64);
+  --on-pine-4: rgba(250, 245, 238, 0.62);
+  --on-pine-5: rgba(250, 245, 238, 0.55);
+  --hairline-on-pine: rgba(250, 245, 238, 0.18);
+
+  --serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
+  --sans: 'Instrument Sans', Helvetica, Arial, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  /* Spacing. vw midpoints derive from the 1180px design width so every value
+     lands on its designed number at 1180 and shrinks proportionally below. */
+  --page-w: 1180px;
+  --gutter: clamp(20px, 7.5vw, 88px);
+  --gutter-inner: clamp(22px, 3.7vw, 44px);
+  --pad-hero: clamp(48px, 8vw, 96px);
+  --pad-major: clamp(42px, 6.8vw, 80px);
+  --pad-industry: clamp(42px, 6.5vw, 76px);
+  --pad-secondary: clamp(40px, 6vw, 72px);
+  --pad-split: clamp(36px, 5.4vw, 64px);
+  --pad-split-sm: clamp(32px, 4.8vw, 56px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--cream);
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--pine);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--pine);
+}
+a:hover {
+  color: var(--clay);
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  margin: 0;
+  text-wrap: pretty;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+/* Page container: 1180px centered. On wider viewports it carries hairline
+   side borders so the horizontal rules inside it have a terminus. */
+.page {
+  width: 100%;
+  max-width: var(--page-w);
+  margin: 0 auto;
+  min-height: 100vh;
+  background: var(--cream);
+  border-left: 1px solid var(--hairline);
+  border-right: 1px solid var(--hairline);
+}
+@media (max-width: 1181px) {
+  .page {
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+/* Generic section shells */
+.section {
+  padding: var(--pad-major) var(--gutter);
+  border-bottom: 1px solid var(--hairline);
+}
+.section--pine {
+  background: var(--pine);
+  color: var(--cream);
+  border-bottom: 0;
+}
+.section--cream2 {
+  background: var(--cream-2);
+}
+.section--sand {
+  background: var(--sand);
+}
+
+/* Type roles */
+.eyebrow {
+  font: 400 11.5px/1 var(--sans);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--clay);
+}
+.section--pine .eyebrow {
+  color: var(--clay-light);
+}
+
+.h2 {
+  font: 400 clamp(18px, 2.54vw, 30px) / 1.28 var(--serif);
+  max-width: 26ch;
+}
+.h2--dark {
+  font: 400 clamp(20px, 2.88vw, 34px) / 1.24 var(--serif);
+  max-width: 28ch;
+}
+
+.body {
+  font: 400 16px/1.72 var(--sans);
+  color: var(--text-82);
+}
+.body--long {
+  line-height: 1.75;
+}
+.section--pine .body {
+  color: var(--on-pine);
+}
+
+.pull {
+  font: 400 18px/1.62 var(--serif);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 16px 32px;
+  background: var(--pine);
+  color: var(--cream);
+  text-decoration: none;
+  font: 500 15px/1 var(--sans);
+  border: 1px solid var(--pine);
+  transition: background-color 150ms ease, color 150ms ease;
+}
+.btn:hover {
+  background: #1a3225;
+  color: var(--cream);
+}
+.btn--lg {
+  padding: 17px 34px;
+  font-size: 15.5px;
+}
+.btn--secondary {
+  background: transparent;
+  color: var(--pine);
+}
+.btn--secondary:hover {
+  background: var(--sand);
+  color: var(--pine);
+}
+
+/* Text link with hairline underline */
+.textlink {
+  color: var(--pine);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline-strong);
+  padding-bottom: 3px;
+}
+.textlink:hover {
+  color: var(--clay);
+  border-bottom-color: currentColor;
+}
+
+/* Two-column split with a vertical hairline between panels. When the columns
+   wrap, the container query drops the divider and evens out the padding so
+   the "trailing edge" artifact noted in the handoff doesn't appear. */
+.split {
+  container-type: inline-size;
+}
+.split__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+}
+.split__col {
+  padding: var(--pad-split) var(--gutter-inner) var(--pad-split) var(--gutter);
+  border-right: 1px solid var(--hairline);
+}
+.split__col + .split__col {
+  padding: var(--pad-split) var(--gutter) var(--pad-split) var(--gutter-inner);
+  border-right: 0;
+}
+.split--sm .split__col,
+.split--sm .split__col + .split__col {
+  padding-top: var(--pad-split-sm);
+  padding-bottom: var(--pad-split-sm);
+}
+@container (width < 600px) {
+  .split__col,
+  .split__col + .split__col {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+    border-right: 0;
+  }
+  .split__col + .split__col {
+    border-top: 1px solid var(--hairline);
+  }
+}
+
+/* Clay diamond accent */
+.diamond {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: var(--clay);
+  transform: rotate(45deg);
+  flex: none;
+}
+.section--pine .diamond {
+  background: var(--clay-light);
+}
+
+/* Anchor targets: production header is not sticky, so a small margin only */
+[id] {
+  scroll-margin-top: 24px;
+}
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

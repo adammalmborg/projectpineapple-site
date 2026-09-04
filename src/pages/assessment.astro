@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MethodList from '../components/MethodList.astro';
+import CalEmbed from '../components/CalEmbed.astro';
+
+const gets = [
+  "An honest read on what's being counted as a conversion, and whether those conversions are real.",
+  'Which sales the platform currently cannot see, and what it would take to fix that.',
+  'The two or three changes with the largest expected effect, in priority order.',
+  "What I don't know yet, and what it would take to find out.",
+];
+---
+
+<Base
+  title="Free marketing assessment | Project Pineapple"
+  description="Thirty minutes in your ad account. Find out what's being counted as a conversion and what would actually move revenue. You keep the findings."
+>
+  <Header variant="minimal" sectionLinks={true} cta={false} />
+
+  <section class="hero">
+    <div class="hero__inner">
+      <h1>The free marketing assessment</h1>
+      <p class="hero__sub">Thirty minutes in your account and your numbers. No pitch, no deck.</p>
+    </div>
+  </section>
+
+  <section class="split">
+    <div class="split__grid">
+      <div class="split__col quad">
+        <div class="eyebrow">What happens</div>
+        <div class="stack">
+          <p class="body">
+            You give me read-only access to your Google Ads account and tell me roughly what a new customer is
+            worth to you. If you don't know, that's fine, and it's usually the first thing worth figuring out.
+          </p>
+          <p class="body">
+            I spend time in the account before we talk. Then we get on a call for thirty minutes and I walk you
+            through what I found.
+          </p>
+        </div>
+      </div>
+      <div class="split__col quad quad--cream2">
+        <div class="eyebrow">What you'll get</div>
+        <MethodList items={gets} compact />
+      </div>
+    </div>
+  </section>
+
+  <section class="split split--sm">
+    <div class="split__grid">
+      <div class="split__col">
+        <div class="eyebrow eyebrow--22">What happens after</div>
+        <p class="body">
+          You keep all of it. If you want to hand it to your current agency and have them fix it, that's a fine
+          outcome. If you'd rather I do it, we'll talk about what that looks like and I'll send a written scope.
+        </p>
+      </div>
+      <div class="split__col">
+        <div class="eyebrow eyebrow--22">Who it's for</div>
+        <p class="body">
+          This is most useful for businesses spending at least $3,000 a month on advertising. Below that there
+          usually isn't enough data to say much with confidence.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="book">
+    <div class="eyebrow book__eyebrow">Pick a time</div>
+    <CalEmbed />
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .hero {
+    padding: var(--pad-major) var(--gutter) var(--pad-split);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .hero__inner {
+    max-width: 900px;
+  }
+  .hero h1 {
+    margin: 0 0 22px;
+    font: 400 clamp(26px, 3.73vw, 44px) / 1.18 var(--serif);
+    letter-spacing: -0.01em;
+    max-width: 24ch;
+  }
+  .hero__sub {
+    max-width: 44ch;
+    font: 400 18px/1.65 var(--sans);
+    color: var(--text-72);
+  }
+
+  .split {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .quad .eyebrow {
+    margin-bottom: 24px;
+  }
+  .quad--cream2 {
+    background: var(--cream-2);
+  }
+  .stack {
+    display: grid;
+    gap: 20px;
+  }
+  .eyebrow--22 {
+    margin-bottom: 22px;
+  }
+
+  .book {
+    padding: var(--pad-split) var(--gutter);
+    background: var(--sand);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .book__eyebrow {
+    margin-bottom: 26px;
+  }
+</style>

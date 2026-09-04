@@ -1,0 +1,58 @@
+---
+/**
+ * Compact operator block: sand or cream-2 background, 88px circular portrait,
+ * heading plus one paragraph. Used on the industry pages and /thanks.
+ * Home has its own larger version inline.
+ */
+import Portrait from './Portrait.astro';
+
+interface Props {
+  heading: string;
+  background?: 'sand' | 'cream2';
+}
+
+const { heading, background = 'cream2' } = Astro.props;
+---
+
+<div class:list={['operator', background === 'sand' ? 'operator--sand' : 'operator--cream2']}>
+  <div class="portrait">
+    <Portrait crop="circle" size={88} />
+  </div>
+  <div>
+    <div class="heading">{heading}</div>
+    <p class="text"><slot /></p>
+  </div>
+</div>
+
+<style>
+  .operator {
+    padding: var(--gutter-inner) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 26px;
+    align-items: center;
+  }
+  .operator--cream2 {
+    background: var(--cream-2);
+  }
+  .operator--sand {
+    background: var(--sand);
+  }
+  .portrait {
+    width: 88px;
+  }
+  .heading {
+    font: 500 15px/1.4 var(--sans);
+    margin-bottom: 7px;
+  }
+  .text {
+    margin: 0;
+    max-width: 60ch;
+    font: 400 15px/1.68 var(--sans);
+    color: var(--text-72);
+  }
+  .text :global(a) {
+    color: var(--pine);
+  }
+</style>

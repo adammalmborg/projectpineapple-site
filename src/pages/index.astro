@@ -1,0 +1,337 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CtaLink from '../components/CtaLink.astro';
+import StatStrip from '../components/StatStrip.astro';
+import MethodList from '../components/MethodList.astro';
+import Portrait from '../components/Portrait.astro';
+import SampleDashboard from '../components/SampleDashboard.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import { CTA_MICROCOPY_HOME } from '../content/site';
+
+const problems = [
+  { heading: 'Leads that never became customers.', body: "The dashboard climbs. The bank account doesn't." },
+  { heading: "Calls the platform can't see.", body: 'The phone is where the money is decided.' },
+  { heading: 'Budget going to the wrong people.', body: 'The platform is doing what it was told.' },
+  { heading: 'Cost per lead looks like progress.', body: 'It can fall while revenue falls with it.' },
+];
+
+const method = [
+  'Establish what a customer is worth. Every decision after that depends on it.',
+  "Connect the sale back to its source. That means call tracking, CRM data, and a hard look at what's being counted.",
+  'Rebuild the campaigns around revenue. Same budget, different people.',
+  "Report on what actually happened, including what I can't attribute yet.",
+];
+---
+
+<Base
+  title="Project Pineapple | Marketing for businesses where the sale happens in person"
+  description="Paid advertising and marketing leadership for service businesses. Flat fee, revenue-based measurement, run by an operator. Salt Lake City, clients nationwide."
+>
+  <Header variant="full" wordmarkAsLink={false} />
+
+  <section class="hero">
+    <div class="eyebrow hero__eyebrow">Marketing for businesses where the sale happens in person</div>
+    <h1>Somewhere between your ad spend and your bank account, the story gets lost.</h1>
+    <p class="hero__sub">
+      If your customers call or walk in, that's where it happens. The ad platform never sees the sale, so your
+      agency reports on leads, because that's what it can see. I connect the spend to the customers who actually
+      paid, so you can see which ads are worth paying for.
+    </p>
+    <CtaLink variant="button-lg" />
+    <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
+  </section>
+
+  <StatStrip
+    items={[
+      { label: 'Revenue fit', value: '$500K–$10M' },
+      { label: 'Media', value: '$3K+ / month' },
+      { label: 'Fee', value: 'Flat monthly' },
+    ]}
+  />
+
+  <section class="section section--pine problem">
+    <h2 class="h2--dark">Where the story gets lost.</h2>
+    <p class="problem__intro">
+      Google spends your money toward whatever it can count. If it can't count the sale, it counts something else
+      and calls that the result.
+    </p>
+    <div class="problem__grid">
+      {
+        problems.map((p) => (
+          <div>
+            <span class="diamond" aria-hidden="true" />
+            <div class="problem__heading">{p.heading}</div>
+            <div class="problem__body">{p.body}</div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="how-i-work" class="section method">
+    <div class="eyebrow">How I work</div>
+    <MethodList items={method} />
+  </section>
+
+  <section class="section section--cream2 proof">
+    <h2 class="h2">What this looks like in practice</h2>
+    <div class="proof__stories">
+      <p class="body body--long">
+        A dental practice had been paying an agency for leads for about a year. The account was optimizing toward
+        form submissions, and form submissions were coming in. When I connected the phone and the booking data
+        back to the campaigns, most of those forms had never become appointments. The platform had gotten very
+        good at finding people who fill out forms. Rebuilding around booked patients changed who the same budget
+        reached, and the practice started seeing the result where it counts, in the schedule.
+      </p>
+      <p class="body body--long">
+        A law firm was bringing in cases from several sources at once: an agency sending leads, directory
+        listings, referrals, and their own paid search. Nobody could say which source the good cases came from.
+        Once every source was tracked through to intake, one of them clearly wasn't producing, and the firm ended
+        that contract. Their sales cycle is eight months. Three months in, I could tell them exactly what had
+        entered the pipeline and where it came from. I could not tell them what had closed, because nothing had
+        closed yet. I said so. Most agencies would have reported the pipeline number and let it sit there looking
+        like revenue.
+      </p>
+    </div>
+    <SampleDashboard />
+  </section>
+
+  <section class="split">
+    <div class="split__grid">
+      <div class="split__col">
+        <div class="eyebrow col-eyebrow">How I report</div>
+        <p class="body">
+          I'll tell you what I know and what I don't. A report that overstates what it knows makes the number look
+          good and makes the next decision worse. If your sales cycle is long, I'll be reporting on pipeline before
+          I can report on revenue, and I'll say which is which.
+        </p>
+      </div>
+      <div class="split__col">
+        <div class="eyebrow col-eyebrow">How I charge</div>
+        <p class="body">
+          A flat monthly fee. Most agencies charge a percentage of your ad spend, which means they earn more when
+          you spend more. That is a bad incentive to have sitting between you and the person advising you on your
+          budget. My fee is the same whether I tell you to double the spend or cut it in half, so the
+          recommendation is just the recommendation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="operator">
+    <div class="operator__portrait">
+      <Portrait crop="circle" size={150} />
+    </div>
+    <div class="operator__text">
+      <div class="eyebrow">Adam Malmborg</div>
+      <p class="operator__lead">Running paid advertising since 2014. Running businesses just as long.</p>
+      <p class="body operator__body">
+        I've made payroll, set pricing, hired and fired, and watched a marketing invoice land on a P&amp;L I was
+        responsible for. That changes how I read an account. Not clicks and impressions, but what it cost to get a
+        customer and whether that customer was worth getting.
+      </p>
+      <p class="operator__quote">You work with me, not an account team.</p>
+      <a href="/about" class="textlink operator__link">More about me</a>
+    </div>
+  </section>
+
+  <section class="section engagement">
+    <h2 class="h2">What working together looks like</h2>
+    <div class="engagement__grid">
+      <p class="body">
+        Most clients want their paid advertising run properly, with measurement they can actually trust. That's
+        the majority of what I do, and for a lot of businesses it's the right amount.
+      </p>
+      <p class="body">
+        Some want more than that. Someone to own the marketing function, sit in the decisions about pricing and
+        capacity and hiring, evaluate every lead source rather than just the paid ones, and hold their other
+        vendors accountable. That's a fractional CMO engagement, and it's a different scope.
+      </p>
+    </div>
+    <p class="pull engagement__pull">
+      You don't have to figure out which one you need before we talk. The assessment usually makes it obvious.
+    </p>
+  </section>
+
+  <section id="who-its-for" class="section section--pine fit">
+    <h2 class="h2">Who this is for</h2>
+    <div class="fit__text">
+      <p class="fit__p1">
+        Businesses doing between $500,000 and $10 million in revenue, spending at least $3,000 a month on media,
+        where the sale happens on a phone call, in a showroom, or across a few weeks of consideration. Dental and
+        medical practices, law firms, med spas, custom retail.
+      </p>
+      <p class="fit__p2">
+        It's a poor fit for pure ecommerce, where the platform already sees the transaction, and for high-volume
+        low-ticket businesses where there isn't much to attribute.
+      </p>
+      <p class="fit__p3">Based in Salt Lake City, working with clients anywhere in the country.</p>
+    </div>
+  </section>
+
+  <ClosingCta heading="Start with the assessment">
+    Thirty minutes on what's being counted, what's wrong, and the two or three changes that would move the most.
+    You keep the findings either way.
+  </ClosingCta>
+
+  <Footer />
+</Base>
+
+<style>
+  /* Hero: the only centered block apart from closing CTAs */
+  .hero {
+    padding: var(--pad-hero) var(--gutter) clamp(44px, 7vw, 84px);
+    text-align: center;
+    border-bottom: 1px solid var(--hairline);
+  }
+  .hero__eyebrow {
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  .hero h1 {
+    margin: 0 auto 28px;
+    font: 400 clamp(31px, 4.41vw, 52px) / 1.14 var(--serif);
+    letter-spacing: -0.012em;
+    max-width: 24ch;
+  }
+  .hero__sub {
+    margin: 0 auto 38px;
+    max-width: 52ch;
+    font: 400 18px/1.68 var(--sans);
+    color: var(--text-72);
+  }
+  .hero__micro {
+    margin: 16px auto 0;
+    font: 400 13px/1.6 var(--sans);
+    color: var(--muted);
+    max-width: 44ch;
+  }
+
+  /* Problem, on pine */
+  .problem h2 {
+    margin-bottom: 18px;
+  }
+  .problem__intro {
+    margin-bottom: 44px;
+    max-width: 52ch;
+    font: 400 16px/1.7 var(--sans);
+    color: var(--on-pine-2);
+  }
+  .problem__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+    gap: clamp(17px, 2.9vw, 34px) 60px;
+  }
+  .problem__grid .diamond {
+    display: block;
+    margin-bottom: 16px;
+  }
+  .problem__heading {
+    font: 500 17px/1.4 var(--sans);
+    margin-bottom: 7px;
+  }
+  .problem__body {
+    font: 400 14.5px/1.65 var(--sans);
+    color: var(--on-pine-4);
+  }
+
+  /* Method */
+  .method {
+    padding-bottom: var(--pad-secondary);
+  }
+  .method .eyebrow {
+    margin-bottom: 30px;
+  }
+
+  /* Proof */
+  .proof h2 {
+    margin-bottom: 36px;
+  }
+  .proof__stories {
+    display: grid;
+    gap: 30px;
+    max-width: 64ch;
+  }
+
+  /* How I report / How I charge */
+  .split {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .col-eyebrow {
+    margin-bottom: 22px;
+  }
+
+  /* Operator block, home variant */
+  .operator {
+    padding: var(--pad-secondary) var(--gutter);
+    background: var(--sand);
+    border-bottom: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: clamp(96px, 13vw, 150px) 1fr;
+    gap: var(--gutter-inner);
+    align-items: start;
+  }
+  .operator__text {
+    max-width: 58ch;
+  }
+  .operator__text .eyebrow {
+    margin-bottom: 20px;
+  }
+  .operator__lead {
+    margin: 0 0 20px;
+    font: 400 clamp(14px, 2.03vw, 24px) / 1.42 var(--serif);
+  }
+  .operator__body {
+    margin: 0 0 18px;
+    color: rgba(34, 64, 47, 0.8);
+  }
+  .operator__quote {
+    margin: 0 0 20px;
+    padding-left: 18px;
+    border-left: 2px solid var(--clay);
+    font: 400 16px/1.7 var(--sans);
+  }
+  .operator__link {
+    font: 500 14.5px/1 var(--sans);
+  }
+
+  /* Engagement model */
+  .engagement h2 {
+    margin-bottom: 32px;
+  }
+  .engagement__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
+    gap: var(--gutter-inner);
+    max-width: 1000px;
+  }
+  .engagement__pull {
+    margin-top: 32px;
+    max-width: 52ch;
+  }
+
+  /* Who this is for, on pine */
+  .fit h2 {
+    margin-bottom: 32px;
+    max-width: 24ch;
+  }
+  .fit__text {
+    display: grid;
+    gap: 24px;
+    max-width: 62ch;
+  }
+  .fit__p1 {
+    font: 400 16px/1.75 var(--sans);
+    color: var(--on-pine);
+  }
+  .fit__p2 {
+    font: 400 16px/1.75 var(--sans);
+    color: var(--on-pine-4);
+  }
+  .fit__p3 {
+    font: 400 14.5px/1.7 var(--sans);
+    color: var(--on-pine-5);
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+/**
+ * Adam's portrait, the only photograph on the site.
+ *
+ * Two crops per the handoff:
+ *   circle  head-and-collar crop via object-fit + scale(1.95) at origin 50% 14%
+ *   square  4:5 crop at object-position 50% 20% (About page)
+ *
+ * Astro's image service generates responsive derivatives from the source
+ * JPEG in src/assets at build time.
+ */
+import { Image } from 'astro:assets';
+import portrait from '../assets/adam-malmborg.jpg';
+
+interface Props {
+  crop: 'circle' | 'square';
+  /** Rendered width hint for the circle variant, in px (88 or 150). */
+  size?: number;
+  loading?: 'lazy' | 'eager';
+}
+
+const { crop, size = 150, loading = 'lazy' } = Astro.props;
+
+// The circle is scaled 1.95x inside its frame, so request roughly 2x the
+// frame width per device pixel to keep it crisp.
+const circleWidths = [Math.round(size * 2), Math.round(size * 4)];
+const squareWidths = [260, 520, 780];
+---
+
+{
+  crop === 'circle' ? (
+    <div class="circle" style={`--size:${size}px`}>
+      <Image
+        src={portrait}
+        alt="Adam Malmborg"
+        width={circleWidths[circleWidths.length - 1]}
+        widths={circleWidths}
+        sizes={`${size}px`}
+        loading={loading}
+        decoding="async"
+      />
+    </div>
+  ) : (
+    <div class="square">
+      <Image
+        src={portrait}
+        alt="Adam Malmborg"
+        width={520}
+        widths={squareWidths}
+        sizes="(max-width: 700px) 100vw, 260px"
+        loading={loading}
+        decoding="async"
+      />
+    </div>
+  )
+}
+
+<style>
+  .circle {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    flex: none;
+  }
+  .circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 12%;
+    transform: scale(1.95);
+    transform-origin: 50% 14%;
+    display: block;
+  }
+  .square {
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+  }
+  .square img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 20%;
+    display: block;
+  }
+</style>

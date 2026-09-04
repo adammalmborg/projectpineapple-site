@@ -1,0 +1,100 @@
+---
+/**
+ * Numbered 01 to 04 list. Clay Caslon numeral in a fixed column, one sentence
+ * each, hairline top border on items 2 onward.
+ *
+ * `compact` is the tighter variant used inside the Assessment and Thanks
+ * quadrants (30px numeral column, 15.5px body).
+ */
+interface Props {
+  items: string[];
+  compact?: boolean;
+  /** Industry pages use 16.5px / 1.62 body and 20px item padding. */
+  industry?: boolean;
+}
+
+const { items, compact = false, industry = false } = Astro.props;
+---
+
+<ol class:list={['method', { 'method--compact': compact, 'method--industry': industry }]}>
+  {
+    items.map((text, i) => (
+      <li>
+        <span class="num" aria-hidden="true">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <p>{text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .method {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    max-width: 58ch;
+  }
+  li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 22px;
+    padding: 22px 0;
+    border-top: 1px solid var(--hairline-inner);
+  }
+  li:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  li:last-child {
+    padding-bottom: 0;
+  }
+  .num {
+    font: 400 16px/1.55 var(--serif);
+    color: var(--clay);
+  }
+  p {
+    margin: 0;
+    font: 400 17px/1.6 var(--sans);
+  }
+
+  .method--industry li {
+    padding: 20px 0;
+  }
+  .method--industry li:first-child {
+    padding-top: 0;
+  }
+  .method--industry li:last-child {
+    padding-bottom: 0;
+  }
+  .method--industry p {
+    font-size: 16.5px;
+    line-height: 1.62;
+  }
+
+  .method--compact {
+    max-width: none;
+  }
+  .method--compact li {
+    grid-template-columns: 30px 1fr;
+    gap: 18px;
+    padding: 16px 0;
+  }
+  .method--compact li:first-child {
+    padding-top: 0;
+  }
+  .method--compact li:last-child {
+    padding-bottom: 0;
+  }
+  .method--compact .num {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .method--compact p {
+    font-size: 15.5px;
+    line-height: 1.65;
+  }
+</style>

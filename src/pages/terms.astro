@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { EMAIL } from '../content/site';
+
+const sections = [
+  {
+    label: 'Services',
+    body: 'Project Pineapple LLC provides marketing consulting services, primarily paid advertising management, measurement, and marketing strategy, to business clients under a written services agreement. The scope of each engagement is defined in that agreement.',
+  },
+  {
+    label: 'Billing',
+    body: 'Engagements are billed as a fixed monthly retainer, invoiced in advance, payable by ACH or card. Advertising spend is billed directly by the advertising platform to the client and is not collected or handled by Project Pineapple LLC.',
+  },
+  {
+    label: 'Cancellation and refunds',
+    body: 'Engagements are month to month unless the services agreement states otherwise, and may be cancelled with written notice before the start of the next billing period. Fees for a month already in progress are earned when the work is performed and are not refundable on a prorated basis.',
+  },
+  {
+    label: 'Disputes',
+    body: `Billing questions or disputes should be sent to ${EMAIL} and will be acknowledged within two business days.`,
+  },
+  {
+    label: 'Entity',
+    body: 'Project Pineapple LLC is a Utah limited liability company, organized in 2014.',
+  },
+];
+---
+
+<Base
+  title="Terms of service | Project Pineapple"
+  description="Terms of service for Project Pineapple LLC: services, billing, cancellation and refunds, disputes, and entity."
+>
+  <Header variant="minimal" sectionLinks={false} cta={true} />
+
+  <section class="terms">
+    <h1>Terms of service</h1>
+    <div class="terms__sections">
+      {
+        sections.map((s) => (
+          <div>
+            <div class="eyebrow terms__label">{s.label}</div>
+            <p class="terms__body">{s.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .terms {
+    padding: var(--pad-secondary) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  h1 {
+    margin: 0 0 44px;
+    font: 400 clamp(23px, 3.22vw, 38px) / 1.22 var(--serif);
+    letter-spacing: -0.01em;
+  }
+  .terms__sections {
+    display: grid;
+    gap: clamp(17px, 2.9vw, 34px);
+    max-width: 70ch;
+  }
+  .terms__label {
+    margin-bottom: 14px;
+  }
+  .terms__body {
+    font: 400 15.5px/1.75 var(--sans);
+    color: var(--text-82);
+  }
+</style>
