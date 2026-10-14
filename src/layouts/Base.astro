@@ -12,7 +12,7 @@ import '@fontsource/instrument-sans/latin-400.css';
 import '@fontsource/instrument-sans/latin-500.css';
 import '../styles/global.css';
 
-import { CAL_NAMESPACE, GTM_ID, SITE_NAME } from '../content/site';
+import { CAL_NAMESPACE, CF_ANALYTICS_TOKEN, GTM_ID, SITE_NAME } from '../content/site';
 
 interface Props {
   title: string;
@@ -118,6 +118,24 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           dark: { 'cal-brand': '#22402f' },
         },
       });
+      // CTA clicks. Every booking link carries data-cal-link; record which one
+      // was clicked and where on the page it sits, before the modal opens.
+      document.addEventListener(
+        'click',
+        function (ev) {
+          var a = ev.target && ev.target.closest && ev.target.closest('a[data-cal-link]');
+          if (!a) return;
+          var section = a.closest('section, header, footer');
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'cta_click',
+            cta_text: (a.textContent || '').trim(),
+            cta_location: section ? (section.id || section.className || section.tagName.toLowerCase()) : 'unknown',
+            page_path: location.pathname,
+          });
+        },
+        true
+      );
       // Conversion event. Fires for both the modal and the inline embed.
       Cal.ns[ns]('on', {
         action: 'bookingSuccessful',
@@ -148,5 +166,15 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <main class="page">
       <slot />
     </main>
+    {
+      CF_ANALYTICS_TOKEN && (
+        <script
+          is:inline
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={JSON.stringify({ token: CF_ANALYTICS_TOKEN })}
+        />
+      )
+    }
   </body>
 </html>
