@@ -72,11 +72,21 @@ Still to configure in the Cal.com dashboard before launch:
 
 ## Analytics
 
-`GTM_ID` in `src/content/site.ts` is empty by default, so no tag manager
-loads. Set it to the container id and the GTM snippet is emitted on every
-page. Independently of GTM, a successful Cal.com booking (modal or inline)
-pushes `{ event: 'booking_complete' }` to `window.dataLayer`, which is the
-trigger to use for the conversion tag.
+Two optional integrations, both off until a value is set in
+`src/content/site.ts`:
+
+- `GTM_ID`: Google Tag Manager container. When set, the GTM snippet is
+  emitted on every page.
+- `CF_ANALYTICS_TOKEN`: Cloudflare Web Analytics site token. Cookieless
+  page-view counting at the edge.
+
+Independently of either, every page initialises `window.dataLayer` and
+pushes two events for a tag manager to pick up:
+
+- `cta_click` when any booking link is clicked, with `cta_text`,
+  `cta_location` (the section id or class), and `page_path`.
+- `booking_complete` when Cal.com reports a successful booking from the
+  modal or the inline embed, with `booking_event_type`.
 
 ## Deploying
 

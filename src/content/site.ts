@@ -32,5 +32,13 @@ export const CTA_MICROCOPY_INDUSTRY = 'Thirty minutes. You keep everything I fin
  */
 export const GTM_ID = '';
 
+/**
+ * Cloudflare Web Analytics site token. Cookieless, free, counts real page
+ * views at the edge. Leave empty to emit nothing. Get it from the Cloudflare
+ * dashboard: Analytics & Logs, Web Analytics, Add a site, projectpineapple.com,
+ * then copy the token from the JS snippet.
+ */
+export const CF_ANALYTICS_TOKEN = '';
+
 /** Cal.com embed config, shared by the modal triggers and the inline embed. */
 export const CAL_CONFIG = { layout: 'month_view' } as const;

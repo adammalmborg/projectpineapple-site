@@ -17,6 +17,36 @@ const problems = [
   { heading: 'Cost per lead looks like progress.', body: 'It can fall while revenue falls with it.' },
 ];
 
+const engagements = [
+  {
+    label: 'Most clients',
+    name: 'Paid advertising, measured by revenue',
+    intro:
+      "I run the paid advertising and connect it to the customers who actually paid. For a lot of businesses this is the right amount.",
+    includes: [
+      'Google Ads and your other paid channels, run day to day',
+      'Call tracking and CRM data connected back to the campaigns',
+      'A customer value by service or case type, so the bidding knows what a good customer is',
+      "A monthly report on what you spent, what came back, and what can't be attributed yet",
+      'A flat monthly fee',
+    ],
+  },
+  {
+    label: 'Some clients',
+    name: 'Marketing and operating leadership',
+    intro:
+      "Some businesses need someone to own the whole function, and the numbers underneath it. That starts with measurement and ends up in decisions about pricing, capacity, and vendors. It's a different scope, priced separately.",
+    includes: [
+      'Every lead source measured, not just the paid ones: referrals, directories, agencies, your own site',
+      'Your booking, sales, and payment systems reporting into one place you can make decisions from',
+      'Pricing and margin, including the fees sitting between you and your revenue, like payment processing',
+      'The sales process itself: follow-up, financing, scheduling, the steps between a lead and a paid customer',
+      'Other vendors held to the same numbers',
+      'Me in the room for the decisions, not a deck afterward',
+    ],
+  },
+];
+
 const method = [
   'Establish what a customer is worth. Every decision after that depends on it.',
   "Connect the sale back to its source. That means call tracking, CRM data, and a hard look at what's being counted.",
@@ -26,13 +56,13 @@ const method = [
 ---
 
 <Base
-  title="Project Pineapple | Marketing for businesses where the sale happens in person"
-  description="Paid advertising and marketing leadership for service businesses. Flat fee, revenue-based measurement, run by an operator. Salt Lake City, clients nationwide."
+  title="Project Pineapple | Marketing and operating leadership for businesses where the sale happens in person"
+  description="Paid advertising measured by revenue, and operating leadership for the businesses that want more. Flat fee, run by an operator. Salt Lake City, clients nationwide."
 >
   <Header variant="full" wordmarkAsLink={false} />
 
   <section class="hero">
-    <div class="eyebrow hero__eyebrow">Marketing for businesses where the sale happens in person</div>
+    <div class="eyebrow hero__eyebrow">Marketing and operating leadership for businesses where the sale happens in person</div>
     <h1>Somewhere between your ad spend and your bank account, the story gets lost.</h1>
     <p class="hero__sub">
       If your customers call or walk in, that's where it happens. The ad platform never sees the sale, so your
@@ -140,15 +170,20 @@ const method = [
   <section class="section engagement">
     <h2 class="h2">What working together looks like</h2>
     <div class="engagement__grid">
-      <p class="body">
-        Most clients want their paid advertising run properly, with measurement they can actually trust. That's
-        the majority of what I do, and for a lot of businesses it's the right amount.
-      </p>
-      <p class="body">
-        Some want more than that. Someone to own the marketing function, sit in the decisions about pricing and
-        capacity and hiring, evaluate every lead source rather than just the paid ones, and hold their other
-        vendors accountable. That's a fractional CMO engagement, and it's a different scope.
-      </p>
+      {
+        engagements.map((e) => (
+          <div class="engagement__col">
+            <div class="eyebrow engagement__label">{e.label}</div>
+            <h3 class="engagement__name">{e.name}</h3>
+            <p class="body engagement__intro">{e.intro}</p>
+            <ul class="engagement__list">
+              {e.includes.map((item) => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
     </div>
     <p class="pull engagement__pull">
       You don't have to figure out which one you need before we talk. The assessment usually makes it obvious.
@@ -304,8 +339,35 @@ const method = [
   .engagement__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
-    gap: var(--gutter-inner);
+    gap: clamp(28px, 4.7vw, 56px);
     max-width: 1000px;
+  }
+  .engagement__label {
+    margin-bottom: 16px;
+  }
+  .engagement__name {
+    margin: 0 0 14px;
+    font: 400 clamp(18px, 1.86vw, 22px) / 1.3 var(--serif);
+    max-width: 24ch;
+  }
+  .engagement__intro {
+    margin-bottom: 22px;
+    max-width: 48ch;
+  }
+  .engagement__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-width: 48ch;
+  }
+  .engagement__list li {
+    padding: 12px 0;
+    border-top: 1px solid var(--hairline-inner);
+    font: 400 15px/1.6 var(--sans);
+    color: var(--text-82);
+  }
+  .engagement__list li:last-child {
+    padding-bottom: 0;
   }
   .engagement__pull {
     margin-top: 32px;
