@@ -33,10 +33,13 @@ export const CTA_MICROCOPY_INDUSTRY = 'Thirty minutes. You keep everything I fin
 export const GTM_ID = '';
 
 /**
- * Cloudflare Web Analytics site token. Cookieless, free, counts real page
- * views at the edge. Leave empty to emit nothing. Get it from the Cloudflare
- * dashboard: Analytics & Logs, Web Analytics, Add a site, projectpineapple.com,
- * then copy the token from the JS snippet.
+ * Cloudflare Web Analytics site token.
+ *
+ * LEAVE EMPTY. Cloudflare injects the analytics beacon automatically for
+ * projectpineapple.com because the domain is proxied through Cloudflare, and
+ * that is already reporting in the dashboard. Setting a token here would load
+ * the beacon a second time and double-count every page view. Only set this if
+ * the site ever moves off Cloudflare's proxy.
  */
 export const CF_ANALYTICS_TOKEN = '';
 

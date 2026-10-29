@@ -1,0 +1,177 @@
+---
+/**
+ * Privacy policy. Covers the website and the software tools and integrations
+ * Project Pineapple LLC builds and operates for clients, including anything
+ * that connects to a Google account. The Google API Services User Data Policy
+ * section is required for any app that requests Google user data through
+ * OAuth; keep it intact.
+ */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { EMAIL, LEGAL_NAME } from '../content/site';
+
+const effective = 'October 29, 2026';
+
+type Section = { label: string; paragraphs: string[]; list?: string[] };
+
+const sections: Section[] = [
+  {
+    label: 'Who this covers',
+    paragraphs: [
+      `${LEGAL_NAME} is a marketing and operating consultancy based in Salt Lake City, Utah. This policy covers two things: this website, projectpineapple.com, and the software tools and integrations we build and operate for our clients, which we refer to below as our applications. Our applications connect to accounts a client already holds, such as advertising platforms, analytics, call tracking, scheduling, payments, and document storage, so that we can measure and report on the client's marketing and operations.`,
+    ],
+  },
+  {
+    label: 'Information collected on this website',
+    paragraphs: [
+      'This website has no user accounts and no forms of its own. If you book a call, the booking is handled by Cal.com, which collects the name, email address, and any notes you choose to provide so the call can be scheduled. Cal.com processes that information under its own privacy policy, and we receive it so we can hold the call.',
+      'We use Cloudflare Web Analytics, which counts page views in aggregate without cookies and without identifying individual visitors. Cloudflare also keeps standard server logs, including IP addresses, for security and performance. We do not set advertising or tracking cookies on this site.',
+    ],
+  },
+  {
+    label: 'Information our applications access',
+    paragraphs: [
+      'When a client authorizes one of our applications to connect to an account, the application accesses only the data needed to deliver the service that client has engaged us for. Depending on the engagement, that can include advertising account structure and performance, website and analytics data, call tracking records, booking and scheduling records, sales and payment records, and documents or spreadsheets the client has shared with us.',
+      'We use that data for one purpose: to measure, report on, and improve the marketing and operations of the client who authorized access. We do not use it for any other client, we do not use it to build profiles of the client\'s customers for advertising, and we do not sell it.',
+    ],
+  },
+  {
+    label: 'Google user data',
+    paragraphs: [
+      'Some of our applications connect to Google services, including Google Ads, Google Analytics, Google Search Console, Google Business Profile, and Google Drive or Sheets, through Google\'s APIs. When you authorize such a connection, Google shows you the specific permissions being requested, and you can revoke them at any time from your Google account permissions page.',
+      'Our use of information received from Google APIs adheres to the Google API Services User Data Policy, including the Limited Use requirements. Specifically:',
+    ],
+    list: [
+      'We only use Google user data to provide and improve the service the authorizing client has engaged us for, as described in this policy.',
+      'We do not transfer Google user data to others except as necessary to provide that service, to comply with applicable law, or as part of a merger or acquisition with notice to the client.',
+      'We do not use Google user data to serve advertisements, and we do not sell it.',
+      'Humans do not read Google user data except with the client\'s consent, where necessary for security purposes, to comply with applicable law, or where the data has been aggregated and anonymized for internal operations.',
+      'We do not use Google user data to develop, improve, or train generalized artificial intelligence or machine learning models.',
+    ],
+  },
+  {
+    label: 'How information is shared',
+    paragraphs: [
+      'We share information only with service providers that help us operate, such as hosting, scheduling, analytics, and data storage providers, and only to the extent needed for them to do their work under agreements that restrict their use of the data. We may also disclose information when required by law, or to protect the rights, safety, or property of our clients or ourselves. We do not sell personal information.',
+    ],
+  },
+  {
+    label: 'Retention and deletion',
+    paragraphs: [
+      'Data accessed by our applications is kept for the duration of the client engagement and for a reasonable period afterward for reporting continuity, then deleted. A client can ask us to delete their data at any time, and can revoke an application\'s access directly from the connected platform, after which no new data is collected. Booking records from Cal.com are kept as long as needed to hold and follow up on the call.',
+    ],
+  },
+  {
+    label: 'Security',
+    paragraphs: [
+      'Access to client data is limited to the people who need it to do the work, which for most engagements means one person. Connections to third-party platforms use the narrowest permissions the service requires, credentials are stored encrypted, and data is encrypted in transit. No system is perfectly secure, and we will notify affected clients promptly if we become aware of a breach involving their data.',
+    ],
+  },
+  {
+    label: 'Your choices',
+    paragraphs: [
+      `You can revoke any application's access from the platform you connected it to. You can ask us what data we hold about you or your business, ask us to correct it, or ask us to delete it, by emailing ${EMAIL}. We will respond within a reasonable time and in any case as required by applicable law.`,
+    ],
+  },
+  {
+    label: 'Children',
+    paragraphs: [
+      'This website and our applications are intended for businesses and are not directed to anyone under 18. We do not knowingly collect personal information from children.',
+    ],
+  },
+  {
+    label: 'Changes and contact',
+    paragraphs: [
+      `We may update this policy as our services change. The effective date at the top of the page will change when we do, and material changes will be communicated to active clients. Questions about this policy can be sent to ${EMAIL}.`,
+    ],
+  },
+];
+---
+
+<Base
+  title="Privacy policy | Project Pineapple"
+  description="How Project Pineapple LLC handles information on this website and in the software tools it operates for clients, including data accessed through Google APIs."
+>
+  <Header variant="minimal" sectionLinks={false} cta={true} />
+
+  <section class="policy">
+    <h1>Privacy policy</h1>
+    <p class="effective">Effective {effective}</p>
+    <div class="policy__sections">
+      {
+        sections.map((s) => (
+          <div>
+            <h2 class="eyebrow policy__label">{s.label}</h2>
+            {s.paragraphs.map((p) => (
+              <p class="policy__body">{p}</p>
+            ))}
+            {s.list && (
+              <ul class="policy__list">
+                {s.list.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .policy {
+    padding: var(--pad-secondary) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  h1 {
+    margin: 0 0 12px;
+    font: 400 clamp(23px, 3.22vw, 38px) / 1.22 var(--serif);
+    letter-spacing: -0.01em;
+  }
+  .effective {
+    margin: 0 0 44px;
+    font: 400 13px/1.5 var(--sans);
+    color: var(--muted);
+  }
+  .policy__sections {
+    display: grid;
+    gap: clamp(17px, 2.9vw, 34px);
+    max-width: 70ch;
+  }
+  .policy__label {
+    margin-bottom: 14px;
+  }
+  .policy__body {
+    font: 400 15.5px/1.75 var(--sans);
+    color: var(--text-82);
+  }
+  .policy__body + .policy__body {
+    margin-top: 14px;
+  }
+  .policy__list {
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .policy__list li {
+    position: relative;
+    padding: 10px 0 10px 22px;
+    border-top: 1px solid var(--hairline-inner);
+    font: 400 15px/1.65 var(--sans);
+    color: var(--text-82);
+  }
+  .policy__list li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 19px;
+    width: 7px;
+    height: 7px;
+    background: var(--clay);
+    transform: rotate(45deg);
+  }
+</style>
