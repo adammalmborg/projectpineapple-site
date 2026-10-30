@@ -1,9 +1,10 @@
 /*
   Project Pineapple, global styles.
 
-  Design tokens from the handoff. No pure black, no pure white, no shadows,
-  no border radius except circular portrait crops. Separation is done with
-  hairline borders and background shifts only.
+  Brand system shared with the client dashboard app: Inter throughout, ink
+  text on cream, white cards with hairline borders and rounded corners,
+  crown green for actions and accents, teal for good news, pineapple
+  yellow only in the mark and as an accent on ink. No shadows.
 
   Responsive behavior is intrinsic (auto-fit grids, clamp() spacing and type)
   rather than breakpoint-driven. The single media query in the site is the
@@ -11,36 +12,48 @@
 */
 
 :root {
-  --pine: #22402f;
-  --clay: #c1613c;
-  --clay-light: #e0a184;
-  --cream: #faf5ee;
-  --cream-2: #f6efe4;
-  --sand: #f0e7da;
+  /* Legacy token names kept so components need no renames:
+     --pine is ink, --clay is crown green, --clay-light is the accent on ink. */
+  --pine: #15202b;
+  --clay: #1e6b47;
+  --clay-light: #f0b429;
+  --cream: #fbf8f1;
+  --cream-2: #f6f2e9;
+  --sand: #f3ede0;
+
+  --ink: #15202b;
+  --green: #1e6b47;
+  --green-dark: #17573a;
+  --teal: #1c9c8f;
+  --yellow: #f0b429;
+  --card: #ffffff;
+  --card-border: rgba(21, 32, 43, 0.12);
+  --radius: 14px;
+  --radius-lg: 18px;
 
   /* Derived from pine at stated alpha */
-  --hairline: rgba(34, 64, 47, 0.18);
-  --hairline-inner: rgba(34, 64, 47, 0.14);
-  --hairline-strong: rgba(34, 64, 47, 0.35);
-  --text-82: rgba(34, 64, 47, 0.82);
-  --text-75: rgba(34, 64, 47, 0.75);
-  --text-72: rgba(34, 64, 47, 0.72);
-  --text-70: rgba(34, 64, 47, 0.7);
-  --text-65: rgba(34, 64, 47, 0.65);
-  --text-60: rgba(34, 64, 47, 0.6);
-  --muted: rgba(34, 64, 47, 0.55);
-  --middot: rgba(34, 64, 47, 0.3);
+  --hairline: rgba(21, 32, 43, 0.18);
+  --hairline-inner: rgba(21, 32, 43, 0.14);
+  --hairline-strong: rgba(21, 32, 43, 0.35);
+  --text-82: rgba(21, 32, 43, 0.82);
+  --text-75: rgba(21, 32, 43, 0.75);
+  --text-72: rgba(21, 32, 43, 0.72);
+  --text-70: rgba(21, 32, 43, 0.7);
+  --text-65: rgba(21, 32, 43, 0.65);
+  --text-60: rgba(21, 32, 43, 0.6);
+  --muted: rgba(21, 32, 43, 0.55);
+  --middot: rgba(21, 32, 43, 0.3);
 
   /* On pine */
-  --on-pine: rgba(250, 245, 238, 0.82);
-  --on-pine-2: rgba(250, 245, 238, 0.68);
-  --on-pine-3: rgba(250, 245, 238, 0.64);
-  --on-pine-4: rgba(250, 245, 238, 0.62);
-  --on-pine-5: rgba(250, 245, 238, 0.55);
-  --hairline-on-pine: rgba(250, 245, 238, 0.18);
+  --on-pine: rgba(251, 248, 241, 0.82);
+  --on-pine-2: rgba(251, 248, 241, 0.68);
+  --on-pine-3: rgba(251, 248, 241, 0.64);
+  --on-pine-4: rgba(251, 248, 241, 0.62);
+  --on-pine-5: rgba(251, 248, 241, 0.55);
+  --hairline-on-pine: rgba(251, 248, 241, 0.18);
 
-  --serif: 'Libre Caslon Text', Georgia, 'Times New Roman', serif;
-  --sans: 'Instrument Sans', Helvetica, Arial, sans-serif;
+  --display: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Spacing. vw midpoints derive from the 1180px design width so every value
@@ -93,7 +106,7 @@ svg {
 h1,
 h2,
 h3 {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-weight: 400;
   margin: 0;
   text-wrap: pretty;
@@ -142,8 +155,8 @@ p {
 /* Type roles */
 .eyebrow {
   margin: 0;
-  font: 400 11.5px/1 var(--sans);
-  letter-spacing: 0.16em;
+  font: 600 11.5px/1 var(--sans);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--clay);
 }
@@ -152,11 +165,11 @@ p {
 }
 
 .h2 {
-  font: 400 clamp(18px, 2.54vw, 30px) / 1.28 var(--serif);
+  font: 700 clamp(18px, 2.54vw, 30px) / 1.28 var(--display);
   max-width: 26ch;
 }
 .h2--dark {
-  font: 400 clamp(20px, 2.88vw, 34px) / 1.24 var(--serif);
+  font: 700 clamp(20px, 2.88vw, 34px) / 1.24 var(--display);
   max-width: 28ch;
 }
 
@@ -172,35 +185,45 @@ p {
 }
 
 .pull {
-  font: 400 18px/1.62 var(--serif);
+  font: 500 18px/1.62 var(--display);
 }
 
-/* Buttons */
+/* Buttons: crown green, matching the app's primary action */
 .btn {
   display: inline-block;
-  padding: 16px 32px;
-  background: var(--pine);
-  color: var(--cream);
+  padding: 16px 30px;
+  background: var(--green);
+  color: #ffffff;
   text-decoration: none;
-  font: 500 15px/1 var(--sans);
-  border: 1px solid var(--pine);
+  font: 600 15px/1 var(--sans);
+  border: 1px solid var(--green);
+  border-radius: 10px;
   transition: background-color 150ms ease, color 150ms ease;
 }
 .btn:hover {
-  background: #1a3225;
-  color: var(--cream);
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+  color: #ffffff;
 }
 .btn--lg {
   padding: 17px 34px;
   font-size: 15.5px;
 }
 .btn--secondary {
-  background: transparent;
-  color: var(--pine);
+  background: var(--card);
+  border-color: var(--card-border);
+  color: var(--ink);
 }
 .btn--secondary:hover {
   background: var(--sand);
   color: var(--pine);
+}
+
+/* White card on cream, the app's basic container */
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
 }
 
 /* Text link with hairline underline */
@@ -211,7 +234,7 @@ p {
   padding-bottom: 3px;
 }
 .textlink:hover {
-  color: var(--clay);
+  color: var(--green);
   border-bottom-color: currentColor;
 }
 

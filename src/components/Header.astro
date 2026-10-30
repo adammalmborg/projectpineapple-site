@@ -12,7 +12,6 @@
  * <details> disclosure. No JavaScript, no animation, keyboard accessible.
  * This is the only media query on the site.
  */
-import Logo from './Logo.astro';
 import CtaLink from './CtaLink.astro';
 
 type Variant = 'full' | 'minimal' | 'wordmark';
@@ -38,16 +37,17 @@ const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
 ---
 
 <header class:list={['header', { 'header--compact': variant === 'wordmark' }]}>
-  <div class="lockup">
-    <Logo />
-    {
-      wordmarkAsLink ? (
-        <a href="/" class="wordmark">Project Pineapple</a>
-      ) : (
-        <span class="wordmark">Project Pineapple</span>
-      )
-    }
-  </div>
+  {
+    wordmarkAsLink ? (
+      <a href="/" class="lockup" aria-label="Project Pineapple, home">
+        <img src="/brand/pp-lockup-horizontal.svg" alt="Project Pineapple" width="153" height="34" />
+      </a>
+    ) : (
+      <span class="lockup">
+        <img src="/brand/pp-lockup-horizontal.svg" alt="Project Pineapple" width="153" height="34" />
+      </span>
+    )
+  }
 
   {
     hasNav && (
@@ -98,22 +98,16 @@ const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
     padding-bottom: 22px;
   }
 
+  .lockup img {
+    display: block;
+    height: 34px;
+    width: auto;
+  }
   .lockup {
     display: flex;
     align-items: center;
     gap: 12px;
     flex: none;
-  }
-  .wordmark {
-    font: 400 15px/1 var(--serif);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    color: var(--pine);
-    text-decoration: none;
-  }
-  a.wordmark:hover {
-    color: var(--pine);
   }
 
   .nav--inline {
@@ -131,10 +125,16 @@ const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
     color: var(--pine);
   }
   .nav--inline :global(a.textlink) {
-    color: var(--pine);
+    color: #ffffff;
+    background: var(--green);
+    border: 0;
+    border-radius: 9px;
+    padding: 10px 16px;
+    font-weight: 600;
   }
   .nav--inline :global(a.textlink:hover) {
-    color: var(--clay);
+    color: #ffffff;
+    background: var(--green-dark);
   }
 
   /* Mobile disclosure, hidden on wider screens */

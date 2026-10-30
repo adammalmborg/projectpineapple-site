@@ -6,7 +6,9 @@ import CtaLink from '../components/CtaLink.astro';
 import StatStrip from '../components/StatStrip.astro';
 import MethodList from '../components/MethodList.astro';
 import Portrait from '../components/Portrait.astro';
-import SampleDashboard from '../components/SampleDashboard.astro';
+import ProductShot from '../components/ProductShot.astro';
+import dashboardMobile from '../assets/product/dashboard-mobile.webp';
+import dashboardMonth from '../assets/product/dashboard-month.webp';
 import ClosingCta from '../components/ClosingCta.astro';
 import { CTA_MICROCOPY_HOME } from '../content/site';
 
@@ -62,6 +64,7 @@ const method = [
   <Header variant="full" wordmarkAsLink={false} />
 
   <section class="hero">
+    <div class="hero__text">
     <div class="eyebrow hero__eyebrow">Marketing and operating leadership for businesses where the sale happens in person</div>
     <h1>Somewhere between your ad spend and your bank account, the story gets lost.</h1>
     <p class="hero__sub">
@@ -71,6 +74,18 @@ const method = [
     </p>
     <CtaLink variant="button-lg" />
     <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
+    </div>
+    <figure class="hero__shot">
+      <ProductShot
+        src={dashboardMobile}
+        frame="phone"
+        alt="The client dashboard on a phone, showing a month of ad spend, bookings, revenue, and return on ads, with demo data"
+        widths={[300, 600, 900]}
+        sizes="(max-width: 700px) 70vw, 300px"
+        loading="eager"
+      />
+      <figcaption>The client dashboard. Demo data.</figcaption>
+    </figure>
   </section>
 
   <StatStrip
@@ -125,7 +140,19 @@ const method = [
         like revenue.
       </p>
     </div>
-    <SampleDashboard />
+    <figure class="proof__shot">
+      <ProductShot
+        src={dashboardMonth}
+        frame="browser"
+        alt="The monthly view of the client dashboard: spend, bookings, revenue, return on ads, bookings by source with how each is known, and bookings with no source on record, shown with demo data"
+        widths={[700, 1000, 1400, 2000]}
+        sizes="(max-width: 1100px) 92vw, 1000px"
+      />
+      <figcaption>
+        The monthly view every client gets, shown with demo data. What you spent, what came back, where each booking
+        came from and how we know, and the bookings with no source on record, counted and kept apart.
+      </figcaption>
+    </figure>
   </section>
 
   <section class="split">
@@ -215,30 +242,47 @@ const method = [
 </Base>
 
 <style>
-  /* Hero: the only centered block apart from closing CTAs */
+  /* Hero: argument on the left, the product on the right */
   .hero {
     padding: var(--pad-hero) var(--gutter) clamp(44px, 7vw, 84px);
-    text-align: center;
     border-bottom: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: clamp(36px, 6vw, 72px);
+    align-items: center;
+  }
+  .hero__shot {
+    margin: 0;
+    justify-self: center;
+    width: min(300px, 74vw);
+  }
+  .hero__shot figcaption,
+  .proof__shot figcaption {
+    margin-top: 12px;
+    font: 400 12.5px/1.6 var(--sans);
+    color: var(--text-60);
+  }
+  .hero__shot figcaption {
+    text-align: center;
   }
   .hero__eyebrow {
     line-height: 1.5;
     margin-bottom: 30px;
   }
   .hero h1 {
-    margin: 0 auto 28px;
-    font: 400 clamp(31px, 4.41vw, 52px) / 1.14 var(--serif);
-    letter-spacing: -0.012em;
+    margin: 0 0 26px;
+    font: 700 clamp(31px, 4.41vw, 52px) / 1.08 var(--display);
+    letter-spacing: -0.028em;
     max-width: 24ch;
   }
   .hero__sub {
-    margin: 0 auto 38px;
+    margin: 0 0 36px;
     max-width: 52ch;
     font: 400 18px/1.68 var(--sans);
     color: var(--text-72);
   }
   .hero__micro {
-    margin: 16px auto 0;
+    margin: 16px 0 0;
     font: 400 13px/1.6 var(--sans);
     color: var(--muted);
     max-width: 44ch;
@@ -284,6 +328,13 @@ const method = [
   .proof h2 {
     margin-bottom: 36px;
   }
+  .proof__shot {
+    margin: clamp(32px, 4vw, 48px) 0 0;
+    max-width: 1000px;
+  }
+  .proof__shot figcaption {
+    max-width: 70ch;
+  }
   .proof__stories {
     display: grid;
     gap: 30px;
@@ -316,11 +367,11 @@ const method = [
   }
   .operator__lead {
     margin: 0 0 20px;
-    font: 400 clamp(14px, 2.03vw, 24px) / 1.42 var(--serif);
+    font: 500 clamp(14px, 2.03vw, 24px) / 1.42 var(--display);
   }
   .operator__body {
     margin: 0 0 18px;
-    color: rgba(34, 64, 47, 0.8);
+    color: rgba(21, 32, 43, 0.8);
   }
   .operator__quote {
     margin: 0 0 20px;
@@ -339,15 +390,21 @@ const method = [
   .engagement__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
-    gap: clamp(28px, 4.7vw, 56px);
+    gap: 18px;
     max-width: 1000px;
+  }
+  .engagement__col {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-lg);
+    padding: clamp(22px, 2.7vw, 32px);
   }
   .engagement__label {
     margin-bottom: 16px;
   }
   .engagement__name {
     margin: 0 0 14px;
-    font: 400 clamp(18px, 1.86vw, 22px) / 1.3 var(--serif);
+    font: 700 clamp(18px, 1.86vw, 22px) / 1.3 var(--display);
     max-width: 24ch;
   }
   .engagement__intro {
