@@ -38,8 +38,10 @@ No layout work is needed.
   handful of shared classes (`.eyebrow`, `.btn`, `.split`, `.section`).
 - `src/layouts/Base.astro`: document shell, fonts, SEO tags, Cal.com loader.
 - `src/components/`: header (three variants), footer, stat strip, method
-  list, operator block, portrait crops, closing CTA, sample dashboard, inline
-  Cal embed.
+  list, operator block, portrait crops, closing CTA, product screenshot
+  frame, inline Cal embed.
+- `src/assets/product/`: screens from the client dashboard app, populated
+  with demo data ("Example Home Co."). Every caption that uses one says so.
 - `src/assets/adam-malmborg.jpg`: the portrait. Responsive derivatives are
   generated at build time.
 - `public/`: favicons, robots.txt.
@@ -49,7 +51,12 @@ No layout work is needed.
 - Copy is client-approved and verbatim. No em dashes anywhere. Sentence-case
   headings.
 - No pure black, no pure white, no shadows, no border radius except circular
-  portrait crops. Hairline borders and background shifts only.
+  portrait crops and the phone frame around product screens. Hairline
+  borders and background shifts only.
+- Logo mark: the vector pineapple with a clay crown and a pine body, solid
+  body at header size. The favicon is the same mark on a pine tile.
+- Product screens are demo data and are always labelled as such. Never
+  present them as a real client's results.
 - Every CTA reads "Let's jump on a call".
 - Responsive layout is intrinsic (auto-fit grids, `clamp()` spacing and
   type). The only media query is the mobile navigation in `Header.astro`.
@@ -118,5 +125,6 @@ once more before the DNS cutover:
 - The two client vignettes on the home page (`src/pages/index.astro`, proof
   section).
 
-The sample dashboard figures are invented and labelled as a sample. Replace
-with real redacted numbers in v2.
+The product screens on the home page use demo data and are captioned as
+such. Keep it that way unless a client agrees to have real, redacted numbers
+shown.
