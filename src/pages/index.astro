@@ -6,7 +6,9 @@ import CtaLink from '../components/CtaLink.astro';
 import StatStrip from '../components/StatStrip.astro';
 import MethodList from '../components/MethodList.astro';
 import Portrait from '../components/Portrait.astro';
-import SampleDashboard from '../components/SampleDashboard.astro';
+import ProductShot from '../components/ProductShot.astro';
+import dashboardMobile from '../assets/product/dashboard-mobile.webp';
+import dashboardMonth from '../assets/product/dashboard-month.webp';
 import ClosingCta from '../components/ClosingCta.astro';
 import { CTA_MICROCOPY_HOME } from '../content/site';
 
@@ -62,15 +64,31 @@ const method = [
   <Header variant="full" wordmarkAsLink={false} />
 
   <section class="hero">
-    <div class="eyebrow hero__eyebrow">Marketing and operating leadership for businesses where the sale happens in person</div>
-    <h1>Somewhere between your ad spend and your bank account, the story gets lost.</h1>
-    <p class="hero__sub">
-      If your customers call or walk in, that's where it happens. The ad platform never sees the sale, so your
-      agency reports on leads, because that's what it can see. I connect the spend to the customers who actually
-      paid, so you can see which ads are worth paying for.
-    </p>
-    <CtaLink variant="button-lg" />
-    <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
+    <div class="hero__text">
+      <div class="eyebrow hero__eyebrow">Marketing and operating leadership for businesses where the sale happens in person</div>
+      <h1>Ad spend that has to answer for itself.</h1>
+      <p class="hero__sub">
+        Google and Meta campaigns run by an operator, connected to the customers who actually paid, not the leads. A
+        flat monthly fee, not a cut of your spend. Reporting on what the spend actually bought, and what I can't
+        attribute yet.
+      </p>
+      <div class="hero__actions">
+        <CtaLink variant="button-lg" />
+        <a href="#proof" class="textlink hero__secondary">See the dashboard</a>
+      </div>
+      <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
+    </div>
+    <figure class="hero__shot">
+      <ProductShot
+        src={dashboardMobile}
+        frame="phone"
+        alt="The client dashboard on a phone, showing a month of ad spend, bookings, revenue, and return on ads, with demo data"
+        widths={[290, 580, 870]}
+        sizes="(max-width: 700px) 72vw, 290px"
+        loading="eager"
+      />
+      <figcaption>The client dashboard. Demo data.</figcaption>
+    </figure>
   </section>
 
   <StatStrip
@@ -82,7 +100,7 @@ const method = [
   />
 
   <section class="section section--pine problem">
-    <h2 class="h2--dark">Where the story gets lost.</h2>
+    <h2 class="h2--dark">Why most ad spend can't answer for itself.</h2>
     <p class="problem__intro">
       Google spends your money toward whatever it can count. If it can't count the sale, it counts something else
       and calls that the result.
@@ -105,7 +123,7 @@ const method = [
     <MethodList items={method} />
   </section>
 
-  <section class="section section--cream2 proof">
+  <section id="proof" class="section section--cream2 proof">
     <h2 class="h2">What this looks like in practice</h2>
     <div class="proof__stories">
       <p class="body body--long">
@@ -125,7 +143,19 @@ const method = [
         like revenue.
       </p>
     </div>
-    <SampleDashboard />
+    <figure class="proof__shot">
+      <ProductShot
+        src={dashboardMonth}
+        frame="screen"
+        alt="The monthly view of the client dashboard: spend, bookings, revenue, return on ads, bookings by source with how each is known, and bookings with no source on record, shown with demo data"
+        widths={[700, 1000, 1400, 2000]}
+        sizes="(max-width: 1100px) 90vw, 1000px"
+      />
+      <figcaption>
+        The monthly view every client gets, shown with demo data. What you spent, what came back, where each booking
+        came from and how we know, and the bookings with no source on record, counted and kept apart.
+      </figcaption>
+    </figure>
   </section>
 
   <section class="split">
@@ -215,30 +245,56 @@ const method = [
 </Base>
 
 <style>
-  /* Hero: the only centered block apart from closing CTAs */
+  /* Hero: the argument on the left, the product on the right */
   .hero {
     padding: var(--pad-hero) var(--gutter) clamp(44px, 7vw, 84px);
-    text-align: center;
     border-bottom: 1px solid var(--hairline);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: clamp(36px, 6vw, 72px);
+    align-items: center;
+  }
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    flex-wrap: wrap;
+  }
+  .hero__secondary {
+    font: 500 15px/1 var(--sans);
+  }
+  .hero__shot {
+    margin: 0;
+    justify-self: center;
+    width: min(290px, 72vw);
+  }
+  .hero__shot figcaption,
+  .proof__shot figcaption {
+    margin-top: 12px;
+    font: 400 12.5px/1.6 var(--sans);
+    color: var(--text-60);
+  }
+  .hero__shot figcaption {
+    text-align: center;
   }
   .hero__eyebrow {
     line-height: 1.5;
     margin-bottom: 30px;
   }
   .hero h1 {
-    margin: 0 auto 28px;
-    font: 400 clamp(31px, 4.41vw, 52px) / 1.14 var(--serif);
+    margin: 0 0 26px;
+    font: 400 clamp(31px, 4.41vw, 52px) / 1.12 var(--serif);
     letter-spacing: -0.012em;
-    max-width: 24ch;
+    max-width: 16ch;
   }
   .hero__sub {
-    margin: 0 auto 38px;
-    max-width: 52ch;
+    margin: 0 0 36px;
+    max-width: 50ch;
     font: 400 18px/1.68 var(--sans);
     color: var(--text-72);
   }
   .hero__micro {
-    margin: 16px auto 0;
+    margin: 16px 0 0;
     font: 400 13px/1.6 var(--sans);
     color: var(--muted);
     max-width: 44ch;
@@ -283,6 +339,13 @@ const method = [
   /* Proof */
   .proof h2 {
     margin-bottom: 36px;
+  }
+  .proof__shot {
+    margin: clamp(32px, 4vw, 48px) 0 0;
+    max-width: 1000px;
+  }
+  .proof__shot figcaption {
+    max-width: 70ch;
   }
   .proof__stories {
     display: grid;
