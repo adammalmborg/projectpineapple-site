@@ -38,35 +38,23 @@ No layout work is needed.
   handful of shared classes (`.eyebrow`, `.btn`, `.split`, `.section`).
 - `src/layouts/Base.astro`: document shell, fonts, SEO tags, Cal.com loader.
 - `src/components/`: header (three variants), footer, stat strip, method
-  list, operator block, portrait crops, closing CTA, product screenshot
-  frame, inline Cal embed.
+  list, operator block, portrait crops, closing CTA, sample dashboard, inline
+  Cal embed.
 - `src/assets/adam-malmborg.jpg`: the portrait. Responsive derivatives are
   generated at build time.
-- `src/assets/product/`: screens from the client dashboard app, populated
-  with demo data ("Example Home Co."). Every caption that uses one says so.
-- `public/brand/`: the logo lockup and app icon. `public/` also holds the
-  favicons (made from the app icon) and robots.txt.
+- `public/`: favicons, robots.txt.
 
-## Design rules
-
-The site shares its visual system with the client dashboard app, so the
-marketing site and the product read as one company.
+## Design rules carried from the handoff
 
 - Copy is client-approved and verbatim. No em dashes anywhere. Sentence-case
   headings.
-- Palette: ink `#15202B` text on cream `#FBF8F1`, white cards with hairline
-  borders, crown green `#1E6B47` for buttons and accents, teal `#1C9C8F`
-  for good news, pineapple yellow `#F0B429` only in the mark and as an
-  accent on ink. No shadows.
-- Type: Inter throughout (400, 500, 600, 700), self-hosted via fontsource,
-  latin subset only. Headings 700 with tight tracking. The wordmark in the
-  logo lockup is outlined Outfit and needs no font.
-- Corners: cards 14 to 18px, buttons 10px, phone frame 28px.
+- No pure black, no pure white, no shadows, no border radius except circular
+  portrait crops. Hairline borders and background shifts only.
 - Every CTA reads "Let's jump on a call".
 - Responsive layout is intrinsic (auto-fit grids, `clamp()` spacing and
   type). The only media query is the mobile navigation in `Header.astro`.
-- Product screens are demo data and are always labelled as such. Never
-  present them as a real client's results.
+- Fonts are self-hosted (fontsource): Libre Caslon Text 400 and 400 italic,
+  Instrument Sans 400 and 500, latin subset only.
 
 ## Cal.com
 
@@ -130,6 +118,5 @@ once more before the DNS cutover:
 - The two client vignettes on the home page (`src/pages/index.astro`, proof
   section).
 
-The product screens on the home page use demo data and are captioned as
-such. Keep it that way unless a client agrees to have real, redacted numbers
-shown.
+The sample dashboard figures are invented and labelled as a sample. Replace
+with real redacted numbers in v2.
