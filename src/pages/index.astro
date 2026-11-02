@@ -22,6 +22,21 @@ const problems = [
   { heading: 'Cost per lead looks like progress.', body: 'It can fall while revenue falls with it.' },
 ];
 
+const layers = [
+  {
+    heading: 'The ads',
+    body: 'Google and Meta, run by me day to day, against customers who paid instead of form fills.',
+  },
+  {
+    heading: 'The numbers',
+    body: "A reporting system I build and run for you. Spend, bookings, and payments in one place, and the bookings I can't attribute counted and kept apart, never guessed into a channel.",
+  },
+  {
+    heading: 'The business',
+    body: 'Follow-up, scheduling, financing, pricing, processing fees. The steps that decide whether a lead turns into revenue.',
+  },
+];
+
 const engagements = [
   {
     label: 'Most clients',
@@ -62,18 +77,18 @@ const method = [
 
 <Base
   title="Project Pineapple | Marketing and operating leadership for businesses where the sale happens in person"
-  description="Paid advertising measured by revenue, and operating leadership for the businesses that want more. Flat fee, run by an operator. Salt Lake City, clients nationwide."
+  description="Paid advertising, the numbers behind it, and the operations underneath, run by someone who has run businesses since 2014. Flat monthly fee. Salt Lake City, clients nationwide."
 >
   <Header variant="full" wordmarkAsLink={false} />
 
   <section class="hero">
     <div class="hero__text">
-      <div class="eyebrow hero__eyebrow">Marketing and operating leadership for businesses where the sale happens in person</div>
-      <h1>Ad spend that has to answer for itself.</h1>
+      <div class="eyebrow hero__eyebrow">For businesses where the sale happens in person</div>
+      <h1>Marketing, run by someone who's run the business.</h1>
       <p class="hero__sub">
-        I run Google and Meta campaigns for owner-operated businesses and connect them to the customers who actually
-        paid, not the leads. A flat monthly fee, not a cut of your spend. When the problem turns out to be bigger than
-        the ads, I work on the data and the operations underneath them too.
+        I've run paid advertising and run businesses since 2014, usually both at once. So I don't stop at the ad
+        account. I build the numbers that tie your spend to customers who paid, run the campaigns against them, and fix
+        what's underneath, from follow-up to fees. One person, one flat monthly fee.
       </p>
       <div class="hero__actions">
         <CtaLink variant="button-lg" />
@@ -84,7 +99,7 @@ const method = [
         <span class="hero__avatar"><Portrait crop="circle" size={44} loading="eager" /></span>
         <span>
           <span class="hero__name">Adam Malmborg</span>
-          <span class="hero__role">Running paid advertising since 2014. Running businesses just as long.</span>
+          <span class="hero__role">Founder, Project Pineapple. Salt Lake City, clients nationwide.</span>
         </span>
       </a>
     </div>
@@ -119,6 +134,27 @@ const method = [
       { label: 'Fee', value: 'Flat monthly' },
     ]}
   />
+
+  <section class="layers">
+    <div class="eyebrow layers__eyebrow">What's different</div>
+    <h2 class="layers__title">
+      Agencies run the ads. Consultants advise on the business. The numbers that connect the two belong to no one.
+    </h2>
+    <p class="layers__intro">That's where I start, and it's why I do all three.</p>
+    <ol class="layers__grid">
+      {
+        layers.map((l, i) => (
+          <li>
+            <span class="layers__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3>{l.heading}</h3>
+            <p>{l.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
 
   <section class="section section--pine problem">
     <h2 class="h2--dark">Why most ad spend can't answer for itself.</h2>
@@ -306,7 +342,7 @@ const method = [
     margin: 0 0 26px;
     font: 400 clamp(31px, 4.41vw, 52px) / 1.12 var(--serif);
     letter-spacing: -0.012em;
-    max-width: 16ch;
+    max-width: 18ch;
   }
   .hero__sub {
     margin: 0 0 36px;
@@ -364,6 +400,53 @@ const method = [
     font: 400 13px/1.6 var(--sans);
     color: var(--muted);
     max-width: 44ch;
+  }
+
+  /* What's different: the three layers */
+  .layers {
+    padding: var(--pad-major) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .layers__eyebrow {
+    margin-bottom: 22px;
+  }
+  .layers__title {
+    margin: 0 0 16px;
+    font: 400 clamp(20px, 2.88vw, 34px) / 1.24 var(--serif);
+    max-width: 30ch;
+  }
+  .layers__intro {
+    margin: 0 0 clamp(32px, 4.4vw, 52px);
+    font: 400 18px/1.62 var(--serif);
+    color: var(--text-82);
+  }
+  .layers__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 28px clamp(28px, 4.1vw, 48px);
+  }
+  .layers__grid li {
+    border-top: 1px solid var(--hairline);
+    padding-top: 20px;
+  }
+  .layers__num {
+    display: block;
+    font: 400 16px/1 var(--serif);
+    color: var(--clay);
+    margin-bottom: 14px;
+  }
+  .layers__grid h3 {
+    margin: 0 0 8px;
+    font: 500 17px/1.4 var(--sans);
+  }
+  .layers__grid p {
+    margin: 0;
+    font: 400 15px/1.68 var(--sans);
+    color: var(--text-82);
+    max-width: 40ch;
   }
 
   /* Problem, on pine */
