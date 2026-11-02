@@ -24,16 +24,16 @@ const problems = [
 
 const layers = [
   {
-    heading: 'The ads',
-    body: 'I run Google and Meta day to day, and set them up to find customers who pay, not people who fill out forms.',
+    heading: 'More of the right customers',
+    body: 'Google and Meta campaigns built to find people who buy, not people who fill out forms.',
   },
   {
-    heading: 'The numbers',
-    body: "I build the reporting myself: spend, bookings, and payments in one place. Anything I can't trace to a source gets counted separately, not guessed.",
+    heading: 'Numbers you can run on',
+    body: 'Spend, bookings, and payments in one place, so every call on budget, pricing, and staffing starts from what actually happened.',
   },
   {
-    heading: 'The business',
-    body: "Follow-up, scheduling, financing, pricing, card fees. If that's where customers are slipping away, that's where I'll spend the time.",
+    heading: 'A business that converts them',
+    body: 'Faster follow-up, cleaner scheduling, financing that closes the sale, fees that stop eating margin. The places growth usually leaks.',
   },
 ];
 
@@ -76,19 +76,19 @@ const method = [
 ---
 
 <Base
-  title="Project Pineapple | Marketing and operating leadership for businesses where the sale happens in person"
-  description="Paid advertising measured by what you spent and what came back, from someone who has run businesses since 2014. Flat monthly fee. Salt Lake City, clients nationwide."
+  title="Project Pineapple | Marketing and growth for owner-run businesses"
+  description="Ads that bring in customers who pay, numbers you can run the business on, and the operational fixes that turn more of them into revenue. Since 2014. Flat monthly fee. Salt Lake City, clients nationwide."
 >
   <Header variant="full" wordmarkAsLink={false} />
 
   <section class="hero">
     <div class="hero__text">
-      <div class="eyebrow hero__eyebrow">For businesses where the sale happens in person</div>
-      <h1>What you spent,<br /> and what came back.</h1>
+      <div class="eyebrow hero__eyebrow">For owner-run businesses</div>
+      <h1>Grow the business,<br /> not just the ad account.</h1>
       <p class="hero__sub">
-        When the sale happens on a phone call or in person, that number is hard to get, so most agencies report on
-        leads instead. Getting you the real number is where I start. From there I run the ads against it, and work on
-        whatever else is costing you customers.
+        I work with owner-operated companies on the whole engine: ads that bring in customers who pay, numbers you can
+        run the business on, and the fixes in follow-up, pricing, and systems that turn more of those customers into
+        revenue. I've done it since 2014, for clients and for businesses of my own.
       </p>
       <div class="hero__actions">
         <CtaLink variant="button-lg" />
@@ -136,11 +136,11 @@ const method = [
   />
 
   <section class="layers">
-    <div class="eyebrow layers__eyebrow">How this is different</div>
-    <h2 class="layers__title">I've been the owner reading the marketing report.</h2>
+    <div class="eyebrow layers__eyebrow">How I help you grow</div>
+    <h2 class="layers__title">Growth comes from three places. I work on all of them.</h2>
     <p class="layers__intro">
-      So the work doesn't stop at the ad account. An agency will run your ads, and a consultant will give you advice.
-      What usually falls between them is the reporting that ties one to the other, and that's the part I build first.
+      Most businesses hire for one at a time: an agency for the ads, a consultant for strategy, someone else for
+      systems. The real gains come from connecting them, with one person accountable for the result.
     </p>
     <ol class="layers__grid">
       {
@@ -158,7 +158,7 @@ const method = [
   </section>
 
   <section class="section section--pine problem">
-    <h2 class="h2--dark">Why the reporting looks fine and the revenue doesn't move</h2>
+    <h2 class="h2--dark">Why growth stalls even when the reports look good</h2>
     <p class="problem__intro">
       Google spends your money toward whatever it can count. If it can't count the sale, it counts something else
       and calls that the result.
@@ -295,8 +295,8 @@ const method = [
   </section>
 
   <ClosingCta heading="Start with the assessment">
-    Thirty minutes on what's being counted, what's wrong, and the two or three changes that would move the most.
-    You keep the findings either way.
+    Thirty minutes on where your growth is coming from, where it's leaking, and the two or three changes that would
+    move the most. You keep the findings either way.
   </ClosingCta>
 
   <Footer />
@@ -307,10 +307,16 @@ const method = [
   .hero {
     padding: var(--pad-hero) var(--gutter) clamp(44px, 7vw, 84px);
     border-bottom: 1px solid var(--hairline);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    /* Flex rather than an equal grid, so the argument gets the extra width
+       and the phone keeps its natural size. Wraps when there isn't room. */
+    display: flex;
+    flex-wrap: wrap;
     gap: clamp(36px, 6vw, 72px);
     align-items: center;
+  }
+  .hero__text {
+    flex: 1 1 440px;
+    min-width: 0;
   }
   .hero__actions {
     display: flex;
@@ -322,8 +328,8 @@ const method = [
     font: 500 15px/1 var(--sans);
   }
   .hero__shot {
-    margin: 0;
-    justify-self: center;
+    margin: 0 auto;
+    flex: 0 0 auto;
     width: min(290px, 72vw);
   }
   .hero__shot figcaption,
@@ -341,9 +347,9 @@ const method = [
   }
   .hero h1 {
     margin: 0 0 26px;
-    font: 400 clamp(31px, 4.41vw, 52px) / 1.12 var(--serif);
+    font: 400 clamp(29px, 4.41vw, 52px) / 1.12 var(--serif);
     letter-spacing: -0.012em;
-    max-width: 20ch;
+    max-width: 24ch;
   }
   .hero__sub {
     margin: 0 0 36px;
