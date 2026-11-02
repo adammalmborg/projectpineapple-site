@@ -6,15 +6,35 @@ import CtaLink from '../components/CtaLink.astro';
 import StatStrip from '../components/StatStrip.astro';
 import MethodList from '../components/MethodList.astro';
 import Portrait from '../components/Portrait.astro';
-import SampleDashboard from '../components/SampleDashboard.astro';
+import ProductShot from '../components/ProductShot.astro';
+import dashboardMobile from '../assets/product/dashboard-mobile.webp';
+import dashboardMonth from '../assets/product/dashboard-month.webp';
 import ClosingCta from '../components/ClosingCta.astro';
 import { CTA_MICROCOPY_HOME } from '../content/site';
+import { testimonials } from '../content/testimonials';
+
+const featured = testimonials[0];
 
 const problems = [
   { heading: 'Leads that never became customers.', body: "The dashboard climbs. The bank account doesn't." },
   { heading: "Calls the platform can't see.", body: 'The phone is where the money is decided.' },
   { heading: 'Budget going to the wrong people.', body: 'The platform is doing what it was told.' },
   { heading: 'Cost per lead looks like progress.', body: 'It can fall while revenue falls with it.' },
+];
+
+const layers = [
+  {
+    heading: 'Getting the right customers',
+    body: 'Running Google and Meta so they find people who actually buy, instead of people who just fill out a form.',
+  },
+  {
+    heading: 'Knowing your numbers',
+    body: 'Getting spend, bookings, and payments into one place, so you can make calls on budget, pricing, and staffing based on what actually happened.',
+  },
+  {
+    heading: 'Turning more of them into revenue',
+    body: 'Follow-up, scheduling, financing, pricing, card fees. Small fixes here often make more difference than more ad spend.',
+  },
 ];
 
 const engagements = [
@@ -42,7 +62,7 @@ const engagements = [
       'Pricing and margin, including the fees sitting between you and your revenue, like payment processing',
       'The sales process itself: follow-up, financing, scheduling, the steps between a lead and a paid customer',
       'Other vendors held to the same numbers',
-      'Me in the room for the decisions, not a deck afterward',
+      'Part of the conversations where decisions get made, instead of reporting on them afterward',
     ],
   },
 ];
@@ -56,22 +76,56 @@ const method = [
 ---
 
 <Base
-  title="Project Pineapple | Marketing and operating leadership for businesses where the sale happens in person"
-  description="Paid advertising measured by revenue, and operating leadership for the businesses that want more. Flat fee, run by an operator. Salt Lake City, clients nationwide."
+  title="Project Pineapple | Marketing and growth for owner-run businesses"
+  description="Paid advertising, reporting, and operations help for owner-run businesses. Since 2014, I've been doing this for clients and for my own businesses. Flat monthly fee. Salt Lake City, clients nationwide."
 >
   <Header variant="full" wordmarkAsLink={false} />
 
   <section class="hero">
-    <div class="eyebrow hero__eyebrow">Marketing and operating leadership for businesses where the sale happens in person</div>
-    <h1>Somewhere between your ad spend and your bank account, the story gets lost.</h1>
-    <p class="hero__sub">
-      If your customers call or walk in, that's where it happens. The ad platform never sees the sale, so your
-      agency reports on leads, because that's what it can see. I connect the spend to the customers who actually
-      paid, so you can see which ads are worth paying for.
-    </p>
-    <CtaLink variant="button-lg" />
-    <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
+    <div class="hero__text">
+      <div class="eyebrow hero__eyebrow">For owner-run businesses</div>
+      <h1>Grow the business,<br /> not just the ad account.</h1>
+      <p class="hero__sub">
+        I help owner-operated businesses get more out of their marketing, and out of the business behind it. That
+        usually starts with the ads and the numbers, and often ends up in follow-up, pricing, and the systems in between.
+        Since 2014, I've been doing this for clients and for my own businesses.
+      </p>
+      <div class="hero__actions">
+        <CtaLink variant="button-lg" />
+        <a href="#proof" class="textlink hero__secondary">See the dashboard</a>
+      </div>
+      <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
+      <a href="/about" class="hero__byline">
+        <span class="hero__avatar"><Portrait crop="circle" size={44} loading="eager" /></span>
+        <span>
+          <span class="hero__name">Adam Malmborg</span>
+          <span class="hero__role">Founder, Project Pineapple. Salt Lake City, clients nationwide.</span>
+        </span>
+      </a>
+    </div>
+    <figure class="hero__shot">
+      <ProductShot
+        src={dashboardMobile}
+        frame="phone"
+        alt="The client dashboard on a phone, showing a month of ad spend, bookings, revenue, and return on ads, with demo data"
+        widths={[290, 580, 870]}
+        sizes="(max-width: 700px) 72vw, 290px"
+        loading="eager"
+      />
+      <figcaption>The client dashboard. Demo data.</figcaption>
+    </figure>
   </section>
+
+  {
+    featured && (
+      <figure class="quote">
+        <blockquote>{featured.quote}</blockquote>
+        <figcaption>
+          {featured.name}, {featured.business}
+        </figcaption>
+      </figure>
+    )
+  }
 
   <StatStrip
     items={[
@@ -81,8 +135,30 @@ const method = [
     ]}
   />
 
+  <section class="layers">
+    <div class="eyebrow layers__eyebrow">How I help</div>
+    <h2 class="layers__title">Most of what I do falls into three areas.</h2>
+    <p class="layers__intro">
+      A lot of businesses hire a different person for each of these. I've found it works better when one person can see
+      all three, because the problems usually connect.
+    </p>
+    <ol class="layers__grid">
+      {
+        layers.map((l, i) => (
+          <li>
+            <span class="layers__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3>{l.heading}</h3>
+            <p>{l.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
   <section class="section section--pine problem">
-    <h2 class="h2--dark">Where the story gets lost.</h2>
+    <h2 class="h2--dark">Why growth stalls even when the reports look good</h2>
     <p class="problem__intro">
       Google spends your money toward whatever it can count. If it can't count the sale, it counts something else
       and calls that the result.
@@ -105,7 +181,7 @@ const method = [
     <MethodList items={method} />
   </section>
 
-  <section class="section section--cream2 proof">
+  <section id="proof" class="section section--cream2 proof">
     <h2 class="h2">What this looks like in practice</h2>
     <div class="proof__stories">
       <p class="body body--long">
@@ -125,7 +201,19 @@ const method = [
         like revenue.
       </p>
     </div>
-    <SampleDashboard />
+    <figure class="proof__shot">
+      <ProductShot
+        src={dashboardMonth}
+        frame="screen"
+        alt="The monthly view of the client dashboard: spend, bookings, revenue, return on ads, bookings by source with how each is known, and bookings with no source on record, shown with demo data"
+        widths={[700, 1000, 1400, 2000]}
+        sizes="(max-width: 1100px) 90vw, 1000px"
+      />
+      <figcaption>
+        The monthly view every client gets, shown here with demo data. It shows what you spent, what came back, and
+        where each booking came from. Bookings without a clear source are counted separately instead of being guessed.
+      </figcaption>
+    </figure>
   </section>
 
   <section class="split">
@@ -195,8 +283,8 @@ const method = [
     <div class="fit__text">
       <p class="fit__p1">
         Businesses doing between $500,000 and $10 million in revenue, spending at least $3,000 a month on media,
-        where the sale happens on a phone call, in a showroom, or across a few weeks of consideration. Dental and
-        medical practices, law firms, med spas, custom retail.
+        where the sale happens on a phone call, in a showroom, or across a few weeks of consideration. Home services
+        and the trades, med spas, dental and medical practices, law firms, custom retail.
       </p>
       <p class="fit__p2">
         It's a poor fit for pure ecommerce, where the platform already sees the transaction, and for high-volume
@@ -207,41 +295,166 @@ const method = [
   </section>
 
   <ClosingCta heading="Start with the assessment">
-    Thirty minutes on what's being counted, what's wrong, and the two or three changes that would move the most.
-    You keep the findings either way.
+    Thirty minutes on where your growth is coming from, where it's leaking, and the two or three changes that would
+    move the most. You keep the findings either way.
   </ClosingCta>
 
   <Footer />
 </Base>
 
 <style>
-  /* Hero: the only centered block apart from closing CTAs */
+  /* Hero: the argument on the left, the product on the right */
   .hero {
     padding: var(--pad-hero) var(--gutter) clamp(44px, 7vw, 84px);
-    text-align: center;
     border-bottom: 1px solid var(--hairline);
+    /* Flex rather than an equal grid, so the argument gets the extra width
+       and the phone keeps its natural size. Wraps when there isn't room. */
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(36px, 6vw, 72px);
+    align-items: center;
+  }
+  .hero__text {
+    flex: 1 1 440px;
+    min-width: 0;
+  }
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    flex-wrap: wrap;
+  }
+  .hero__secondary {
+    font: 500 15px/1 var(--sans);
+  }
+  .hero__shot {
+    margin: 0 auto;
+    flex: 0 0 auto;
+    width: min(290px, 72vw);
+  }
+  .hero__shot figcaption,
+  .proof__shot figcaption {
+    margin-top: 12px;
+    font: 400 12.5px/1.6 var(--sans);
+    color: var(--text-60);
+  }
+  .hero__shot figcaption {
+    text-align: center;
   }
   .hero__eyebrow {
     line-height: 1.5;
     margin-bottom: 30px;
   }
   .hero h1 {
-    margin: 0 auto 28px;
-    font: 400 clamp(31px, 4.41vw, 52px) / 1.14 var(--serif);
+    margin: 0 0 26px;
+    font: 400 clamp(29px, 4.41vw, 52px) / 1.12 var(--serif);
     letter-spacing: -0.012em;
     max-width: 24ch;
   }
   .hero__sub {
-    margin: 0 auto 38px;
-    max-width: 52ch;
+    margin: 0 0 36px;
+    max-width: 50ch;
     font: 400 18px/1.68 var(--sans);
     color: var(--text-72);
   }
+  .hero__byline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hairline-inner);
+    max-width: 50ch;
+    text-decoration: none;
+    color: var(--pine);
+  }
+  .hero__byline:hover .hero__name {
+    color: var(--clay);
+  }
+  .hero__avatar {
+    width: 44px;
+    flex: none;
+  }
+  .hero__name {
+    display: block;
+    font: 500 14.5px/1.3 var(--sans);
+  }
+  .hero__role {
+    display: block;
+    font: 400 13px/1.5 var(--sans);
+    color: var(--text-60);
+  }
+
+  /* Client quote, only rendered when testimonials.ts has an approved entry */
+  .quote {
+    margin: 0;
+    padding: clamp(32px, 4.8vw, 56px) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .quote blockquote {
+    margin: 0 0 16px;
+    max-width: 40ch;
+    font: 400 clamp(17px, 2.03vw, 24px) / 1.42 var(--serif);
+    text-wrap: pretty;
+  }
+  .quote figcaption {
+    font: 400 13px/1.5 var(--sans);
+    color: var(--muted);
+  }
+
   .hero__micro {
-    margin: 16px auto 0;
+    margin: 16px 0 0;
     font: 400 13px/1.6 var(--sans);
     color: var(--muted);
     max-width: 44ch;
+  }
+
+  /* What's different: the three layers */
+  .layers {
+    padding: var(--pad-major) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .layers__eyebrow {
+    margin-bottom: 22px;
+  }
+  .layers__title {
+    margin: 0 0 16px;
+    font: 400 clamp(20px, 2.88vw, 34px) / 1.24 var(--serif);
+    max-width: 30ch;
+  }
+  .layers__intro {
+    margin: 0 0 clamp(32px, 4.4vw, 52px);
+    max-width: 60ch;
+    font: 400 16px/1.72 var(--sans);
+    color: var(--text-82);
+  }
+  .layers__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+    gap: 28px clamp(28px, 4.1vw, 48px);
+  }
+  .layers__grid li {
+    border-top: 1px solid var(--hairline);
+    padding-top: 20px;
+  }
+  .layers__num {
+    display: block;
+    font: 400 16px/1 var(--serif);
+    color: var(--clay);
+    margin-bottom: 14px;
+  }
+  .layers__grid h3 {
+    margin: 0 0 8px;
+    font: 500 17px/1.4 var(--sans);
+  }
+  .layers__grid p {
+    margin: 0;
+    font: 400 15px/1.68 var(--sans);
+    color: var(--text-82);
+    max-width: 40ch;
   }
 
   /* Problem, on pine */
@@ -283,6 +496,13 @@ const method = [
   /* Proof */
   .proof h2 {
     margin-bottom: 36px;
+  }
+  .proof__shot {
+    margin: clamp(32px, 4vw, 48px) 0 0;
+    max-width: 1000px;
+  }
+  .proof__shot figcaption {
+    max-width: 70ch;
   }
   .proof__stories {
     display: grid;

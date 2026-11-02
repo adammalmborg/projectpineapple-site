@@ -1,30 +1,24 @@
 ---
 /**
- * Logo mark. Inline SVG, 46x58 viewBox rendered at 19x24.
- *
- * Per the handoff this is a sketch, not a finished logo, and is due for a
- * proper vector redraw in v2. The favicon (public/favicon.svg) is the same
- * mark with the interior lattice dropped out.
+ * Logo mark: a pineapple with a clay crown and a pine body. Vector redraw of
+ * the original sketch, from the design pass, recolored to the site palette.
+ * The solid body is used at header and favicon sizes, where the lattice
+ * turns to noise. The 120x272 viewBox is a tight crop around the drawing.
  */
+interface Props {
+  height?: number;
+}
+const { height = 28 } = Astro.props;
+const width = Math.round((height * 120) / 272 * 10) / 10;
 ---
 
 <svg
-  width="19"
-  height="24"
-  viewBox="0 0 46 58"
-  fill="none"
+  width={width}
+  height={height}
+  viewBox="40 -8 120 272"
   aria-hidden="true"
   focusable="false"
->
-  <path d="M23 2 L30 11 L23 13 L16 11 Z" fill="#c1613c"></path>
-  <path d="M16 11 L11 6 M30 11 L35 6" stroke="#c1613c" stroke-width="1.8" stroke-linecap="round"></path>
-  <path
-    d="M23 15 C33 15 39.5 21.5 39.5 33.5 C39.5 45.5 33 55 23 55 C13 55 6.5 45.5 6.5 33.5 C6.5 21.5 13 15 23 15 Z"
-    stroke="#22402f"
-    stroke-width="2"
-    fill="none"></path>
-  <path d="M9 24 L37 40 M37 24 L9 40 M8 33 L38 33" stroke="#22402f" stroke-width="1.4" opacity=".5"></path>
-</svg>
+><Fragment set:html={`<clipPath id="pp-mark-crown" clip-rule="evenodd"><path clip-rule="evenodd" fill-rule="evenodd" d="M-50,-50H250V310H-50Z M44,162a50,50 0 0 1 50,-50h12a50,50 0 0 1 50,50v48a50,50 0 0 1 -50,50h-12a50,50 0 0 1 -50,-50Z"/></clipPath><g fill="#c1613c" clip-path="url(#pp-mark-crown)"><path d="M-15.00,0 C-15.75,-52.92 -8.25,-100.80 0,-126.00 C8.25,-100.80 15.75,-52.92 15.00,0 Z" transform="translate(100,122) rotate(0)"/><path d="M-14.00,0 C-14.70,-47.04 -7.70,-89.60 0,-112.00 C7.70,-89.60 14.70,-47.04 14.00,0 Z" transform="translate(100,122) rotate(-15)"/><path d="M-14.00,0 C-14.70,-47.04 -7.70,-89.60 0,-112.00 C7.70,-89.60 14.70,-47.04 14.00,0 Z" transform="translate(100,122) rotate(15)"/><path d="M-13.00,0 C-13.65,-38.64 -7.15,-73.60 0,-92.00 C7.15,-73.60 13.65,-38.64 13.00,0 Z" transform="translate(100,122) rotate(-32)"/><path d="M-13.00,0 C-13.65,-38.64 -7.15,-73.60 0,-92.00 C7.15,-73.60 13.65,-38.64 13.00,0 Z" transform="translate(100,122) rotate(32)"/><path d="M-11.00,0 C-11.55,-27.72 -6.05,-52.80 0,-66.00 C6.05,-52.80 11.55,-27.72 11.00,0 Z" transform="translate(100,122) rotate(-50)"/><path d="M-11.00,0 C-11.55,-27.72 -6.05,-52.80 0,-66.00 C6.05,-52.80 11.55,-27.72 11.00,0 Z" transform="translate(100,122) rotate(50)"/></g><rect x="44" y="112" width="112" height="148" rx="50" fill="#22402f"/>`} /></svg>
 
 <style>
   svg {
