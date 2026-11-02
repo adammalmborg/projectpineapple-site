@@ -25,15 +25,15 @@ const problems = [
 const layers = [
   {
     heading: 'The ads',
-    body: 'Google and Meta, run by me day to day, against customers who paid instead of form fills.',
+    body: 'I run Google and Meta day to day, and set them up to find customers who pay, not people who fill out forms.',
   },
   {
     heading: 'The numbers',
-    body: "A reporting system I build and run for you. Spend, bookings, and payments in one place, and the bookings I can't attribute counted and kept apart, never guessed into a channel.",
+    body: "I build the reporting myself: spend, bookings, and payments in one place. Anything I can't trace to a source gets counted separately, not guessed.",
   },
   {
     heading: 'The business',
-    body: 'Follow-up, scheduling, financing, pricing, processing fees. The steps that decide whether a lead turns into revenue.',
+    body: "Follow-up, scheduling, financing, pricing, card fees. If that's where customers are slipping away, that's where I'll spend the time.",
   },
 ];
 
@@ -77,18 +77,18 @@ const method = [
 
 <Base
   title="Project Pineapple | Marketing and operating leadership for businesses where the sale happens in person"
-  description="Paid advertising, the numbers behind it, and the operations underneath, run by someone who has run businesses since 2014. Flat monthly fee. Salt Lake City, clients nationwide."
+  description="Paid advertising measured by what you spent and what came back, from someone who has run businesses since 2014. Flat monthly fee. Salt Lake City, clients nationwide."
 >
   <Header variant="full" wordmarkAsLink={false} />
 
   <section class="hero">
     <div class="hero__text">
       <div class="eyebrow hero__eyebrow">For businesses where the sale happens in person</div>
-      <h1>Marketing, run by someone who's run the business.</h1>
+      <h1>What you spent,<br /> and what came back.</h1>
       <p class="hero__sub">
-        I've run paid advertising and run businesses since 2014, usually both at once. So I don't stop at the ad
-        account. I build the numbers that tie your spend to customers who paid, run the campaigns against them, and fix
-        what's underneath, from follow-up to fees. One person, one flat monthly fee.
+        When the sale happens on a phone call or in person, that number is hard to get, so most agencies report on
+        leads instead. Getting you the real number is where I start. From there I run the ads against it, and work on
+        whatever else is costing you customers.
       </p>
       <div class="hero__actions">
         <CtaLink variant="button-lg" />
@@ -136,11 +136,12 @@ const method = [
   />
 
   <section class="layers">
-    <div class="eyebrow layers__eyebrow">What's different</div>
-    <h2 class="layers__title">
-      Agencies run the ads. Consultants advise on the business. The numbers that connect the two belong to no one.
-    </h2>
-    <p class="layers__intro">That's where I start, and it's why I do all three.</p>
+    <div class="eyebrow layers__eyebrow">How this is different</div>
+    <h2 class="layers__title">I've been the owner reading the marketing report.</h2>
+    <p class="layers__intro">
+      So the work doesn't stop at the ad account. An agency will run your ads, and a consultant will give you advice.
+      What usually falls between them is the reporting that ties one to the other, and that's the part I build first.
+    </p>
     <ol class="layers__grid">
       {
         layers.map((l, i) => (
@@ -157,7 +158,7 @@ const method = [
   </section>
 
   <section class="section section--pine problem">
-    <h2 class="h2--dark">Why most ad spend can't answer for itself.</h2>
+    <h2 class="h2--dark">Why the reporting looks fine and the revenue doesn't move</h2>
     <p class="problem__intro">
       Google spends your money toward whatever it can count. If it can't count the sale, it counts something else
       and calls that the result.
@@ -342,7 +343,7 @@ const method = [
     margin: 0 0 26px;
     font: 400 clamp(31px, 4.41vw, 52px) / 1.12 var(--serif);
     letter-spacing: -0.012em;
-    max-width: 18ch;
+    max-width: 20ch;
   }
   .hero__sub {
     margin: 0 0 36px;
@@ -417,7 +418,8 @@ const method = [
   }
   .layers__intro {
     margin: 0 0 clamp(32px, 4.4vw, 52px);
-    font: 400 18px/1.62 var(--serif);
+    max-width: 60ch;
+    font: 400 16px/1.72 var(--sans);
     color: var(--text-82);
   }
   .layers__grid {
