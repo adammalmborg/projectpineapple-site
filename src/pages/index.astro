@@ -11,6 +11,9 @@ import dashboardMobile from '../assets/product/dashboard-mobile.webp';
 import dashboardMonth from '../assets/product/dashboard-month.webp';
 import ClosingCta from '../components/ClosingCta.astro';
 import { CTA_MICROCOPY_HOME } from '../content/site';
+import { testimonials } from '../content/testimonials';
+
+const featured = testimonials[0];
 
 const problems = [
   { heading: 'Leads that never became customers.', body: "The dashboard climbs. The bank account doesn't." },
@@ -68,15 +71,22 @@ const method = [
       <div class="eyebrow hero__eyebrow">Marketing and operating leadership for businesses where the sale happens in person</div>
       <h1>Ad spend that has to answer for itself.</h1>
       <p class="hero__sub">
-        Google and Meta campaigns run by an operator, connected to the customers who actually paid, not the leads. A
-        flat monthly fee, not a cut of your spend. Reporting on what the spend actually bought, and what I can't
-        attribute yet.
+        I run Google and Meta campaigns for owner-operated businesses and connect them to the customers who actually
+        paid, not the leads. A flat monthly fee, not a cut of your spend. When the problem turns out to be bigger than
+        the ads, I work on the data and the operations underneath them too.
       </p>
       <div class="hero__actions">
         <CtaLink variant="button-lg" />
         <a href="#proof" class="textlink hero__secondary">See the dashboard</a>
       </div>
       <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
+      <a href="/about" class="hero__byline">
+        <span class="hero__avatar"><Portrait crop="circle" size={44} loading="eager" /></span>
+        <span>
+          <span class="hero__name">Adam Malmborg</span>
+          <span class="hero__role">Running paid advertising since 2014. Running businesses just as long.</span>
+        </span>
+      </a>
     </div>
     <figure class="hero__shot">
       <ProductShot
@@ -90,6 +100,17 @@ const method = [
       <figcaption>The client dashboard. Demo data.</figcaption>
     </figure>
   </section>
+
+  {
+    featured && (
+      <figure class="quote">
+        <blockquote>{featured.quote}</blockquote>
+        <figcaption>
+          {featured.name}, {featured.business}
+        </figcaption>
+      </figure>
+    )
+  }
 
   <StatStrip
     items={[
@@ -225,8 +246,8 @@ const method = [
     <div class="fit__text">
       <p class="fit__p1">
         Businesses doing between $500,000 and $10 million in revenue, spending at least $3,000 a month on media,
-        where the sale happens on a phone call, in a showroom, or across a few weeks of consideration. Dental and
-        medical practices, law firms, med spas, custom retail.
+        where the sale happens on a phone call, in a showroom, or across a few weeks of consideration. Home services
+        and the trades, med spas, dental and medical practices, law firms, custom retail.
       </p>
       <p class="fit__p2">
         It's a poor fit for pure ecommerce, where the platform already sees the transaction, and for high-volume
@@ -293,6 +314,51 @@ const method = [
     font: 400 18px/1.68 var(--sans);
     color: var(--text-72);
   }
+  .hero__byline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 30px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hairline-inner);
+    max-width: 50ch;
+    text-decoration: none;
+    color: var(--pine);
+  }
+  .hero__byline:hover .hero__name {
+    color: var(--clay);
+  }
+  .hero__avatar {
+    width: 44px;
+    flex: none;
+  }
+  .hero__name {
+    display: block;
+    font: 500 14.5px/1.3 var(--sans);
+  }
+  .hero__role {
+    display: block;
+    font: 400 13px/1.5 var(--sans);
+    color: var(--text-60);
+  }
+
+  /* Client quote, only rendered when testimonials.ts has an approved entry */
+  .quote {
+    margin: 0;
+    padding: clamp(32px, 4.8vw, 56px) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .quote blockquote {
+    margin: 0 0 16px;
+    max-width: 40ch;
+    font: 400 clamp(17px, 2.03vw, 24px) / 1.42 var(--serif);
+    text-wrap: pretty;
+  }
+  .quote figcaption {
+    font: 400 13px/1.5 var(--sans);
+    color: var(--muted);
+  }
+
   .hero__micro {
     margin: 16px 0 0;
     font: 400 13px/1.6 var(--sans);
