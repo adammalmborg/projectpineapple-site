@@ -55,8 +55,10 @@ No layout work is needed.
 - No pure black, no pure white, no shadows, no border radius except circular
   portrait crops and the phone frame around product screens. Hairline
   borders and background shifts only.
-- Logo mark: the vector pineapple with a clay crown and a pine body, solid
-  body at header size. The favicon is the same mark on a pine tile.
+- Logo mark: a pineapple with a pine crown over a clay body and a diamond
+  lattice. The header uses the small drawing, with a coarser lattice. The
+  favicon is the reversed mark on a pine tile. Every version, with usage
+  notes, is in `brand/`; use those files in other products too.
 - Product screens are demo data and are always labelled as such. Never
   present them as a real client's results.
 - Every CTA reads "Let's jump on a call".
