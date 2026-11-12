@@ -55,9 +55,11 @@ No layout work is needed.
 - No pure black, no pure white, no shadows, no border radius except circular
   portrait crops and the phone frame around product screens. Hairline
   borders and background shifts only.
-- Logo mark: a pineapple with a pine crown over a clay body and a diamond
-  lattice. The header uses the small drawing, with a coarser lattice. The
-  favicon is the reversed mark on a pine tile. Every version, with usage
+- Logo mark: a pineapple with a pine crown over a gold body (`#F0B429`) and
+  a diamond lattice. Gold belongs to the mark only; the site accent is clay.
+  The header uses the small drawing, with a coarser lattice. The wordmark is
+  "Project Pineapple" in title case, in the display Caslon. The favicon is
+  the mark with a cream crown on a pine tile. Every version, with usage
   notes, is in `brand/`; use those files in other products too.
 - Product screens are demo data and are always labelled as such. Never
   present them as a real client's results.
