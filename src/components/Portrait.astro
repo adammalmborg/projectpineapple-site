@@ -2,9 +2,10 @@
 /**
  * Adam's portrait, the only photograph on the site.
  *
- * Two crops per the handoff:
- *   circle  head-and-collar crop via object-fit + scale(1.95) at origin 50% 14%
- *   square  4:5 crop at object-position 50% 20% (About page)
+ * Three crops:
+ *   circle   head-and-collar crop via object-fit + scale(1.95) at origin 50% 14%
+ *   square   4:5 crop at object-position 50% 20%, capped at 260px
+ *   feature  the same 4:5 crop at whatever width its container gives it
  *
  * Astro's image service generates responsive derivatives from the source
  * JPEG in src/assets at build time.
@@ -13,7 +14,7 @@ import { Image } from 'astro:assets';
 import portrait from '../assets/adam-malmborg.jpg';
 
 interface Props {
-  crop: 'circle' | 'square';
+  crop: 'circle' | 'square' | 'feature';
   /** Rendered width hint for the circle variant, in px (88 or 150). */
   size?: number;
   loading?: 'lazy' | 'eager';
@@ -25,6 +26,7 @@ const { crop, size = 150, loading = 'lazy' } = Astro.props;
 // frame width per device pixel to keep it crisp.
 const circleWidths = [Math.round(size * 2), Math.round(size * 4)];
 const squareWidths = [260, 520, 780];
+const featureWidths = [420, 640, 840, 1260];
 ---
 
 {
@@ -36,6 +38,18 @@ const squareWidths = [260, 520, 780];
         width={circleWidths[circleWidths.length - 1]}
         widths={circleWidths}
         sizes={`${size}px`}
+        loading={loading}
+        decoding="async"
+      />
+    </div>
+  ) : crop === 'feature' ? (
+    <div class="square square--feature">
+      <Image
+        src={portrait}
+        alt="Adam Malmborg"
+        width={840}
+        widths={featureWidths}
+        sizes="(max-width: 760px) 92vw, 420px"
         loading={loading}
         decoding="async"
       />
@@ -77,6 +91,9 @@ const squareWidths = [260, 520, 780];
     max-width: 260px;
     aspect-ratio: 4 / 5;
     overflow: hidden;
+  }
+  .square--feature {
+    max-width: none;
   }
   .square img {
     width: 100%;

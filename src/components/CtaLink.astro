@@ -7,25 +7,29 @@
  * which is also where the inline embed lives.
  *
  * `variant`:
- *   button    solid pine button (default)
- *   button-lg the slightly larger home hero button
- *   text      hairline-underlined text link (header nav CTA)
+ *   button     solid pine button (default)
+ *   button-lg  the larger hero and closing button
+ *   button-sm  the compact header button
+ *   on-pine    large cream button for pine bands
+ *   text       hairline-underlined text link (mobile menu)
  */
 import { CAL_CONFIG, CAL_LINK, CAL_NAMESPACE, CTA_LABEL } from '../content/site';
 
 interface Props {
-  variant?: 'button' | 'button-lg' | 'text';
+  variant?: 'button' | 'button-lg' | 'button-sm' | 'on-pine' | 'text';
   class?: string;
 }
 
 const { variant = 'button', class: className = '' } = Astro.props;
 
-const cls =
-  variant === 'text'
-    ? `textlink ${className}`
-    : variant === 'button-lg'
-      ? `btn btn--lg ${className}`
-      : `btn ${className}`;
+const base = {
+  text: 'textlink',
+  'button-lg': 'btn btn--lg',
+  'button-sm': 'btn btn--sm',
+  'on-pine': 'btn btn--lg btn--on-pine',
+  button: 'btn',
+}[variant];
+const cls = `${base} ${className}`;
 ---
 
 <a

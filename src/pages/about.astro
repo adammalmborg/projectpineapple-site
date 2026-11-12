@@ -36,7 +36,7 @@ import CtaLink from '../components/CtaLink.astro';
       </div>
     </div>
     <div class="bio__portrait">
-      <Portrait crop="square" loading="eager" />
+      <Portrait crop="feature" loading="eager" />
     </div>
   </section>
 
@@ -87,15 +87,16 @@ import CtaLink from '../components/CtaLink.astro';
   .bio {
     padding: var(--pad-major) var(--gutter) var(--pad-split);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-    gap: clamp(28px, 4.7vw, 56px);
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(28px, 5.6vw, 96px);
     align-items: start;
     border-bottom: 1px solid var(--hairline);
   }
   .bio h1 {
     margin: 0 0 34px;
-    font: 400 clamp(26px, 3.73vw, 44px) / 1.18 var(--serif);
-    letter-spacing: -0.01em;
+    font: 400 clamp(36px, 5.4vw, 72px) / 1.03 var(--display);
+    letter-spacing: -0.022em;
+    text-wrap: balance;
   }
   .bio__eyebrow {
     margin-bottom: 22px;
@@ -107,7 +108,17 @@ import CtaLink from '../components/CtaLink.astro';
   }
   .bio__portrait {
     width: 100%;
-    max-width: 260px;
+    max-width: 440px;
+    justify-self: end;
+  }
+  @media (max-width: 760px) {
+    .bio {
+      grid-template-columns: 1fr;
+    }
+    .bio__portrait {
+      max-width: 300px;
+      justify-self: start;
+    }
   }
 
   .why {
