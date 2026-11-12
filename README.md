@@ -46,7 +46,7 @@ No layout work is needed.
   generated at build time.
 - `public/`: favicons, robots.txt.
 
-## Design rules carried from the handoff
+## Design rules
 
 - Copy is client-approved and verbatim. No em dashes anywhere. Sentence-case
   headings.
@@ -58,10 +58,17 @@ No layout work is needed.
 - Product screens are demo data and are always labelled as such. Never
   present them as a real client's results.
 - Every CTA reads "Let's jump on a call".
-- Responsive layout is intrinsic (auto-fit grids, `clamp()` spacing and
-  type). The only media query is the mobile navigation in `Header.astro`.
-- Fonts are self-hosted (fontsource): Libre Caslon Text 400 and 400 italic,
-  Instrument Sans 400 and 500, latin subset only.
+- Layout: every section is a full-bleed band of colour. Content is held to
+  1240px by `--gutter`, which is horizontal padding that grows with the
+  viewport, so a section only needs `padding: <vertical> var(--gutter)`.
+  Spacing and type scale with `clamp()`; a handful of media queries stack
+  the two-column sections on small screens.
+- The header is sticky, so the booking button stays in reach.
+- Product crops sit on a tinted mat (pine or sand) so the light screens have
+  something to stand against.
+- Fonts are self-hosted (fontsource), latin subset only: Libre Caslon Display
+  400 for large headings, Libre Caslon Text 400 and 400 italic for small
+  serif, Instrument Sans 400 and 500 for everything else.
 
 ## Cal.com
 

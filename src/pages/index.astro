@@ -1,19 +1,33 @@
 ---
+/**
+ * Home. The copy is approved; the layout is what this file is about.
+ *
+ * Every section is a full-bleed band. Product screens are demo data and each
+ * one is captioned that way.
+ */
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CtaLink from '../components/CtaLink.astro';
-import StatStrip from '../components/StatStrip.astro';
-import MethodList from '../components/MethodList.astro';
 import Portrait from '../components/Portrait.astro';
 import ProductShot from '../components/ProductShot.astro';
 import dashboardMobile from '../assets/product/dashboard-mobile.webp';
 import dashboardMonth from '../assets/product/dashboard-month.webp';
+import screenMonth from '../assets/product/screen-month.webp';
+import cropCost from '../assets/product/crop-cost.webp';
+import cropChart from '../assets/product/crop-chart.webp';
+import cropLeads from '../assets/product/crop-leads.webp';
 import ClosingCta from '../components/ClosingCta.astro';
 import { CTA_MICROCOPY_HOME } from '../content/site';
 import { testimonials } from '../content/testimonials';
 
 const featured = testimonials[0];
+
+const facts = [
+  { label: 'Revenue fit', value: '$500K–$10M' },
+  { label: 'Media', value: '$3K+ / month' },
+  { label: 'Fee', value: 'Flat monthly' },
+];
 
 const problems = [
   { heading: 'Leads that never became customers.', body: "The dashboard climbs. The bank account doesn't." },
@@ -26,14 +40,27 @@ const layers = [
   {
     heading: 'Getting the right customers',
     body: 'Running Google and Meta so they find people who actually buy, instead of people who just fill out a form.',
+    shot: cropCost,
+    alt: 'A table from the client dashboard showing the cost of a booking by paid channel over five months, with demo data',
+    caption: 'What a booking costs on each channel, month by month. Demo data.',
+    mat: 'sand',
   },
   {
     heading: 'Knowing your numbers',
     body: 'Getting spend, bookings, and payments into one place, so you can make calls on budget, pricing, and staffing based on what actually happened.',
+    shot: cropChart,
+    alt: 'A chart from the client dashboard comparing monthly ad spend with what the customers from those ads went on to pay, with demo data',
+    caption: 'What you paid for ads next to what those customers paid you. Demo data.',
+    mat: 'pine',
   },
   {
     heading: 'Turning more of them into revenue',
     body: 'Follow-up, scheduling, financing, pricing, card fees. Small fixes here often make more difference than more ad spend.',
+    shot: cropLeads,
+    alt: 'The leads board from the client dashboard, showing new and contacted leads and how long each has been waiting, with demo data',
+    caption: 'The leads board, with how long each lead has been waiting. Demo data.',
+    mat: 'sand',
+    bleed: true,
   },
 ];
 
@@ -82,38 +109,67 @@ const method = [
   <Header variant="full" wordmarkAsLink={false} />
 
   <section class="hero">
-    <div class="hero__text">
-      <div class="eyebrow hero__eyebrow">For owner-run businesses</div>
-      <h1>Grow the business,<br /> not just the ad account.</h1>
-      <p class="hero__sub">
+    <div class="eyebrow hero__eyebrow">For owner-run businesses</div>
+    <h1>Grow the business,<br /> <span class="hero__turn">not just the ad account.</span></h1>
+
+    <div class="hero__row">
+      <p class="lead hero__sub">
         I help owner-operated businesses get more out of their marketing, and out of the business behind it. That
         usually starts with the ads and the numbers, and often ends up in follow-up, pricing, and the systems in between.
         Since 2014, I've been doing this for clients and for my own businesses.
       </p>
-      <div class="hero__actions">
-        <CtaLink variant="button-lg" />
-        <a href="#proof" class="textlink hero__secondary">See the dashboard</a>
+      <div class="hero__side">
+        <div class="hero__actions">
+          <CtaLink variant="button-lg" />
+          <a href="#proof" class="textlink hero__secondary">See the dashboard</a>
+        </div>
+        <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
+        <a href="/about" class="hero__byline">
+          <span class="hero__avatar"><Portrait crop="circle" size={52} loading="eager" /></span>
+          <span>
+            <span class="hero__name">Adam Malmborg</span>
+            <span class="hero__role">Founder, Project Pineapple. Salt Lake City, clients nationwide.</span>
+          </span>
+        </a>
       </div>
-      <div class="hero__micro">{CTA_MICROCOPY_HOME}</div>
-      <a href="/about" class="hero__byline">
-        <span class="hero__avatar"><Portrait crop="circle" size={44} loading="eager" /></span>
-        <span>
-          <span class="hero__name">Adam Malmborg</span>
-          <span class="hero__role">Founder, Project Pineapple. Salt Lake City, clients nationwide.</span>
-        </span>
-      </a>
     </div>
-    <figure class="hero__shot">
-      <ProductShot
-        src={dashboardMobile}
-        frame="phone"
-        alt="The client dashboard on a phone, showing a month of ad spend, bookings, revenue, and return on ads, with demo data"
-        widths={[290, 580, 870]}
-        sizes="(max-width: 700px) 72vw, 290px"
-        loading="eager"
-      />
+
+    <figure class="stage">
+      <div class="stage__mat">
+        <div class="stage__screen">
+          <ProductShot
+            src={screenMonth}
+            frame="window"
+            alt="The monthly view of the client dashboard: bookings, ad spend, revenue, return on ads, and where each booking came from, shown with demo data"
+            widths={[640, 960, 1280, 1640]}
+            sizes="(max-width: 700px) 0px, (max-width: 1240px) 72vw, 900px"
+            loading="eager"
+          />
+        </div>
+        <div class="stage__phone">
+          <ProductShot
+            src={dashboardMobile}
+            frame="phone"
+            alt="The same dashboard on a phone, with demo data"
+            widths={[290, 580, 870]}
+            sizes="(max-width: 700px) 62vw, 280px"
+            loading="eager"
+          />
+        </div>
+      </div>
       <figcaption>The client dashboard. Demo data.</figcaption>
     </figure>
+
+    <dl class="facts">
+      {
+        facts.map((f) => (
+          <div>
+            <dt>{f.label}</dt>
+            <dd>{f.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
   </section>
 
   {
@@ -127,88 +183,122 @@ const method = [
     )
   }
 
-  <StatStrip
-    items={[
-      { label: 'Revenue fit', value: '$500K–$10M' },
-      { label: 'Media', value: '$3K+ / month' },
-      { label: 'Fee', value: 'Flat monthly' },
-    ]}
-  />
-
   <section class="layers">
-    <div class="eyebrow layers__eyebrow">How I help</div>
-    <h2 class="layers__title">Most of what I do falls into three areas.</h2>
-    <p class="layers__intro">
-      A lot of businesses hire a different person for each of these. I've found it works better when one person can see
-      all three, because the problems usually connect.
-    </p>
-    <ol class="layers__grid">
+    <header class="sechead">
+      <div>
+        <div class="eyebrow sechead__eyebrow">How I help</div>
+        <h2 class="display-2">Most of what I do falls into three areas.</h2>
+      </div>
+      <p class="lead sechead__lead">
+        A lot of businesses hire a different person for each of these. I've found it works better when one person can
+        see all three, because the problems usually connect.
+      </p>
+    </header>
+    <ol class="areas">
       {
         layers.map((l, i) => (
-          <li>
-            <span class="layers__num" aria-hidden="true">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <h3>{l.heading}</h3>
-            <p>{l.body}</p>
+          <li class="area">
+            <div class="area__text">
+              <span class="area__num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="display-3">{l.heading}</h3>
+              <p>{l.body}</p>
+            </div>
+            <figure class="area__fig">
+              <div class:list={['mat', `mat--${l.mat}`, { 'mat--bleed': l.bleed }]}>
+                <ProductShot
+                  src={l.shot}
+                  frame="tile"
+                  alt={l.alt}
+                  widths={[380, 570, 760]}
+                  sizes="(max-width: 860px) 84vw, 590px"
+                />
+              </div>
+              <figcaption>{l.caption}</figcaption>
+            </figure>
           </li>
         ))
       }
     </ol>
   </section>
 
-  <section class="section section--pine problem">
-    <h2 class="h2--dark">Why growth stalls even when the reports look good</h2>
-    <p class="problem__intro">
-      Google spends your money toward whatever it can count. If it can't count the sale, it counts something else
-      and calls that the result.
-    </p>
-    <div class="problem__grid">
+  <section class="section--pine problem">
+    <div class="problem__head">
+      <h2 class="display-2">Why growth stalls even when the reports look good</h2>
+      <p class="lead problem__intro">
+        Google spends your money toward whatever it can count. If it can't count the sale, it counts something else
+        and calls that the result.
+      </p>
+    </div>
+    <ul class="problem__list">
       {
         problems.map((p) => (
-          <div>
+          <li>
             <span class="diamond" aria-hidden="true" />
-            <div class="problem__heading">{p.heading}</div>
-            <div class="problem__body">{p.body}</div>
-          </div>
+            <div>
+              <div class="problem__heading">{p.heading}</div>
+              <div class="problem__body">{p.body}</div>
+            </div>
+          </li>
         ))
       }
-    </div>
+    </ul>
   </section>
 
-  <section id="how-i-work" class="section method">
-    <h2 class="eyebrow">How I work</h2>
-    <MethodList items={method} />
+  <section id="how-i-work" class="method">
+    <h2 class="display-2">How I work</h2>
+    <ol class="steps">
+      {
+        method.map((text, i) => (
+          <li>
+            <span class="steps__num" aria-hidden="true">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <p>{text}</p>
+          </li>
+        ))
+      }
+    </ol>
   </section>
 
-  <section id="proof" class="section section--cream2 proof">
-    <h2 class="h2">What this looks like in practice</h2>
-    <div class="proof__stories">
-      <p class="body body--long">
-        A dental practice had been paying an agency for leads for about a year. The account was optimizing toward
-        form submissions, and form submissions were coming in. When I connected the phone and the booking data
-        back to the campaigns, most of those forms had never become appointments. The platform had gotten very
-        good at finding people who fill out forms. Rebuilding around booked patients changed who the same budget
-        reached, and the practice started seeing the result where it counts, in the schedule.
-      </p>
-      <p class="body body--long">
-        A law firm was bringing in cases from several sources at once: an agency sending leads, directory
-        listings, referrals, and their own paid search. Nobody could say which source the good cases came from.
-        Once every source was tracked through to intake, one of them clearly wasn't producing, and the firm ended
-        that contract. Their sales cycle is eight months. Three months in, I could tell them exactly what had
-        entered the pipeline and where it came from. I could not tell them what had closed, because nothing had
-        closed yet. I said so. Most agencies would have reported the pipeline number and let it sit there looking
-        like revenue.
-      </p>
+  <section id="proof" class="proof">
+    <h2 class="display-2">What this looks like in practice</h2>
+    <div class="stories">
+      <div class="story">
+        <p class="story__lead">A dental practice had been paying an agency for leads for about a year.</p>
+        <p class="body body--long">
+          The account was optimizing toward form submissions, and form submissions were coming in. When I connected
+          the phone and the booking data back to the campaigns, most of those forms had never become appointments.
+          The platform had gotten very good at finding people who fill out forms. Rebuilding around booked patients
+          changed who the same budget reached, and the practice started seeing the result where it counts, in the
+          schedule.
+        </p>
+      </div>
+      <div class="story">
+        <p class="story__lead">
+          A law firm was bringing in cases from several sources at once: an agency sending leads, directory listings,
+          referrals, and their own paid search.
+        </p>
+        <p class="body body--long">
+          Nobody could say which source the good cases came from. Once every source was tracked through to intake,
+          one of them clearly wasn't producing, and the firm ended that contract. Their sales cycle is eight months.
+          Three months in, I could tell them exactly what had entered the pipeline and where it came from. I could
+          not tell them what had closed, because nothing had closed yet. I said so. Most agencies would have reported
+          the pipeline number and let it sit there looking like revenue.
+        </p>
+      </div>
     </div>
     <figure class="proof__shot">
-      <ProductShot
-        src={dashboardMonth}
-        frame="screen"
-        alt="The monthly view of the client dashboard: spend, bookings, revenue, return on ads, bookings by source with how each is known, and bookings with no source on record, shown with demo data"
-        widths={[700, 1000, 1400, 2000]}
-        sizes="(max-width: 1100px) 90vw, 1000px"
-      />
+      <div class="proof__pan">
+        <ProductShot
+          src={dashboardMonth}
+          frame="window"
+          alt="The monthly view of the client dashboard: spend, bookings, revenue, return on ads, bookings by source with how each is known, and bookings with no source on record, shown with demo data"
+          widths={[700, 1000, 1400, 2000]}
+          sizes="(max-width: 700px) 940px, (max-width: 1240px) 92vw, 1240px"
+        />
+      </div>
       <figcaption>
         The monthly view every client gets, shown here with demo data. It shows what you spent, what came back, and
         where each booking came from. Bookings without a clear source are counted separately instead of being guessed.
@@ -216,10 +306,10 @@ const method = [
     </figure>
   </section>
 
-  <section class="split">
+  <section class="split terms">
     <div class="split__grid">
       <div class="split__col">
-        <h2 class="eyebrow col-eyebrow">How I report</h2>
+        <h2 class="display-3 terms__h">How I report</h2>
         <p class="body">
           I'll tell you what I know and what I don't. A report that overstates what it knows makes the number look
           good and makes the next decision worse. If your sales cycle is long, I'll be reporting on pipeline before
@@ -227,7 +317,7 @@ const method = [
         </p>
       </div>
       <div class="split__col">
-        <h2 class="eyebrow col-eyebrow">How I charge</h2>
+        <h2 class="display-3 terms__h">How I charge</h2>
         <p class="body">
           A flat monthly fee. Most agencies charge a percentage of your ad spend, which means they earn more when
           you spend more. That is a bad incentive to have sitting between you and the person advising you on your
@@ -240,7 +330,7 @@ const method = [
 
   <section class="operator">
     <div class="operator__portrait">
-      <Portrait crop="circle" size={150} />
+      <Portrait crop="feature" />
     </div>
     <div class="operator__text">
       <div class="eyebrow">Adam Malmborg</div>
@@ -255,16 +345,16 @@ const method = [
     </div>
   </section>
 
-  <section class="section engagement">
-    <h2 class="h2">What working together looks like</h2>
+  <section class="engagement">
+    <h2 class="display-2">What working together looks like</h2>
     <div class="engagement__grid">
       {
         engagements.map((e) => (
-          <div class="engagement__col">
-            <div class="eyebrow engagement__label">{e.label}</div>
-            <h3 class="engagement__name">{e.name}</h3>
-            <p class="body engagement__intro">{e.intro}</p>
-            <ul class="engagement__list">
+          <div class="plan">
+            <div class="eyebrow plan__label">{e.label}</div>
+            <h3 class="display-3 plan__name">{e.name}</h3>
+            <p class="body plan__intro">{e.intro}</p>
+            <ul class="plan__list">
               {e.includes.map((item) => (
                 <li>{item}</li>
               ))}
@@ -278,8 +368,8 @@ const method = [
     </p>
   </section>
 
-  <section id="who-its-for" class="section section--pine fit">
-    <h2 class="h2">Who this is for</h2>
+  <section id="who-its-for" class="section--pine fit">
+    <h2 class="display-2">Who this is for</h2>
     <div class="fit__text">
       <p class="fit__p1">
         Businesses doing between $500,000 and $10 million in revenue, spending at least $3,000 a month on media,
@@ -303,20 +393,34 @@ const method = [
 </Base>
 
 <style>
-  /* Hero: the argument on the left, the product on the right */
+  /* ---------- Hero ---------- */
   .hero {
-    padding: var(--pad-hero) var(--gutter) clamp(44px, 7vw, 84px);
+    padding: var(--pad-hero) var(--gutter) clamp(40px, 5vw, 72px);
     border-bottom: 1px solid var(--hairline);
-    /* Flex rather than an equal grid, so the argument gets the extra width
-       and the phone keeps its natural size. Wraps when there isn't room. */
-    display: flex;
-    flex-wrap: wrap;
-    gap: clamp(36px, 6vw, 72px);
-    align-items: center;
   }
-  .hero__text {
-    flex: 1 1 440px;
-    min-width: 0;
+  .hero__eyebrow {
+    margin-bottom: clamp(20px, 2.4vw, 32px);
+  }
+  .hero h1 {
+    margin: 0 0 clamp(28px, 3.6vw, 52px);
+    font: 400 clamp(46px, 7.6vw, 108px) / 0.98 var(--display);
+    letter-spacing: -0.026em;
+    text-wrap: balance;
+  }
+  .hero__turn {
+    color: var(--clay);
+  }
+  .hero__row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+    gap: clamp(28px, 4vw, 96px);
+    align-items: start;
+  }
+  .hero__sub {
+    max-width: 54ch;
+  }
+  .hero__side {
+    justify-self: start;
   }
   .hero__actions {
     display: flex;
@@ -325,46 +429,21 @@ const method = [
     flex-wrap: wrap;
   }
   .hero__secondary {
-    font: 500 15px/1 var(--sans);
+    font: 500 15.5px/1 var(--sans);
   }
-  .hero__shot {
-    margin: 0 auto;
-    flex: 0 0 auto;
-    width: min(290px, 72vw);
-  }
-  .hero__shot figcaption,
-  .proof__shot figcaption {
-    margin-top: 12px;
-    font: 400 12.5px/1.6 var(--sans);
+  .hero__micro {
+    margin: 18px 0 0;
+    font: 400 13.5px/1.6 var(--sans);
     color: var(--text-60);
-  }
-  .hero__shot figcaption {
-    text-align: center;
-  }
-  .hero__eyebrow {
-    line-height: 1.5;
-    margin-bottom: 30px;
-  }
-  .hero h1 {
-    margin: 0 0 26px;
-    font: 400 clamp(29px, 4.41vw, 52px) / 1.12 var(--serif);
-    letter-spacing: -0.012em;
-    max-width: 24ch;
-  }
-  .hero__sub {
-    margin: 0 0 36px;
-    max-width: 50ch;
-    font: 400 18px/1.68 var(--sans);
-    color: var(--text-72);
+    max-width: 44ch;
   }
   .hero__byline {
     display: flex;
     align-items: center;
     gap: 14px;
-    margin-top: 30px;
+    margin-top: 26px;
     padding-top: 22px;
     border-top: 1px solid var(--hairline-inner);
-    max-width: 50ch;
     text-decoration: none;
     color: var(--pine);
   }
@@ -372,248 +451,504 @@ const method = [
     color: var(--clay);
   }
   .hero__avatar {
-    width: 44px;
+    width: 52px;
     flex: none;
   }
   .hero__name {
     display: block;
-    font: 500 14.5px/1.3 var(--sans);
+    font: 500 15px/1.3 var(--sans);
   }
   .hero__role {
     display: block;
-    font: 400 13px/1.5 var(--sans);
+    font: 400 13.5px/1.5 var(--sans);
     color: var(--text-60);
+  }
+
+  /* The product, on a pine mat. The screen bleeds off the bottom edge and the
+     phone stands in front of it. */
+  .stage {
+    margin: clamp(40px, 5.6vw, 84px) 0 0;
+  }
+  .stage__mat {
+    position: relative;
+    overflow: hidden;
+    background: var(--pine);
+    height: clamp(380px, 46vw, 610px);
+    padding: clamp(22px, 4.4vw, 60px) clamp(22px, 4.4vw, 60px) 0;
+  }
+  .stage__screen {
+    width: 77%;
+  }
+  .stage__phone {
+    position: absolute;
+    right: clamp(22px, 4.4vw, 60px);
+    top: 17%;
+    width: 23%;
+  }
+  .stage figcaption,
+  .area__fig figcaption,
+  .proof__shot figcaption {
+    margin-top: 14px;
+    font: 400 13px/1.6 var(--sans);
+    color: var(--text-60);
+  }
+  @media (max-width: 700px) {
+    .stage__screen {
+      display: none;
+    }
+    .stage__phone {
+      position: static;
+      width: min(66%, 270px);
+      margin: 0 auto;
+    }
+  }
+
+  .facts {
+    margin: clamp(36px, 4.6vw, 64px) 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 0 clamp(24px, 3vw, 48px);
+  }
+  .facts > div {
+    padding: 18px 0 20px;
+    border-top: 1px solid var(--pine);
+  }
+  .facts dt {
+    font: 500 11.5px/1 var(--sans);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-60);
+    margin-bottom: 14px;
+  }
+  .facts dd {
+    margin: 0;
+    font: 400 clamp(28px, 3.3vw, 44px) / 1 var(--display);
+    letter-spacing: -0.015em;
   }
 
   /* Client quote, only rendered when testimonials.ts has an approved entry */
   .quote {
     margin: 0;
-    padding: clamp(32px, 4.8vw, 56px) var(--gutter);
+    padding: var(--pad-secondary) var(--gutter);
     border-bottom: 1px solid var(--hairline);
+    background: var(--cream-2);
   }
   .quote blockquote {
-    margin: 0 0 16px;
-    max-width: 40ch;
-    font: 400 clamp(17px, 2.03vw, 24px) / 1.42 var(--serif);
-    text-wrap: pretty;
+    margin: 0 0 22px;
+    max-width: 30ch;
+    font: 400 clamp(24px, 3.3vw, 44px) / 1.18 var(--display);
+    letter-spacing: -0.012em;
+    text-wrap: balance;
   }
   .quote figcaption {
-    font: 400 13px/1.5 var(--sans);
-    color: var(--muted);
+    font: 400 14px/1.5 var(--sans);
+    color: var(--text-65);
   }
 
-  .hero__micro {
-    margin: 16px 0 0;
-    font: 400 13px/1.6 var(--sans);
-    color: var(--muted);
-    max-width: 44ch;
+  /* ---------- Shared section header: title left, lead right ---------- */
+  .sechead {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+    gap: clamp(20px, 4vw, 96px);
+    align-items: end;
+  }
+  .sechead__eyebrow {
+    margin-bottom: clamp(16px, 1.8vw, 24px);
+  }
+  .sechead h2 {
+    max-width: 14ch;
+  }
+  .sechead__lead {
+    max-width: 46ch;
+    padding-bottom: 0.4em;
   }
 
-  /* What's different: the three layers */
+  /* ---------- How I help: three areas, each beside a piece of the product ---------- */
   .layers {
     padding: var(--pad-major) var(--gutter);
     border-bottom: 1px solid var(--hairline);
   }
-  .layers__eyebrow {
-    margin-bottom: 22px;
+  .areas {
+    list-style: none;
+    margin: clamp(48px, 6.6vw, 96px) 0 0;
+    padding: 0;
+    display: grid;
+    gap: clamp(48px, 6.6vw, 96px);
   }
-  .layers__title {
-    margin: 0 0 16px;
-    font: 400 clamp(20px, 2.88vw, 34px) / 1.24 var(--serif);
-    max-width: 30ch;
+  .area {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(26px, 5.6vw, 96px);
+    align-items: center;
+    padding-top: clamp(48px, 6.6vw, 96px);
+    border-top: 1px solid var(--hairline);
   }
-  .layers__intro {
-    margin: 0 0 clamp(32px, 4.4vw, 52px);
-    max-width: 60ch;
-    font: 400 16px/1.72 var(--sans);
+  .area:first-child {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .area__num {
+    display: block;
+    font: 400 clamp(17px, 1.5vw, 20px) / 1 var(--display);
+    letter-spacing: 0.04em;
+    color: var(--clay);
+    margin-bottom: clamp(16px, 2vw, 28px);
+  }
+  .area__text h3 {
+    margin: 0 0 clamp(14px, 1.6vw, 22px);
+    font-size: clamp(28px, 3.6vw, 50px);
+    line-height: 1.06;
+    letter-spacing: -0.018em;
+    max-width: 12ch;
+  }
+  .area__text p {
+    font: 400 clamp(16.5px, 1.4vw, 18.5px) / 1.65 var(--sans);
     color: var(--text-82);
+    max-width: 38ch;
   }
-  .layers__grid {
+  .area__fig {
+    margin: 0;
+  }
+  .mat {
+    padding: clamp(18px, 3.6vw, 48px);
+  }
+  .mat--sand {
+    background: var(--sand);
+  }
+  .mat--pine {
+    background: var(--pine);
+  }
+  .mat :global(.shot) {
+    border: 1px solid var(--hairline);
+  }
+  .mat--bleed {
+    padding-bottom: 0;
+  }
+  .mat--bleed :global(.shot) {
+    border-bottom: 0;
+  }
+  .area:nth-child(even) {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+  .area:nth-child(even) .area__text {
+    order: 2;
+  }
+  @media (max-width: 860px) {
+    .area,
+    .area:nth-child(even) {
+      grid-template-columns: 1fr;
+    }
+    .area:nth-child(even) .area__text {
+      order: 0;
+    }
+  }
+
+  /* ---------- Problem, on pine ---------- */
+  .problem {
+    padding: var(--pad-major) var(--gutter);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+    gap: clamp(36px, 5.6vw, 104px);
+    align-items: start;
+  }
+  .problem__head h2 {
+    max-width: 13ch;
+    margin-bottom: clamp(20px, 2.4vw, 32px);
+  }
+  .problem__intro {
+    color: var(--on-pine-2);
+    max-width: 40ch;
+  }
+  .problem__list {
     list-style: none;
     margin: 0;
     padding: 0;
+  }
+  .problem__list li {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-    gap: 28px clamp(28px, 4.1vw, 48px);
+    grid-template-columns: auto 1fr;
+    gap: clamp(16px, 2vw, 26px);
+    padding: clamp(22px, 2.6vw, 34px) 0;
+    border-top: 1px solid var(--hairline-on-pine);
   }
-  .layers__grid li {
-    border-top: 1px solid var(--hairline);
-    padding-top: 20px;
+  .problem__list li:last-child {
+    border-bottom: 1px solid var(--hairline-on-pine);
   }
-  .layers__num {
-    display: block;
-    font: 400 16px/1 var(--serif);
-    color: var(--clay);
-    margin-bottom: 14px;
-  }
-  .layers__grid h3 {
-    margin: 0 0 8px;
-    font: 500 17px/1.4 var(--sans);
-  }
-  .layers__grid p {
-    margin: 0;
-    font: 400 15px/1.68 var(--sans);
-    color: var(--text-82);
-    max-width: 40ch;
-  }
-
-  /* Problem, on pine */
-  .problem h2 {
-    margin-bottom: 18px;
-  }
-  .problem__intro {
-    margin-bottom: 44px;
-    max-width: 52ch;
-    font: 400 16px/1.7 var(--sans);
-    color: var(--on-pine-2);
-  }
-  .problem__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
-    gap: clamp(17px, 2.9vw, 34px) 60px;
-  }
-  .problem__grid .diamond {
-    display: block;
-    margin-bottom: 16px;
+  .problem__list .diamond {
+    margin-top: 0.75em;
   }
   .problem__heading {
-    font: 500 17px/1.4 var(--sans);
-    margin-bottom: 7px;
+    font: 400 clamp(21px, 2.3vw, 31px) / 1.16 var(--display);
+    letter-spacing: -0.008em;
+    margin-bottom: 8px;
   }
   .problem__body {
-    font: 400 14.5px/1.65 var(--sans);
-    color: var(--on-pine-4);
+    font: 400 16.5px/1.6 var(--sans);
+    color: var(--on-pine-2);
+  }
+  @media (min-width: 861px) {
+    .problem__head {
+      position: sticky;
+      top: calc(var(--header-h) + 48px);
+    }
   }
 
-  /* Method */
+  /* ---------- Method: four steps across ---------- */
   .method {
-    padding-bottom: var(--pad-secondary);
-  }
-  .method .eyebrow {
-    margin-bottom: 30px;
-  }
-
-  /* Proof */
-  .proof h2 {
-    margin-bottom: 36px;
-  }
-  .proof__shot {
-    margin: clamp(32px, 4vw, 48px) 0 0;
-    max-width: 1000px;
-  }
-  .proof__shot figcaption {
-    max-width: 70ch;
-  }
-  .proof__stories {
-    display: grid;
-    gap: 30px;
-    max-width: 64ch;
-  }
-
-  /* How I report / How I charge */
-  .split {
+    padding: var(--pad-major) var(--gutter);
     border-bottom: 1px solid var(--hairline);
   }
-  .col-eyebrow {
-    margin-bottom: 22px;
+  .steps {
+    list-style: none;
+    margin: clamp(36px, 5vw, 72px) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(28px, 3vw, 44px) clamp(24px, 3vw, 48px);
+  }
+  @media (max-width: 960px) {
+    .steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 520px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+  .steps li {
+    border-top: 1px solid var(--pine);
+    padding-top: clamp(16px, 1.8vw, 24px);
+  }
+  .steps__num {
+    display: block;
+    font: 400 clamp(44px, 5.2vw, 76px) / 0.9 var(--display);
+    letter-spacing: -0.03em;
+    color: var(--clay);
+    margin-bottom: clamp(16px, 2.2vw, 32px);
+  }
+  .steps p {
+    font: 400 17px/1.6 var(--sans);
+    color: var(--text-82);
+    max-width: 34ch;
   }
 
-  /* Operator block, home variant */
+  /* ---------- Proof ---------- */
+  .proof {
+    padding: var(--pad-major) var(--gutter);
+    background: var(--cream-2);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .proof h2 {
+    max-width: 22ch;
+  }
+  .stories {
+    margin-top: clamp(36px, 5vw, 72px);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(36px, 4vw, 72px);
+  }
+  /* Each story spans two shared rows, so the two bodies start level even
+     though the opening sentences differ in length. */
+  .story {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+    row-gap: 18px;
+    border-top: 1px solid var(--pine);
+    padding-top: clamp(20px, 2.2vw, 28px);
+  }
+  .story__lead {
+    font: 400 clamp(20px, 1.9vw, 25px) / 1.34 var(--serif);
+    max-width: 30ch;
+  }
+  @media (max-width: 760px) {
+    .stories {
+      grid-template-columns: 1fr;
+    }
+    .story + .story {
+      margin-top: 36px;
+    }
+  }
+  .story .body {
+    max-width: 56ch;
+  }
+  .proof__shot {
+    margin: clamp(44px, 5.6vw, 88px) 0 0;
+  }
+  .proof__shot figcaption {
+    max-width: 78ch;
+  }
+  /* On a phone the full dashboard would shrink to a thumbnail. Keep it at a
+     readable size and let it pan sideways instead. */
+  @media (max-width: 700px) {
+    .proof__pan {
+      overflow-x: auto;
+      margin-right: calc(var(--gutter) * -1);
+      -webkit-overflow-scrolling: touch;
+    }
+    .proof__pan :global(.shot) {
+      width: 940px;
+    }
+  }
+
+  /* ---------- How I report / How I charge ---------- */
+  .terms {
+    border-bottom: 1px solid var(--hairline);
+  }
+  .terms .split__col {
+    padding-top: var(--pad-secondary);
+    padding-bottom: var(--pad-secondary);
+  }
+  .terms__h {
+    margin-bottom: clamp(16px, 1.8vw, 24px);
+  }
+  .terms .body {
+    max-width: 50ch;
+  }
+
+  /* ---------- Operator ---------- */
   .operator {
-    padding: var(--pad-secondary) var(--gutter);
+    padding: var(--pad-major) var(--gutter);
     background: var(--sand);
     border-bottom: 1px solid var(--hairline);
     display: grid;
-    grid-template-columns: clamp(96px, 13vw, 150px) 1fr;
-    gap: var(--gutter-inner);
-    align-items: start;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(28px, 5.6vw, 104px);
+    align-items: center;
   }
-  .operator__text {
-    max-width: 58ch;
+  .operator__portrait {
+    max-width: 440px;
   }
   .operator__text .eyebrow {
-    margin-bottom: 20px;
+    margin-bottom: clamp(16px, 1.8vw, 24px);
   }
   .operator__lead {
-    margin: 0 0 20px;
-    font: 400 clamp(14px, 2.03vw, 24px) / 1.42 var(--serif);
+    margin: 0 0 clamp(18px, 2.2vw, 30px);
+    font: 400 clamp(28px, 3.7vw, 52px) / 1.06 var(--display);
+    letter-spacing: -0.018em;
+    max-width: 17ch;
+    text-wrap: balance;
   }
   .operator__body {
-    margin: 0 0 18px;
-    color: rgba(34, 64, 47, 0.8);
+    margin: 0 0 clamp(22px, 2.4vw, 32px);
+    max-width: 54ch;
   }
   .operator__quote {
-    margin: 0 0 20px;
-    padding-left: 18px;
+    margin: 0 0 clamp(22px, 2.4vw, 32px);
+    padding-left: 22px;
     border-left: 2px solid var(--clay);
-    font: 400 16px/1.7 var(--sans);
+    font: italic 400 clamp(19px, 1.9vw, 25px) / 1.4 var(--serif);
   }
   .operator__link {
-    font: 500 14.5px/1 var(--sans);
+    font: 500 15px/1 var(--sans);
+  }
+  @media (max-width: 760px) {
+    .operator {
+      grid-template-columns: 1fr;
+    }
+    .operator__portrait {
+      max-width: 300px;
+    }
   }
 
-  /* Engagement model */
+  /* ---------- Engagement: two ways of working ---------- */
+  .engagement {
+    padding: var(--pad-major) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
+  }
   .engagement h2 {
-    margin-bottom: 32px;
+    max-width: 22ch;
   }
   .engagement__grid {
+    margin-top: clamp(36px, 5vw, 72px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
-    gap: clamp(28px, 4.7vw, 56px);
-    max-width: 1000px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
+    gap: clamp(20px, 2.2vw, 32px);
   }
-  .engagement__label {
-    margin-bottom: 16px;
+  .plan {
+    padding: clamp(24px, 3.4vw, 48px);
+    background: var(--cream-2);
+    border: 1px solid var(--hairline);
+    border-top: 2px solid var(--pine);
   }
-  .engagement__name {
-    margin: 0 0 14px;
-    font: 400 clamp(18px, 1.86vw, 22px) / 1.3 var(--serif);
-    max-width: 24ch;
+  .plan__label {
+    margin-bottom: 18px;
   }
-  .engagement__intro {
-    margin-bottom: 22px;
-    max-width: 48ch;
+  .plan__name {
+    margin: 0 0 16px;
+    font-size: clamp(24px, 2.6vw, 34px);
+    max-width: 18ch;
   }
-  .engagement__list {
+  .plan__intro {
+    margin-bottom: 26px;
+    max-width: 50ch;
+  }
+  .plan__list {
     list-style: none;
     margin: 0;
     padding: 0;
-    max-width: 48ch;
   }
-  .engagement__list li {
-    padding: 12px 0;
+  .plan__list li {
+    position: relative;
+    padding: 13px 0 13px 24px;
     border-top: 1px solid var(--hairline-inner);
-    font: 400 15px/1.6 var(--sans);
+    font: 400 15.5px/1.6 var(--sans);
     color: var(--text-82);
   }
-  .engagement__list li:last-child {
+  .plan__list li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 1.55em;
+    width: 7px;
+    height: 7px;
+    background: var(--clay);
+    transform: rotate(45deg);
+  }
+  .plan__list li:last-child {
     padding-bottom: 0;
   }
   .engagement__pull {
-    margin-top: 32px;
-    max-width: 52ch;
+    margin-top: clamp(32px, 4vw, 56px);
+    max-width: 44ch;
+    font-size: clamp(20px, 2.1vw, 27px);
+    line-height: 1.38;
   }
 
-  /* Who this is for, on pine */
+  /* ---------- Who this is for, on pine ---------- */
+  .fit {
+    padding: var(--pad-major) var(--gutter);
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(28px, 5.6vw, 104px);
+    align-items: start;
+  }
   .fit h2 {
-    margin-bottom: 32px;
-    max-width: 24ch;
+    max-width: 9ch;
   }
   .fit__text {
     display: grid;
-    gap: 24px;
-    max-width: 62ch;
+    gap: clamp(20px, 2.2vw, 28px);
   }
   .fit__p1 {
-    font: 400 16px/1.75 var(--sans);
-    color: var(--on-pine);
+    font: 400 clamp(19px, 1.9vw, 25px) / 1.48 var(--serif);
+    color: var(--cream);
   }
   .fit__p2 {
-    font: 400 16px/1.75 var(--sans);
-    color: var(--on-pine-4);
+    font: 400 17px/1.7 var(--sans);
+    color: var(--on-pine-2);
+    max-width: 58ch;
   }
   .fit__p3 {
-    font: 400 14.5px/1.7 var(--sans);
+    padding-top: clamp(20px, 2.2vw, 28px);
+    border-top: 1px solid var(--hairline-on-pine);
+    font: 400 15px/1.7 var(--sans);
     color: var(--on-pine-5);
+  }
+  @media (max-width: 760px) {
+    .fit {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

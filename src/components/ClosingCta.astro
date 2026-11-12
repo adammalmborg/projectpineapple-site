@@ -1,50 +1,38 @@
 ---
 /**
- * Centered closing CTA: Caslon h3, one muted paragraph, the button.
+ * Closing call to action: a sand band, one large centered heading, one
+ * paragraph, the button.
  */
 import CtaLink from './CtaLink.astro';
 
 interface Props {
   heading: string;
-  /** Home uses the 34px h3 and 88px padding; industry uses 33px and 80px. */
+  /** Kept for the call sites; both variants now share one layout. */
   variant?: 'home' | 'industry';
 }
 
-const { heading, variant = 'home' } = Astro.props;
+const { heading } = Astro.props;
 ---
 
-<section class:list={['closing', `closing--${variant}`]}>
-  <h2>{heading}</h2>
-  <p><slot /></p>
-  <CtaLink />
+<section class="closing">
+  <h2 class="display-1">{heading}</h2>
+  <p class="lead"><slot /></p>
+  <CtaLink variant="button-lg" />
 </section>
 
 <style>
   .closing {
+    padding: var(--pad-major) var(--gutter);
     text-align: center;
+    background: var(--sand);
     border-bottom: 1px solid var(--hairline);
   }
-  .closing--home {
-    padding: var(--gutter);
-  }
-  .closing--industry {
-    padding: var(--pad-major) var(--gutter);
-  }
   h2 {
-    margin: 0 auto 14px;
-    font: 400 clamp(20px, 2.88vw, 34px) / 1.26 var(--serif);
-    max-width: 28ch;
-  }
-  .closing--industry h2 {
-    font-size: clamp(20px, 2.8vw, 33px);
+    margin: 0 auto clamp(18px, 2vw, 26px);
+    max-width: 18ch;
   }
   p {
-    margin: 0 auto 30px;
-    max-width: 48ch;
-    font: 400 16px/1.7 var(--sans);
-    color: var(--text-70);
-  }
-  .closing--industry p {
+    margin: 0 auto clamp(28px, 3vw, 40px);
     max-width: 50ch;
   }
 </style>

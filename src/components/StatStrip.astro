@@ -1,9 +1,8 @@
 ---
 /**
- * Three equal columns on sand, hairline top and bottom, vertical dividers.
- * Outer padding matches the page gutter so the first and last cells are
- * asymmetric at full width. When the cells wrap, a container query evens the
- * padding out and drops the trailing divider.
+ * Three equal columns on a sand band with vertical dividers. The band is
+ * full-bleed; the cells sit inside the page gutter. When the cells wrap, a
+ * container query stacks them and swaps the dividers to horizontal.
  */
 interface Props {
   items: { label: string; value: string }[];
@@ -30,6 +29,7 @@ const { items, size = 'lg' } = Astro.props;
 <style>
   .strip-wrap {
     container-type: inline-size;
+    padding: 0 var(--gutter);
     background: var(--sand);
     border-bottom: 1px solid var(--hairline);
   }
@@ -39,41 +39,42 @@ const { items, size = 'lg' } = Astro.props;
     margin: 0;
   }
   .cell {
-    padding: 22px 24px;
+    padding: clamp(22px, 2.6vw, 34px) clamp(18px, 2.4vw, 32px);
     border-right: 1px solid var(--hairline-inner);
   }
   .cell:first-child {
-    padding-left: var(--gutter);
+    padding-left: 0;
   }
   .cell:last-child {
-    padding-right: var(--gutter);
+    padding-right: 0;
     border-right: 0;
   }
   dt {
-    font: 400 10.5px/1 var(--sans);
+    font: 500 11px/1 var(--sans);
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   dd {
     margin: 0;
-    font: 400 clamp(13px, 1.86vw, 22px) / 1 var(--serif);
+    font: 400 clamp(17px, 2.3vw, 30px) / 1.05 var(--display);
+    letter-spacing: -0.01em;
     white-space: nowrap;
   }
   .strip--md dd {
-    font-size: clamp(13px, 1.78vw, 21px);
+    font-size: clamp(17px, 2.1vw, 27px);
   }
 
-  @container (width < 560px) {
+  @container (width < 520px) {
     .strip {
       grid-template-columns: 1fr;
     }
     .cell,
     .cell:first-child,
     .cell:last-child {
-      padding-left: var(--gutter);
-      padding-right: var(--gutter);
+      padding-left: 0;
+      padding-right: 0;
       border-right: 0;
     }
     .cell + .cell {

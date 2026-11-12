@@ -4,9 +4,12 @@
  * populated with demo data ("Example Home Co."), and every caption that uses
  * them must say so. Never present them as a real client's results.
  *
- * Two frames: a phone, drawn as a pine bezel (the one rounded shape on the
- * site besides portraits, because it depicts a device), and a plain screen
- * with a hairline border and square corners.
+ * Frames:
+ *   phone   a dark bezel (the one rounded shape on the site besides
+ *           portraits, because it depicts a device)
+ *   screen  a plain hairline border, square corners
+ *   window  a browser window: a slim title bar above the screen
+ *   tile    a borderless crop, for a single card lifted out of a screen
  *
  * Astro generates responsive WebP derivatives at build time.
  */
@@ -16,7 +19,7 @@ import type { ImageMetadata } from 'astro';
 interface Props {
   src: ImageMetadata;
   alt: string;
-  frame: 'phone' | 'screen';
+  frame: 'phone' | 'screen' | 'window' | 'tile';
   /** CSS sizes attribute for responsive selection. */
   sizes: string;
   widths: number[];
@@ -27,6 +30,15 @@ const { src, alt, frame, sizes, widths, loading = 'lazy' } = Astro.props;
 ---
 
 <div class:list={['shot', `shot--${frame}`]}>
+  {
+    frame === 'window' && (
+      <div class="shot__bar" aria-hidden="true">
+        <span />
+        <span />
+        <span />
+      </div>
+    )
+  }
   <Image src={src} alt={alt} widths={widths} sizes={sizes} loading={loading} decoding="async" />
 </div>
 
@@ -37,12 +49,33 @@ const { src, alt, frame, sizes, widths, loading = 'lazy' } = Astro.props;
     height: auto;
   }
   .shot--phone {
-    background: var(--pine);
-    border-radius: 30px;
-    padding: 8px;
+    background: #14271c;
+    border-radius: 12% / 6.4%;
+    padding: 3.2%;
+    border: 1px solid rgba(250, 245, 238, 0.22);
   }
   .shot--phone img {
-    border-radius: 23px;
+    border-radius: 9.5% / 5.2%;
+  }
+  .shot--window {
+    background: var(--cream);
+    border: 1px solid var(--hairline);
+  }
+  .shot__bar {
+    display: flex;
+    gap: 6px;
+    padding: 11px 14px;
+    background: var(--sand);
+    border-bottom: 1px solid var(--hairline-inner);
+  }
+  .shot__bar span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(34, 64, 47, 0.22);
+  }
+  .shot--tile {
+    background: var(--cream);
   }
   .shot--screen {
     border: 1px solid var(--hairline);

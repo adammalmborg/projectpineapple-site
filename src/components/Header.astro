@@ -8,9 +8,11 @@
  *   wordmark  Dental, Legal, Thanks: no nav at all, to protect the single
  *             conversion path on landing pages
  *
- * Mobile navigation: below 640px the inline nav is replaced by a native
+ * The header is sticky, so the booking button stays in reach the whole way
+ * down the page.
+ *
+ * Mobile navigation: below 720px the inline nav is replaced by a native
  * <details> disclosure. No JavaScript, no animation, keyboard accessible.
- * This is the only media query on the site.
  */
 import Logo from './Logo.astro';
 import CtaLink from './CtaLink.astro';
@@ -37,7 +39,7 @@ const {
 const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
 ---
 
-<header class:list={['header', { 'header--compact': variant === 'wordmark' }]}>
+<header class="header">
   <div class="lockup">
     <Logo />
     {
@@ -60,7 +62,7 @@ const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
               <a href="/about">About</a>
             </>
           )}
-          {cta && <CtaLink variant="text" />}
+          {cta && <CtaLink variant="button-sm" />}
         </nav>
 
         <details class="nav nav--mobile">
@@ -83,19 +85,31 @@ const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
   }
 </header>
 
+<script>
+  // Close the mobile menu after a link in it is used, so an in-page jump
+  // doesn't land underneath an open menu.
+  const menu = document.querySelector<HTMLDetailsElement>('details.nav--mobile');
+  menu?.addEventListener('click', (ev) => {
+    if ((ev.target as HTMLElement).closest('a')) menu.open = false;
+  });
+</script>
+
 <style>
   .header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 16px 28px;
-    padding: 24px var(--gutter);
+    gap: 12px 28px;
+    min-height: var(--header-h);
+    padding: 14px var(--gutter);
+    background: rgba(250, 245, 238, 0.9);
+    -webkit-backdrop-filter: saturate(1.4) blur(14px);
+    backdrop-filter: saturate(1.4) blur(14px);
     border-bottom: 1px solid var(--hairline);
-  }
-  .header--compact {
-    padding-top: 22px;
-    padding-bottom: 22px;
   }
 
   .lockup {
@@ -106,7 +120,7 @@ const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
   }
   .wordmark {
     font: 400 15px/1 var(--serif);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     white-space: nowrap;
     color: var(--pine);
@@ -119,34 +133,32 @@ const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
   .nav--inline {
     display: flex;
     align-items: center;
-    gap: 28px;
-    font: 400 13px/1 var(--sans);
-    color: var(--text-65);
+    gap: clamp(20px, 2.6vw, 36px);
+    font: 400 14px/1 var(--sans);
+    color: var(--text-72);
   }
-  .nav--inline a {
+  .nav--inline a:not(.btn) {
     color: inherit;
     text-decoration: none;
+    padding: 6px 0;
   }
-  .nav--inline a:hover {
-    color: var(--pine);
-  }
-  .nav--inline :global(a.textlink) {
-    color: var(--pine);
-  }
-  .nav--inline :global(a.textlink:hover) {
+  .nav--inline a:not(.btn):hover {
     color: var(--clay);
+  }
+  .nav--inline :global(.btn) {
+    margin-left: 4px;
   }
 
   /* Mobile disclosure, hidden on wider screens */
   .nav--mobile {
     display: none;
-    font: 400 13px/1 var(--sans);
+    font: 400 14px/1 var(--sans);
   }
   .nav--mobile summary {
     list-style: none;
     cursor: pointer;
-    color: var(--text-65);
-    padding: 6px 0;
+    color: var(--pine);
+    padding: 10px 0 10px 14px;
     user-select: none;
   }
   .nav--mobile summary::-webkit-details-marker {
@@ -168,26 +180,41 @@ const hasNav = variant !== 'wordmark' && (sectionLinks || cta);
   .nav--mobile[open] {
     flex-basis: 100%;
   }
+  .nav--mobile[open] summary {
+    position: absolute;
+    top: 14px;
+    right: var(--gutter);
+    height: calc(var(--header-h) - 28px);
+    display: flex;
+    align-items: center;
+  }
   .nav--mobile nav {
     display: grid;
     gap: 0;
-    margin-top: 14px;
     border-top: 1px solid var(--hairline-inner);
   }
   .nav--mobile nav a {
     display: block;
-    padding: 15px 0;
+    padding: 17px 0;
     border-bottom: 1px solid var(--hairline-inner);
     color: var(--pine);
     text-decoration: none;
-    font-size: 15px;
+    font-size: 16px;
   }
   .nav--mobile nav :global(a.textlink) {
-    border-bottom: 1px solid var(--hairline-inner);
-    padding-bottom: 15px;
+    display: block;
+    border-bottom: 0;
+    padding: 17px 0 10px;
+    font-size: 16px;
+    color: var(--clay);
+    font-weight: 500;
+  }
+  /* Solid background while the menu is open, so the page doesn't show through */
+  .header:has(.nav--mobile[open]) {
+    background: var(--cream);
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 720px) {
     .nav--inline {
       display: none;
     }
