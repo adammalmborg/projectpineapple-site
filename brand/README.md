@@ -1,6 +1,6 @@
 # Project Pineapple logo files
 
-The mark is a pineapple with a pine crown over a clay body. Use these files
+The mark is a pineapple with a pine crown over a gold body. Use these files
 anywhere the logo appears, so every product shows the same drawing.
 
 ## Which file to use
@@ -27,15 +27,19 @@ noise. The 16px icon drops the lattice altogether.
 | Name | Hex | Where |
 | --- | --- | --- |
 | Pine | `#22402f` | Crown on light backgrounds, icon tile, wordmark |
-| Clay | `#c1613c` | Body on light backgrounds |
-| Cream | `#faf5ee` | Crown on dark backgrounds, page background |
-| Light clay | `#e0a184` | Body on dark backgrounds |
+| Gold | `#F0B429` | Body, on every background |
+| Cream | `#faf5ee` | Crown and wordmark on dark backgrounds, page background |
+
+Gold is the mark's own colour. On the website the accent colour for text
+and small details is clay, `#c1613c`, not gold.
 
 ## Notes
 
-- The wordmark in the lockups is Libre Caslon Text, uppercase, tracked
-  0.06em, converted to outlines, so no font is needed. It is set without
-  kerning pairs. That is fine on screen; have it checked before print.
+- The wordmark in the lockups is "Project Pineapple" in Libre Caslon
+  Display, title case, set with the font's own kerning and converted to
+  outlines, so no font is needed. To set it as live text instead, use
+  Libre Caslon Display at about three quarters of the mark's height, with
+  letter-spacing of -0.008em.
 - The SVGs use masks to cut the lattice out of the body, so the lattice
   shows whatever is behind the mark. If a tool does not render SVG masks,
   use the PNGs.
