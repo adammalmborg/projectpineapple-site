@@ -8,7 +8,8 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CtaLink from '../components/CtaLink.astro';
-import MethodList from '../components/MethodList.astro';
+import PineList from '../components/PineList.astro';
+import Steps from '../components/Steps.astro';
 import StatStrip from '../components/StatStrip.astro';
 import OperatorBlock from '../components/OperatorBlock.astro';
 import ClosingCta from '../components/ClosingCta.astro';
@@ -31,30 +32,18 @@ const { industry } = Astro.props;
   <section class="hero">
     <div class="eyebrow hero__eyebrow">{industry.eyebrow}</div>
     <h1>{industry.headline}</h1>
-    <p class="hero__sub">{industry.subhead}</p>
+    <p class="lead hero__sub">{industry.subhead}</p>
     <div class="hero__cta">
-      <CtaLink class="hero__btn" />
+      <CtaLink variant="button-lg" />
       <span class="hero__micro">{CTA_MICROCOPY_INDUSTRY}</span>
     </div>
   </section>
 
-  <section class="section section--pine breaks">
-    <h2>{industry.breaksHeading}</h2>
-    <ul class="breaks__list">
-      {
-        industry.breaks.map((b) => (
-          <li>
-            <div class="breaks__heading">{b.heading}</div>
-            <div class="breaks__body">{b.body}</div>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+  <PineList heading={industry.breaksHeading} items={industry.breaks} />
 
-  <section class="section method">
-    <div class="eyebrow method__eyebrow">{industry.methodHeading}</div>
-    <MethodList items={industry.method} industry />
+  <section class="method">
+    <h2 class="display-2">{industry.methodHeading}</h2>
+    <div class="method__steps"><Steps items={industry.method} /></div>
   </section>
 
   <StatStrip items={industry.stats} size="md" />
@@ -72,24 +61,22 @@ const { industry } = Astro.props;
 
 <style>
   .hero {
-    padding: var(--pad-industry) var(--gutter) clamp(38px, 5.8vw, 68px);
+    padding: var(--pad-hero) var(--gutter) var(--pad-major);
     border-bottom: 1px solid var(--hairline);
   }
   .hero__eyebrow {
-    margin-bottom: 26px;
+    margin-bottom: clamp(20px, 2.4vw, 32px);
   }
   .hero h1 {
-    margin: 0 0 26px;
-    font: 400 clamp(34px, 4.8vw, 64px) / 1.04 var(--display);
-    letter-spacing: -0.022em;
+    margin: 0 0 clamp(24px, 3vw, 40px);
+    font: 400 clamp(36px, 5.6vw, 78px) / 1.02 var(--display);
+    letter-spacing: -0.024em;
     text-wrap: balance;
-    max-width: 26ch;
+    max-width: 21ch;
   }
   .hero__sub {
-    margin: 0 0 36px;
-    max-width: 56ch;
-    font: 400 17px/1.7 var(--sans);
-    color: var(--text-75);
+    margin: 0 0 clamp(28px, 3vw, 40px);
+    max-width: 58ch;
   }
   .hero__cta {
     display: flex;
@@ -97,59 +84,20 @@ const { industry } = Astro.props;
     gap: 24px;
     flex-wrap: wrap;
   }
-  .hero :global(.hero__btn) {
-    padding: 16px 30px;
-  }
   .hero__micro {
-    font: 400 13px/1.6 var(--sans);
+    font: 400 13.5px/1.6 var(--sans);
     color: var(--text-60);
     max-width: 26ch;
   }
 
-  .breaks {
-    padding-top: var(--pad-industry);
-    padding-bottom: var(--pad-industry);
-  }
-  .breaks h2 {
-    margin: 0 0 40px;
-    font: 400 clamp(28px, 3.6vw, 48px) / 1.08 var(--display);
-    letter-spacing: -0.016em;
-    max-width: 22ch;
-    text-wrap: balance;
-  }
-  .breaks__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0;
-    max-width: 66ch;
-  }
-  .breaks__list li {
-    padding: 22px 0;
-    border-top: 1px solid var(--hairline-on-pine);
-  }
-  .breaks__list li:first-child {
-    padding-top: 0;
-    border-top: 0;
-  }
-  .breaks__list li:last-child {
-    padding-bottom: 0;
-  }
-  .breaks__heading {
-    font: 500 17px/1.4 var(--sans);
-    margin-bottom: 7px;
-  }
-  .breaks__body {
-    font: 400 15px/1.7 var(--sans);
-    color: var(--on-pine-3);
-  }
-
   .method {
-    padding-top: var(--pad-industry);
-    padding-bottom: var(--pad-industry);
+    padding: var(--pad-major) var(--gutter);
+    border-bottom: 1px solid var(--hairline);
   }
-  .method__eyebrow {
-    margin-bottom: 30px;
+  .method h2 {
+    max-width: 18ch;
+  }
+  .method__steps {
+    margin-top: clamp(36px, 5vw, 72px);
   }
 </style>

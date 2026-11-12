@@ -18,6 +18,8 @@ import cropCost from '../assets/product/crop-cost.webp';
 import cropChart from '../assets/product/crop-chart.webp';
 import cropLeads from '../assets/product/crop-leads.webp';
 import ClosingCta from '../components/ClosingCta.astro';
+import PineList from '../components/PineList.astro';
+import Steps from '../components/Steps.astro';
 import { CTA_MICROCOPY_HOME } from '../content/site';
 import { testimonials } from '../content/testimonials';
 
@@ -223,43 +225,14 @@ const method = [
     </ol>
   </section>
 
-  <section class="section--pine problem">
-    <div class="problem__head">
-      <h2 class="display-2">Why growth stalls even when the reports look good</h2>
-      <p class="lead problem__intro">
-        Google spends your money toward whatever it can count. If it can't count the sale, it counts something else
-        and calls that the result.
-      </p>
-    </div>
-    <ul class="problem__list">
-      {
-        problems.map((p) => (
-          <li>
-            <span class="diamond" aria-hidden="true" />
-            <div>
-              <div class="problem__heading">{p.heading}</div>
-              <div class="problem__body">{p.body}</div>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-  </section>
+  <PineList heading="Why growth stalls even when the reports look good" items={problems}>
+    Google spends your money toward whatever it can count. If it can't count the sale, it counts something else and
+    calls that the result.
+  </PineList>
 
   <section id="how-i-work" class="method">
     <h2 class="display-2">How I work</h2>
-    <ol class="steps">
-      {
-        method.map((text, i) => (
-          <li>
-            <span class="steps__num" aria-hidden="true">
-              {String(i + 1).padStart(2, '0')}
-            </span>
-            <p>{text}</p>
-          </li>
-        ))
-      }
-    </ol>
+    <div class="method__steps"><Steps items={method} /></div>
   </section>
 
   <section id="proof" class="proof">
@@ -643,94 +616,13 @@ const method = [
     }
   }
 
-  /* ---------- Problem, on pine ---------- */
-  .problem {
-    padding: var(--pad-major) var(--gutter);
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 330px), 1fr));
-    gap: clamp(36px, 5.6vw, 104px);
-    align-items: start;
-  }
-  .problem__head h2 {
-    max-width: 13ch;
-    margin-bottom: clamp(20px, 2.4vw, 32px);
-  }
-  .problem__intro {
-    color: var(--on-pine-2);
-    max-width: 40ch;
-  }
-  .problem__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .problem__list li {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: clamp(16px, 2vw, 26px);
-    padding: clamp(22px, 2.6vw, 34px) 0;
-    border-top: 1px solid var(--hairline-on-pine);
-  }
-  .problem__list li:last-child {
-    border-bottom: 1px solid var(--hairline-on-pine);
-  }
-  .problem__list .diamond {
-    margin-top: 0.75em;
-  }
-  .problem__heading {
-    font: 400 clamp(21px, 2.3vw, 31px) / 1.16 var(--display);
-    letter-spacing: -0.008em;
-    margin-bottom: 8px;
-  }
-  .problem__body {
-    font: 400 16.5px/1.6 var(--sans);
-    color: var(--on-pine-2);
-  }
-  @media (min-width: 861px) {
-    .problem__head {
-      position: sticky;
-      top: calc(var(--header-h) + 48px);
-    }
-  }
-
   /* ---------- Method: four steps across ---------- */
   .method {
     padding: var(--pad-major) var(--gutter);
     border-bottom: 1px solid var(--hairline);
   }
-  .steps {
-    list-style: none;
-    margin: clamp(36px, 5vw, 72px) 0 0;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(28px, 3vw, 44px) clamp(24px, 3vw, 48px);
-  }
-  @media (max-width: 960px) {
-    .steps {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (max-width: 520px) {
-    .steps {
-      grid-template-columns: 1fr;
-    }
-  }
-  .steps li {
-    border-top: 1px solid var(--pine);
-    padding-top: clamp(16px, 1.8vw, 24px);
-  }
-  .steps__num {
-    display: block;
-    font: 400 clamp(44px, 5.2vw, 76px) / 0.9 var(--display);
-    letter-spacing: -0.03em;
-    color: var(--clay);
-    margin-bottom: clamp(16px, 2.2vw, 32px);
-  }
-  .steps p {
-    font: 400 17px/1.6 var(--sans);
-    color: var(--text-82);
-    max-width: 34ch;
+  .method__steps {
+    margin-top: clamp(36px, 5vw, 72px);
   }
 
   /* ---------- Proof ---------- */

@@ -37,9 +37,11 @@ No layout work is needed.
 - `src/styles/global.css`: design tokens (colors, type, spacing) and the
   handful of shared classes (`.eyebrow`, `.btn`, `.split`, `.section`).
 - `src/layouts/Base.astro`: document shell, fonts, SEO tags, Cal.com loader.
-- `src/components/`: header (three variants), footer, stat strip, method
-  list, operator block, portrait crops, closing CTA, product screenshot
-  frame, inline Cal embed.
+- `src/components/`: header (three variants), footer, stat strip, steps
+  (numbered, set across the page), pine list (the pine band with a heading
+  on the left and points on the right), compact method list, operator
+  block, portrait crops, closing CTA, product screenshot frame, inline Cal
+  embed.
 - `src/assets/product/`: screens from the client dashboard app, populated
   with demo data ("Example Home Co."). Every caption that uses one says so.
 - `src/assets/adam-malmborg.jpg`: the portrait. Responsive derivatives are

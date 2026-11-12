@@ -25,26 +25,26 @@ const helps = [
 
   <section class="hero">
     <div class="hero__inner">
-    <div class="hero__status">
-      <span class="diamond" aria-hidden="true"></span>
-      <span class="eyebrow">You're on the calendar</span>
-    </div>
-    <h1>Thanks. The call is booked.</h1>
-    <p class="hero__sub">
-      You'll get a calendar invite with the meeting link. If you don't see it in a few minutes, check spam, or just
-      email me and I'll sort it out.
-    </p>
+      <div class="hero__status">
+        <span class="diamond" aria-hidden="true"></span>
+        <span class="eyebrow">You're on the calendar</span>
+      </div>
+      <h1>Thanks. The call is booked.</h1>
+      <p class="lead hero__sub">
+        You'll get a calendar invite with the meeting link. If you don't see it in a few minutes, check spam, or
+        just email me and I'll sort it out.
+      </p>
     </div>
   </section>
 
   <section class="split">
     <div class="split__grid">
       <div class="split__col quad">
-        <div class="eyebrow">Two things that will help</div>
+        <h2 class="display-3 split__h">Two things that will help</h2>
         <MethodList items={helps} compact />
       </div>
       <div class="split__col quad quad--cream2">
-        <div class="eyebrow">What happens on the call</div>
+        <h2 class="display-3 split__h">What happens on the call</h2>
         <p class="body quad__p">
           Thirty minutes. I walk you through what's being counted as a conversion, which sales the platform can't
           see, and the two or three changes with the largest expected effect. No pitch, no deck.
@@ -91,13 +91,8 @@ const helps = [
   }
   .hero__sub {
     max-width: 52ch;
-    font: 400 18px/1.68 var(--sans);
-    color: var(--text-75);
   }
 
-  .quad .eyebrow {
-    margin-bottom: 24px;
-  }
   .quad--cream2 {
     background: var(--cream-2);
   }
