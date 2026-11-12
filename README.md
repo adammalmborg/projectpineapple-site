@@ -59,7 +59,8 @@ No layout work is needed.
   a diamond lattice. Gold belongs to the mark only; the site accent is clay.
   The header uses the small drawing, with a coarser lattice. The wordmark is
   "Project Pineapple" in title case, in the display Caslon. The favicon is
-  the mark with a cream crown on a pine tile. Every version, with usage
+  the mark on its own with no tile; the SVG turns the crown cream when the
+  browser is in dark mode. Every version, with usage
   notes, is in `brand/`; use those files in other products too.
 - Product screens are demo data and are always labelled as such. Never
   present them as a real client's results.

@@ -13,14 +13,21 @@ anywhere the logo appears, so every product shows the same drawing.
 | On a dark background, under 64px | `svg/mark-reversed-small.svg` |
 | Mark and wordmark together, light background | `svg/lockup.svg` |
 | Mark and wordmark together, dark background | `svg/lockup-reversed.svg` |
-| Browser favicon | `svg/icon-tile.svg`, `png/icon-32.png`, `png/icon-16.png` |
+| Browser favicon | `svg/favicon.svg`, with `png/favicon-32.png` and `png/favicon-16.png` as fallbacks |
 | iOS home screen | `png/apple-touch-icon-180.png` (square; iOS rounds it) |
+| App icon in SVG | `svg/icon-tile.svg` (rounded), `svg/icon-tile-square.svg` |
 | Android and web app manifest | `png/icon-192.png`, `png/icon-512.png` |
 | Google sign-in consent screen (120 by 120) | `png/icon-120.png` |
 | Anywhere that needs a PNG of the mark alone | `png/mark-512.png`, `png/mark-1024.png` (transparent) |
 
 The small drawings have a coarser lattice so the body does not turn to
-noise. The 16px icon drops the lattice altogether.
+noise. The 16px favicon drops the lattice altogether.
+
+The favicon is the mark on its own, with no tile behind it, so it is as
+large as the tab allows. The SVG turns the crown cream when the browser is
+in dark mode. A PNG cannot do that, so the two PNG fallbacks use a brighter
+green crown (`#3a7553`) that shows on light and dark tab bars alike. App
+icons need a background, so those stay on a pine tile.
 
 ## Colours
 
@@ -29,6 +36,9 @@ noise. The 16px icon drops the lattice altogether.
 | Pine | `#22402f` | Crown on light backgrounds, icon tile, wordmark |
 | Gold | `#F0B429` | Body, on every background |
 | Cream | `#faf5ee` | Crown and wordmark on dark backgrounds, page background |
+
+On a dark background other than pine, such as the app's navy (`#15202B`),
+use the reversed files as they are: cream crown, gold body.
 
 Gold is the mark's own colour. On the website the accent colour for text
 and small details is clay, `#c1613c`, not gold.
