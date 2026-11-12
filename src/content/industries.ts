@@ -48,7 +48,7 @@ export const industries: Record<string, Industry> = {
         body: 'Until new patient value is established by treatment type, bidding treats them identically.',
       },
       {
-        heading: 'No shows report as wins.',
+        heading: 'No-shows report as wins.',
         body: 'A booked appointment that never arrives still looks like a conversion in the account.',
       },
       {
