@@ -69,7 +69,7 @@ export const industries: Record<string, Industry> = {
     ],
     stats: [
       { label: 'Practices', value: 'Single and group' },
-      { label: 'Media', value: '$3K+ / month' },
+      { label: 'You work with', value: 'One person' },
       { label: 'Fee', value: 'Flat monthly' },
     ],
     closingHeading: 'Find out what your account is actually counting',
@@ -114,7 +114,7 @@ export const industries: Record<string, Industry> = {
     ],
     stats: [
       { label: 'Firms', value: 'Solo to mid-size' },
-      { label: 'Media', value: '$3K+ / month' },
+      { label: 'You work with', value: 'One person' },
       { label: 'Fee', value: 'Flat monthly' },
     ],
     closingHeading: 'Find out what your account is actually counting',
