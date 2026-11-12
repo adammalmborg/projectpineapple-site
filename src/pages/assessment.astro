@@ -22,14 +22,14 @@ const gets = [
   <section class="hero">
     <div class="hero__inner">
       <h1>The free marketing assessment</h1>
-      <p class="hero__sub">Thirty minutes in your account and your numbers. No pitch, no deck.</p>
+      <p class="lead hero__sub">Thirty minutes in your account and your numbers. No pitch, no deck.</p>
     </div>
   </section>
 
   <section class="split">
     <div class="split__grid">
       <div class="split__col quad">
-        <div class="eyebrow">What happens</div>
+        <h2 class="display-3 split__h">What happens</h2>
         <div class="stack">
           <p class="body">
             You give me read-only access to your Google Ads account and tell me roughly what a new customer is
@@ -47,7 +47,7 @@ const gets = [
         </div>
       </div>
       <div class="split__col quad quad--cream2">
-        <div class="eyebrow">What you'll get</div>
+        <h2 class="display-3 split__h">What you'll get</h2>
         <MethodList items={gets} compact />
       </div>
     </div>
@@ -56,14 +56,14 @@ const gets = [
   <section class="split split--sm">
     <div class="split__grid">
       <div class="split__col">
-        <div class="eyebrow eyebrow--22">What happens after</div>
+        <h2 class="display-3 split__h split__h--sm">What happens after</h2>
         <p class="body">
           You keep all of it. If you want to hand it to your current agency and have them fix it, that's a fine
           outcome. If you'd rather I do it, we'll talk about what that looks like and I'll send a written scope.
         </p>
       </div>
       <div class="split__col">
-        <div class="eyebrow eyebrow--22">Who it's for</div>
+        <h2 class="display-3 split__h split__h--sm">Who it's for</h2>
         <p class="body">
           For the ad account review, businesses spending at least $3,000 a month on advertising. Below that there
           usually isn't enough data to say much with confidence. For data and operations work there's no minimum ad
@@ -73,8 +73,8 @@ const gets = [
     </div>
   </section>
 
-  <section class="book">
-    <div class="eyebrow book__eyebrow">Pick a time</div>
+  <section id="book" class="book">
+    <h2 class="display-2 book__h">Pick a time</h2>
     <CalEmbed />
   </section>
 
@@ -83,30 +83,22 @@ const gets = [
 
 <style>
   .hero {
-    padding: var(--pad-major) var(--gutter) var(--pad-split);
+    padding: var(--pad-hero) var(--gutter) var(--pad-secondary);
     border-bottom: 1px solid var(--hairline);
   }
-  .hero__inner {
-    max-width: 900px;
-  }
   .hero h1 {
-    margin: 0 0 22px;
-    font: 400 clamp(36px, 5.4vw, 72px) / 1.03 var(--display);
-    letter-spacing: -0.022em;
+    margin: 0 0 clamp(20px, 2.4vw, 32px);
+    font: 400 clamp(40px, 6.2vw, 88px) / 1 var(--display);
+    letter-spacing: -0.024em;
     text-wrap: balance;
-    max-width: 24ch;
+    max-width: 16ch;
   }
   .hero__sub {
     max-width: 44ch;
-    font: 400 18px/1.65 var(--sans);
-    color: var(--text-72);
   }
 
   .split {
     border-bottom: 1px solid var(--hairline);
-  }
-  .quad .eyebrow {
-    margin-bottom: 24px;
   }
   .quad--cream2 {
     background: var(--cream-2);
@@ -114,17 +106,18 @@ const gets = [
   .stack {
     display: grid;
     gap: 20px;
+    max-width: 56ch;
   }
-  .eyebrow--22 {
-    margin-bottom: 22px;
+  .split--sm .body {
+    max-width: 52ch;
   }
 
   .book {
-    padding: var(--pad-split) var(--gutter);
+    padding: var(--pad-secondary) var(--gutter);
     background: var(--sand);
     border-bottom: 1px solid var(--hairline);
   }
-  .book__eyebrow {
-    margin-bottom: 26px;
+  .book__h {
+    margin-bottom: clamp(24px, 3vw, 40px);
   }
 </style>

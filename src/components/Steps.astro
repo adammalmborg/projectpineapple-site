@@ -1,0 +1,70 @@
+---
+/**
+ * Numbered steps set across the page: a rule, a large clay numeral, one
+ * sentence. Four across on a wide screen, two on a tablet, one on a phone.
+ */
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class:list={['steps', `steps--${Math.min(items.length, 4)}`]}>
+  {
+    items.map((text, i) => (
+      <li>
+        <span class="num" aria-hidden="true">
+          {String(i + 1).padStart(2, '0')}
+        </span>
+        <p>{text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(28px, 3vw, 44px) clamp(24px, 3vw, 48px);
+  }
+  .steps--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .steps--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  li {
+    border-top: 1px solid var(--pine);
+    padding-top: clamp(16px, 1.8vw, 24px);
+  }
+  .num {
+    display: block;
+    font: 400 clamp(44px, 5.2vw, 76px) / 0.9 var(--display);
+    letter-spacing: -0.03em;
+    color: var(--clay);
+    margin-bottom: clamp(16px, 2.2vw, 32px);
+  }
+  p {
+    font: 400 17px/1.6 var(--sans);
+    color: var(--text-82);
+    max-width: 38ch;
+  }
+  @media (max-width: 960px) {
+    .steps,
+    .steps--3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 520px) {
+    .steps,
+    .steps--2,
+    .steps--3 {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
