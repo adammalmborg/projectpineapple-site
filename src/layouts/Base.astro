@@ -58,9 +58,13 @@ const ogImage = new URL('/og.png', Astro.site);
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- dataLayer exists on every page so events can be pushed whether or
-         not a tag manager is configured. -->
+         not a tag manager is configured. gtag() is defined for any tag or
+         consent command that expects it. -->
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
     </script>
     {
       GTM_ID && (

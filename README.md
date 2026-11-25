@@ -93,11 +93,12 @@ Still to configure in the Cal.com dashboard before launch:
 
 ## Analytics
 
-Two optional integrations, both off until a value is set in
-`src/content/site.ts`:
+Two integrations, each controlled by a value in `src/content/site.ts`:
 
-- `GTM_ID`: Google Tag Manager container. When set, the GTM snippet is
-  emitted on every page.
+- `GTM_ID`: Google Tag Manager container, currently `GTM-TS5QXJ88`. The
+  GTM snippet and its noscript fallback are emitted on every page, and
+  `gtag()` is defined for tags that expect it. Empty the value to remove
+  tag manager entirely.
 - `CF_ANALYTICS_TOKEN`: Cloudflare Web Analytics site token. Cookieless
   page-view counting at the edge.
 
