@@ -35,9 +35,14 @@ import { CAL_LINK, CAL_NAMESPACE } from '../content/site';
     }
     if (el.dataset.calMounted) return;
     el.dataset.calMounted = '1';
+    // The visitor's stored source (Base.astro, window.__bookingSource): the
+    // page's own query string is forwarded by Cal.com anyway; this adds what
+    // the visitor arrived with on an earlier page.
+    const source =
+      (window as unknown as { __bookingSource?: () => Record<string, string> }).__bookingSource?.() ?? {};
     api('inline', {
       elementOrSelector: '#cal-inline',
-      config: { layout: 'month_view', useSlotsViewOnSmallScreen: 'true' },
+      config: { layout: 'month_view', useSlotsViewOnSmallScreen: 'true', ...source },
       calLink: link,
     });
   }

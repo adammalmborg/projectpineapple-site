@@ -130,13 +130,58 @@ const ogImage = new URL('/og.png', Astro.site);
           dark: { 'cal-brand': '#22402f' },
         },
       });
+      // Where the visitor came from, for the booking. forwardQueryParams only
+      // forwards the query string of the page the booking is made on, so a
+      // visitor who lands on one page with ?utm_source=...&gclid=... and books
+      // from another would arrive at Cal.com with no source. The capture tag
+      // (GTM) keeps first and last touch under "_pineapple" (cookie, mirrored
+      // in localStorage: URI-encoded JSON { first: { params }, last: { params } });
+      // this reads it (last touch wins per key, first touch fills gaps, the
+      // current page's own query string on top) and returns only the eight
+      // keys the intro event type has hidden booking questions for. No
+      // identifier is read or sent: these are campaign tags and click ids.
+      var SOURCE_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'msclkid'];
+      window.__bookingSource = function () {
+        var out = {};
+        var state = null;
+        try {
+          var text = null;
+          var m = document.cookie.match(/(?:^|;\s*)_pineapple=([^;]*)/);
+          if (m) text = m[1];
+          if (!text && window.localStorage) text = window.localStorage.getItem('_pineapple');
+          if (text) state = JSON.parse(decodeURIComponent(text));
+        } catch (e) {
+          state = null;
+        }
+        var first = (state && state.first && state.first.params) || {};
+        var last = (state && state.last && state.last.params) || {};
+        var here = {};
+        try {
+          new URLSearchParams(location.search).forEach(function (v, k) {
+            here[k] = v;
+          });
+        } catch (e) {}
+        SOURCE_KEYS.forEach(function (k) {
+          var v = here[k] || last[k] || first[k];
+          if (typeof v === 'string' && v && v.length <= 300) out[k] = v;
+        });
+        return out;
+      };
       // CTA clicks. Every booking link carries data-cal-link; record which one
-      // was clicked and where on the page it sits, before the modal opens.
+      // was clicked and where on the page it sits, before the modal opens, and
+      // hand the stored source to the modal (Cal.com reads data-cal-config at
+      // click time and prefills a booking question whose identifier matches).
       document.addEventListener(
         'click',
         function (ev) {
           var a = ev.target && ev.target.closest && ev.target.closest('a[data-cal-link]');
           if (!a) return;
+          try {
+            var cfg = JSON.parse(a.getAttribute('data-cal-config') || '{}') || {};
+            var src = window.__bookingSource();
+            for (var k in src) cfg[k] = src[k];
+            a.setAttribute('data-cal-config', JSON.stringify(cfg));
+          } catch (e) {}
           var section = a.closest('section, header, footer');
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({
